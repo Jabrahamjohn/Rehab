@@ -8,4 +8,10 @@ Clone the repository
 
 cd rehab_app
 
+execute the following commands
+
+python -m venv venv
+
+source venv/bin/activate
+
 python app.py
