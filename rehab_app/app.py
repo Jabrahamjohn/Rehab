@@ -29,6 +29,11 @@ def resources():
     """Renders the resources.html template."""
     return render_template('resources.html')
 
+@app.route('/privacystatement')
+def privacystatement():
+    """Renders the privacystatement.html template."""
+    return render_template('privacystatement.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
