@@ -82,6 +82,43 @@
         </div>
     </section>
 
+    <!-- Treatment Approach Section -->
+    <section class="py-16 bg-gray-200">
+        <div class="container mx-auto">
+            <div>
+                <h2 class="text-4xl font-bold text-center mb-8">Treatment Approach</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Explanation of the center's approach -->
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Our Approach</h3>
+                        <p class="text-lg text-gray-700">At Rehab Center, we believe in a holistic approach to addiction treatment that addresses the physical, emotional, and spiritual aspects of recovery. <br>Our evidence-based practices are tailored to meet the individual needs of each client, ensuring comprehensive care and support throughout their journey to sobriety.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Information on therapy modalities and counseling techniques -->
+            <div class="mt-8">
+                <h2 class="text-4xl font-bold text-center mb-8">Therapy Modalities and Counseling Techniques</h2>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Therapy Modalities</h3>
+                    <ul class="list-disc list-inside">
+                        <li>Cognitive Behavioral Therapy (CBT)</li>
+                        <li>Dialectical Behavior Therapy (DBT)</li>
+                        <li>Motivational Interviewing (MI)</li>
+                        <!-- Add more therapy modalities as needed -->
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mt-8 mb-4">Counseling Techniques</h3>
+                    <ul class="list-disc list-inside">
+                        <li>Individual Counseling</li>
+                        <li>Group Therapy</li>
+                        <li>Family Counseling</li>
+                        <!-- Add more counseling techniques as needed -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!---Contact Section-->
     <section id="contact" class="bg-blue-900 text-white py-14">
@@ -94,15 +131,6 @@
             </div>
         </div>
     </section>
-
-    <!---JavaScript to toggle service Cards-->
-    <script>
-        document.querySelectorAll('.text-2xl').forEach(serviceTitle => {
-            serviceTitle.addEventListener('click', () => {
-                serviceTitle.nextElementSibling.classList.toggle('hidden')
-            })
-        })
-    </script>
 
     <!---Footer Section-->
     <footer class="bg-blue-500 text-white py-4 flex flex-wrap justify-center gap-8">
@@ -127,5 +155,24 @@
             <li><a href="/resources" class="text-white hover:underline" target="_blank">FAQ</a></li>
         </div>
     </footer>
+
+    <!-- JavaScript to toggle service Cards -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Select all service titles
+            const serviceTitles = document.querySelectorAll('.text-2xl');
+            
+            // Loop through each service title
+            serviceTitles.forEach(serviceTitle => {
+                // Add click event listener to each service title
+                serviceTitle.addEventListener('click', () => {
+                    // Toggle visibility of next sibling element (service details)
+                    serviceTitle.nextElementSibling.classList.toggle('hidden');
+                });
+            });
+        });
+    </script>
+
 </body>
+
 </html>
