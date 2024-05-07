@@ -8,6 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - Rehab Center</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Additional CSS styling */
+        .service-card {
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100">
@@ -38,16 +51,34 @@
 
     <!-- Treatment Programs Section -->
     <section class="bg-gray-200 py-16">
-        <div class="container mx-auto">
-            <h2 class="text-2xl font-bold mb-4">Treatment Programs</h2>
-            <p class="text-lg mb-8">At Rehab Center, we offer a range of treatment programs tailored to meet the individual needs of our clients.</p>
-            <ul class="list-disc list-inside">
-                <li>Inpatient Treatment</li>
-                <li>Outpatient Programs</li>
-                <li>Detox Services</li>
-                <li>Therapy Sessions</li>
-            </ul>
-            <p class="text-lg mt-4">We also provide specialized programs for specific addictions such as alcoholism, drug addiction, and dual diagnosis. Our programs are designed to address the unique needs of various demographics, including adolescents, adults, and seniors.</p>
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Inpatient Treatment -->
+            <div class="service-card p-6 flex flex-col justify-between items-center">
+                <img src="/static/images/inpatient.jpg" alt="Inpatient Treatment" class="mb-4 rounded-lg">
+                <h2 class="text-xl font-bold mb-2">Inpatient Treatment</h2>
+                <p class="text-lg">Comprehensive residential treatment programs.</p>
+            </div>
+            <!-- Outpatient Programs -->
+            <div class="service-card p-6 flex flex-col justify-between items-center">
+                <img src="/static/images/outpatient.jpg" alt="Outpatient Programs" class="mb-4 rounded-lg">
+                <h2 class="text-xl font-bold mb-2">Outpatient Programs</h2>
+                <p class="text-lg">Flexible outpatient programs tailored to your schedule.</p>
+            </div>
+            <!-- Detox Services -->
+            <div class="service-card p-6 flex flex-col justify-between items-center">
+                <img src="/static/images/detox.jpg" alt="Detox Services" class="mb-4 rounded-lg">
+                <h2 class="text-xl font-bold mb-2">Detox Services</h2>
+                <p class="text-lg">Safe and supervised detoxification programs.</p>
+            </div>
+            <!-- Therapy Sessions -->
+            <div class="service-card p-6 flex flex-col justify-between items-center">
+                <img src="/static/images/therapy.jpg" alt="Therapy Sessions" class="mb-4 rounded-lg">
+                <h2 class="text-xl font-bold mb-2">Therapy Sessions</h2>
+                <p class="text-lg">Individual, group, and family therapy sessions.</p>
+            </div>
+        </div>
+        <div class="container mx-auto mt-8 text-center">
+            <p class="text-lg">We also provide specialized programs for specific addictions such as alcoholism, drug addiction, and dual diagnosis. Our programs are designed to address the unique needs of various demographics, including adolescents, adults, and seniors.</p>
         </div>
     </section>
 
@@ -55,23 +86,4 @@
     <section class="py-16">
         <div class="container mx-auto">
             <h2 class="text-2xl font-bold mb-4">Therapy Types</h2>
-            <p class="text-lg mb-8">Our therapy services encompass individual, group, and family therapy sessions.</p>
-            <ul class="list-disc list-inside">
-                <li><strong>Individual Therapy:</strong> Cognitive-behavioral therapy (CBT), dialectical behavior therapy (DBT), etc.</li>
-                <li><strong>Group Therapy:</strong> Support groups, psychoeducational groups, etc.</li>
-                <li><strong>Family Therapy:</strong> Family counseling, communication skills training, etc.</li>
-            </ul>
-            <p class="text-lg mt-4">Individual therapy provides personalized support and focuses on addressing specific issues and goals. Group therapy fosters peer support and provides opportunities for shared experiences and learning. Family therapy helps improve communication and relationships within the family system.</p>
-        </div>
-    </section>
-
-    <!-- Footer Section -->
-    <footer class="bg-blue-500 text-white py-4">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2024 Rehab Center. All rights reserved.</p>
-        </div>
-    </footer>
-
-</body>
-
-</html>
+            <p class="text-lg mb-
