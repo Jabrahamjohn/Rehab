@@ -34,6 +34,10 @@ def privacystatement():
     """Renders the privacystatement.html template."""
     return render_template('privacystatement.html')
 
+@app.route('/virtualtour')
+def virtualtour():
+    """Renders the virtualtour.html template"""
+    return render_template('virtualtour.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
