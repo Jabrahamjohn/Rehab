@@ -19,5 +19,11 @@ def services():
     """Renders the services.html template."""
     return render_template('services.html')
 
+@app.route('/contact')
+def contact():
+    """Renders the contact.html template."""
+    return render_template('contact.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)

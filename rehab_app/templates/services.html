@@ -42,7 +42,7 @@
     </header>
 
     <!-- Introduction Section -->
-    <section class="py-16">
+    <section class="py-12">
         <div class="container mx-auto text-center">
             <h1 class="text-4xl font-bold mb-4">Our Services</h1>
             <p class="text-lg mb-8">Explore Our Treatment Programs and Therapy Services.</p>
@@ -82,8 +82,35 @@
         </div>
     </section>
 
-    <!-- Therapy Types Section -->
-    <section class="py-16">
-        <div class="container mx-auto">
-            <h2 class="text-2xl font-bold mb-4">Therapy Types</h2>
-            <p class="text-lg mb-
+
+    <!---Contact Section-->
+    <section id="contact" class="bg-blue-900 text-white py-14">
+        <div class="container mx-auto text-center">
+            <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
+            <p class="text-lg mb-8">Ready to start your recovery journey? Contact us today to learn more about our treatment programs and therapy services.</p>
+            <div class="flex flex-col md:flex-row justify-center items-center">
+                <a href="/contact" class="bg-white text-blue-900 py-2 px-6 rounded-full inline-block hover:bg-blue-800 hover:text-white transition duration-300 mb-4 md:mb-0">Contact Us</a>
+                <p class="text-lg ml-0 md:ml-4">Call us at <strong>(555) 123-4567</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!---JavaScript to toggle service Cards-->
+    <script>
+        document.querySelectorAll('.text-2xl').forEach(serviceTitle => {
+            serviceTitle.addEventListener('click', () => {
+                serviceTitle.nextElementSibling.classList.toggle('hidden')
+            })
+        })
+    </script>
+
+    <!---Footer Section-->
+    <footer class="bg-blue-500 text-white py-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2021 Rehab Center. All Rights Reserved.</p>
+        </div> 
+    </footer>
+
+</body>
+
+</html>
