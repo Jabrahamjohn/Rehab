@@ -39,5 +39,16 @@ def virtualtour():
     """Renders the virtualtour.html template"""
     return render_template('virtualtour.html')
 
+@app.route('/admissions')
+def admissions():
+    """Renders the admissions.html template"""
+    return render_template('admissions.html')
+
+@app.route('/login')
+def login():
+    """Renders the login.html template"""
+    return render_template('login.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)

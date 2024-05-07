@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admissions - Rehab Center</title>
+    <!-- Using Tailwind CSS from CDN for base styles -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Internal CSS for custom styling -->
+    <style>
+        /* Custom styles for a more appealing design */
+        :root {
+            --primary-color: #5e60ce;
+            --secondary-color: #48bfe3;
+            --accent-color: #64dfdf;
+            --light-color: #d8eefe;
+            --dark-color: #1e2139;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+
+        header {
+            background-color: var(--primary-color);
+        }
+
+        .cta-button {
+            background-color: var(--secondary-color);
+            color: #fff;
+            border-radius: 30px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .accordion-item {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-item h3 {
+            padding: 1rem;
+            margin: 0;
+            cursor: pointer;
+            background-color: var(--secondary-color);
+            color: #fff;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        footer a {
+            color: var(--light-color);
+        }
+
+        footer a:hover {
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <!-- Semantic header element for navigation and branding -->
+    <header class="bg-blue-500 text-white py-4">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <a href="/" class="text-lg font-bold" aria-label="Rehab Center Home">Rehab Center</a>
+            <nav aria-label="Primary">
+                <ul class="flex space-x-4">
+                    <li><a href="/" class="hover:text-gray-200">Home</a></li>
+                    <li><a href="/services" class="hover:text-gray-200">Services</a></li>
+                    <li><a href="/resources" class="hover:text-gray-200">Resources</a></li>
+                    <li><a href="/contact" class="hover:text-gray-200">Contact Us</a></li>
+                    <li><a href="/staff" class="hover:text-gray-200">Staff</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main content section for admissions information -->
+    <main class="container mx-auto py-16">
+        <h1 class="text-4xl font-bold text-center mb-8">Admissions</h1>
+        <!-- Step-by-Step Guide -->
+        <section aria-labelledby="step-by-step-guide">
+            <h2 id="step-by-step-guide" class="text-2xl font-bold mb-4">Step-by-Step Guide</h2>
+            <ol class="list-decimal list-inside">
+                <li>Initial Inquiry or Contact</li>
+                <li>Pre-Assessment Form Submission</li>
+                <li>Evaluation and Consultation</li>
+                <li>Admission and Enrollment</li>
+                <li>Orientation and Welcome</li>
+            </ol>
+        </section>
+
+        <!-- Online Pre-Assessment Forms -->
+        <section aria-labelledby="online-pre-assessment">
+            <h2 id="online-pre-assessment" class="text-2xl font-bold mb-4">Online Pre-Assessment Forms</h2>
+            <p>Fill out our pre-assessment form to begin the admissions process:</p>
+            <a href="/pre-assessment" class="cta-button inline-block py-2 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50">Pre-Assessment Form</a>
+        </section>
+
+        <!-- Insurance Acceptance and Payment Options -->
+        <section aria-labelledby="insurance-payment">
+            <h2 id="insurance-payment" class="text-2xl font-bold mb-4">Insurance Acceptance and Payment Options</h2>
+            <p>We accept various insurance providers. Contact us for details on insurance coverage and payment options.</p>
+            <p>For inquiries, please call <a href="tel:+15551234567" class="font-bold hover:underline">(555) 123-4567</a> or email <a href="mailto:info@rehabcenter.com" class="font-bold hover:underline">info@rehabcenter.com</a>.</p>
+        </section>
+
+        <!-- FAQs with Accordion -->
+        <section aria-labelledby="faqs">
+            <h2 id="faqs" class="text-2xl font-bold mb-4">FAQs</h2>
+            <div class="accordion-item mb-4 rounded-md">
+                <h3 tabindex="0" class="text-lg font-bold mb-2">Q: What is the admissions process like?</h3>
+                <div class="accordion-content">
+                    <p>The admissions process involves initial contact, form submission, evaluation, admission, and orientation.</p>
+                </div>
+            </div>
+            <div class="accordion-item mb-4 rounded-md">
+                <h3 tabindex="0" class="text-lg font-bold mb-2">Q: Do you accept insurance?</h3>
+                <div class="accordion-content">
+                    <p>Yes, we accept various insurance providers. Contact us for more details.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer with contact information and social media links -->
+    <footer class="bg-blue-500 text-white py-4">
+        <div class="container mx-auto flex flex-wrap justify-center gap-8 p-8 rounded-lg shadow-md text-center">
+            <section aria-label="Social Media">
+                <h3>Follow Us on:</h3>
+                <ul>
+                    <li><a href="#" class="hover:underline">LinkedIn</a></li>
+                    <li><a href="#" class="hover:underline">Instagram</a></li>
+                    <li><a href="#" class="hover:underline">Facebook</a></li>
+                    <li><a href="#" class="hover:underline">Twitter</a></li>
+                </ul>
+            </section>
+            <section aria-label="Legal">
+                <ul>
+                    <li>© 2024 Rehab Center</li>
+                    <li>All Rights Reserved</li>
+                    <li><a href="/privacystatement" class="hover:underline">Terms of Use & Privacy Policy</a></li>
+                </ul>
+            </section>
+            <section aria-label="Navigation">
+                <ul>
+                    <li><a href="#top" class="hover:underline">Back to Top</a></li>
+                    <li><a href="/contact" class="hover:underline">Contact Us</a></li>
+                    <li><a href="/virtualtour" class="hover:underline">Virtual Tour</a></li>
+                    <li><a href="/sitemap" class="hover:underline">Sitemap</a></li>
+                    <li><a href="/resources" class="hover:underline">FAQ</a></li>
+                </ul>
+            </section>
+        </div>
+    </footer>
+
+</body>
+
+</html>
