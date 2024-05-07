@@ -1,4 +1,4 @@
-<!-- templates/resources.html -->
+<!-- templates/virtual_tour.html -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resources - Rehab Center</title>
+    <title>Virtual Tour - Rehab Center</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
@@ -22,55 +22,37 @@
                     <li><a href="/about" class="hover:text-gray-200">About Us</a></li>
                     <li><a href="/services" class="hover:text-gray-200">Services</a></li>
                     <li><a href="#resources" class="hover:text-gray-200">Resources</a></li>
-                    <li><a href="/contact" class="hover:text-gray-200">Contact Us</a></li>
+                    <li><a href="#contact" class="hover:text-gray-200">Contact Us</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Educational Articles and Guides Section -->
+    <!-- Virtual Tour Section -->
     <section class="py-16">
         <div class="container mx-auto">
-            <h1 class="text-4xl font-bold text-center mb-8">Educational Articles and Guides</h1>
+            <h1 class="text-4xl font-bold text-center mb-8">Virtual Tour</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Sample Article Card -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-xl font-bold mb-4">Understanding Addiction</h2>
-                    <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis elit justo.</p>
-                    <a href="#" class="text-blue-500 font-bold hover:underline mt-4">Read More</a>
+                <!-- Sample Photo Gallery -->
+                <div>
+                    <h2 class="text-xl font-bold mb-4">Photo Gallery</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Sample Photo -->
+                        <div>
+                            <img src="images/photo1.jpg" alt="Photo 1" class="rounded-lg shadow-md">
+                        </div>
+                        <!-- Add more photos as needed -->
+                    </div>
                 </div>
-                <!-- Add more article cards as needed -->
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQs Section -->
-    <section class="py-16 bg-gray-200">
-        <div class="container mx-auto">
-            <h1 class="text-4xl font-bold text-center mb-8">Frequently Asked Questions (FAQs)</h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Sample FAQ Card -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-xl font-bold mb-4">Is addiction treatable?</h2>
-                    <p class="text-gray-700">Yes, addiction is treatable. With the right support and treatment, individuals can recover from addiction and lead fulfilling lives.</p>
+                <!-- Sample Video Gallery -->
+                <div>
+                    <h2 class="text-xl font-bold mb-4">Video Gallery</h2>
+                    <!-- Sample Video -->
+                    <div class="embed-responsive">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen class="rounded-lg shadow-md"></iframe>
+                    </div>
+                    <!-- Add more videos as needed -->
                 </div>
-                <!-- Add more FAQ cards as needed -->
-            </div>
-        </div>
-    </section>
-
-    <!-- External Resources Section -->
-    <section class="py-16">
-        <div class="container mx-auto">
-            <h1 class="text-4xl font-bold text-center mb-8">External Resources</h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Sample Resource Card -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-xl font-bold mb-4">Support Groups</h2>
-                    <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis elit justo.</p>
-                    <a href="#" class="text-blue-500 font-bold hover:underline mt-4">Learn More</a>
-                </div>
-                <!-- Add more resource cards as needed -->
             </div>
         </div>
     </section>
