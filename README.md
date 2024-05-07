@@ -4,11 +4,11 @@ This is is a simple web app for a rehabilitation facility
 
 ## Running the Application
 
-Clone the repository.
+**Clone the repository.**
 ```
 git clone https://github.com/Jabrahamjohn/Rehab.git
 ```
-move into the repository
+**move into the repository**
 ```
 cd rehab_app
 ```
