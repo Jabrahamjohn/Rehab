@@ -4,21 +4,31 @@ This is is a simple web app for a rehabilitation facility
 
 ## Running the Application
 
-Clone the repository
-
+Clone the repository.
+```
+git clone https://github.com/Jabrahamjohn/Rehab.git
+```
+move into the repository
+```
 cd rehab_app
+```
+**create a virtual environment**
 
-execute the following commands
+**activate the environment**
 
-python -m venv venv (creates a virtual environment)
-
-source venv/bin/activate (activates the virtual environment for macOS/Linux)
-
-or
-
-venv/Scripts/activate (activates the virtual environment for Windows)
-
-
-pip install -r requirements.txt (installs the required packages)
-
+(For macOS/Linux)
+```
+source venv/bin/activate 
+```
+(For Windows)
+```
+venv/Scripts/activate 
+```
+**install dependancies**
+```
+pip install -r requirements.txt 
+```
+**Run the application**
+```
 python app.py (runs the application)
+```
