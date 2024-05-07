@@ -24,6 +24,11 @@ def contact():
     """Renders the contact.html template."""
     return render_template('contact.html')
 
+@app.route('/resources')
+def resources():
+    """Renders the resources.html template."""
+    return render_template('resources.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
