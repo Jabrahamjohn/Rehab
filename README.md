@@ -1,6 +1,12 @@
 # Rehab
 
-This is is a simple web app for a rehabilitation facility
+**overview**
+A user-friendly and informative web application for a rehab center to provide resources, support, and information to individuals seeking help for addiction or rehabilitation.
+
+**target audience**
+ Individuals struggling with addiction, their families, healthcare professionals, and anyone seeking information on addiction treatment and recovery.
+
+## Prerequistes
 
 ## Running the Application
 
