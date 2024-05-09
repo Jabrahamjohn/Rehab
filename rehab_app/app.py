@@ -116,6 +116,24 @@ def add_patient():
 def view_patients():
     return render_template('patients.html', patients=patients)
 
+# Route for editing a patient
+@app.route('/edit_patient/<int:patient_id>', methods=['GET', 'POST'])
+def edit_patient(patient_id):
+    # Find the patient in the list by ID
+    patient = next((p for p in patients if p['id'] == patient_id), None)
+    if not patient:
+        return 'Patient not found', 404
+    
+    if request.method == 'POST':
+        # Update patient information with data from the form
+        patient['name'] = request.form.get('name')
+        patient['age'] = int(request.form.get('age'))
+        patient['gender'] = request.form.get('gender')
+        # Redirect back to the dashboard
+        return redirect(url_for('dashboard'))
+    
+    # Render the edit patient form with the patient's current information
+    return render_template('edit_patient.html', patient=patient)
 
 @app.route('/logout')
 def logout():
