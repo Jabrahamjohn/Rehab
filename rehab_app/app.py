@@ -135,6 +135,18 @@ def edit_patient(patient_id):
     # Render the edit patient form with the patient's current information
     return render_template('edit_patient.html', patient=patient)
 
+# Route for deleting a patient
+@app.route('/delete_patient/<int:patient_id>', methods=['POST'])
+def delete_patient(patient_id):
+    # Find the index of the patient in the list by ID
+    index = next((i for i, p in enumerate(patients) if p['id'] == patient_id), None)
+    if index is not None:
+        # Remove the patient from the list
+        del patients[index]
+    # Redirect back to the dashboard
+    return redirect(url_for('dashboard'))
+
+
 @app.route('/logout')
 def logout():
     #session.pop("logged_in", None)
