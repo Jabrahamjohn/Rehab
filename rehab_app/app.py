@@ -86,66 +86,42 @@ def dashboard():
     """Renders the dashboard.html template"""
     return render_template('dashboard.html')
 
-# Dummy data for demonstration
+# Sample data for demonstration purposes
 patients = [
-    {"id": 1, "name": "John Doe", "age": 35, "gender": "Male"},
-    {"id": 2, "name": "Jane Smith", "age": 28, "gender": "Female"},
-    {"id": 3, "name": "Alice Johnson", "age": 45, "gender": "Female"}
+    {"id": 1, "name": "John Doe", "age": 30, "gender": "Male"},
+    {"id": 2, "name": "Jane Smith", "age": 25, "gender": "Female"}
 ]
 
 # Route for adding a new patient
-@app.route('/add_patient', methods=['POST'])
+@app.route('/add-patient', methods=['POST'])
 def add_patient():
-    # Get form data
     name = request.form.get('name')
-    age = int(request.form.get('age'))
+    age = request.form.get('age')
     gender = request.form.get('gender')
-    
-    # Generate patient ID (for demonstration purposes)
-    new_patient_id = len(patients) + 1
-    
-    # Add new patient to the list
-    new_patient = {"id": new_patient_id, "name": name, "age": age, "gender": gender}
-    patients.append(new_patient)
-    
-    # Redirect back to the dashboard
+    # Add the new patient to the list (for demonstration purposes)
+    patients.append({"id": len(patients) + 1, "name": name, "age": age, "gender": gender})
     return redirect(url_for('dashboard'))
-
-# Route for viewing patients
-@app.route('/patients')
-def view_patients():
-    return render_template('patients.html', patients=patients)
 
 # Route for editing a patient
-@app.route('/edit_patient/<int:patient_id>', methods=['GET', 'POST'])
+@app.route('/edit-patient/<int:patient_id>', methods=['GET', 'POST'])
 def edit_patient(patient_id):
-    # Find the patient in the list by ID
-    patient = next((p for p in patients if p['id'] == patient_id), None)
-    if not patient:
-        return 'Patient not found', 404
-    
     if request.method == 'POST':
-        # Update patient information with data from the form
-        patient['name'] = request.form.get('name')
-        patient['age'] = int(request.form.get('age'))
-        patient['gender'] = request.form.get('gender')
-        # Redirect back to the dashboard
+        # Update the patient's information (for demonstration purposes)
+        patients[patient_id - 1]['name'] = request.form.get('name')
+        patients[patient_id - 1]['age'] = request.form.get('age')
+        patients[patient_id - 1]['gender'] = request.form.get('gender')
         return redirect(url_for('dashboard'))
-    
-    # Render the edit patient form with the patient's current information
-    return render_template('edit_patient.html', patient=patient)
+    else:
+        # Render the edit patient form
+        patient = patients[patient_id - 1]  # Subtract 1 because list indices start from 0
+        return render_template('edit_patient.html', patient=patient)
 
 # Route for deleting a patient
-@app.route('/delete_patient/<int:patient_id>', methods=['POST'])
+@app.route('/delete-patient/<int:patient_id>', methods=['POST'])
 def delete_patient(patient_id):
-    # Find the index of the patient in the list by ID
-    index = next((i for i, p in enumerate(patients) if p['id'] == patient_id), None)
-    if index is not None:
-        # Remove the patient from the list
-        del patients[index]
-    # Redirect back to the dashboard
+    # Delete the patient from the list (for demonstration purposes)
+    del patients[patient_id - 1]
     return redirect(url_for('dashboard'))
-
 
 @app.route('/logout')
 def logout():
