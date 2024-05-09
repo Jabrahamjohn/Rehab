@@ -86,6 +86,19 @@ def dashboard():
     """Renders the dashboard.html template"""
     return render_template('dashboard.html')
 
+# Dummy data for demonstration
+patients = [
+    {"id": 1, "name": "John Doe", "age": 35, "gender": "Male"},
+    {"id": 2, "name": "Jane Smith", "age": 28, "gender": "Female"},
+    {"id": 3, "name": "Alice Johnson", "age": 45, "gender": "Female"}
+]
+
+# Route for viewing patients
+@app.route('/patients')
+def view_patients():
+    return render_template('patients.html', patients=patients)
+
+
 @app.route('/logout')
 def logout():
     #session.pop("logged_in", None)
