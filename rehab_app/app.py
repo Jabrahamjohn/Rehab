@@ -57,7 +57,24 @@ def login():
             return render_template("staff.html", error_message=error_message)
     """Renders the login.html template"""
     return render_template('staff.html')
+@pp.route('/change_password', methods=['GET', 'POST'])
+def change_password():
+    if request.method == 'POST':
+        password = request.form.get("password")
+        confirm_password = request.form.get("confirm_password")
+        if password == confirm_password:
+            STAFFPASSWORD = password
+            return redirect(url_for('dashboard'))
+        else:
+            error_message="Passwords do not match. Please try again!"
+            return render_template("change_password.html", error_message=error_message)
+    """Renders the change_password.html template"""
+    return render_template('change_password.html')
 
+@app.route('/dashboard')
+def dashboard():
+    """Renders the dashboard.html template"""
+    return render_template('dashboard.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
