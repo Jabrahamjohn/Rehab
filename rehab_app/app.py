@@ -101,10 +101,12 @@ def add_patient():
 def patient_details(patient_id):
     if not session.get("logged_in"):
         return redirect(url_for("login"))
-    # Retrieve patient details based on the patient_id (for demonstration purposes)
-    patient = patients[patient_id - 1]  # Subtract 1 because list indices start from 0
-    return render_template("patient_details.html", patient=patient)
 
+    if patient_id >= 1 and patient_id <= len(patients):
+        patient = patients[patient_id - 1]  # Subtract 1 to adjust for zero-based index
+        return render_template("patient_details.html", patient=patient)
+    else:
+        return "Patient not found"
 
 if __name__ == '__main__':
     app.run(debug=True)
