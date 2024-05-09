@@ -43,6 +43,56 @@
                 <h2 class="text-2xl font-semibold mb-4">Patient Management</h2>
                 <p class="text-lg mb-2">View, add, edit, and delete patient information.</p>
                 <!-- Placeholder for patient management functionality -->
+                
+
+                <!-- View Patients -->
+                <h3 class="text-xl font-semibold mb-2">View Patients</h3>
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gender</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Loop through patients data and display each patient -->
+                        {% for patient in patients %}
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ patient.name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ patient.age }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ patient.gender }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <a href="/edit-patient/{{ patient.id }}" class="text-blue-500 hover:underline">Edit</a>
+                                <form action="/delete-patient/{{ patient.id }}" method="POST" class="inline-block">
+                                    <button type="submit" class="text-red-500 hover:underline">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- Add New Patient -->
+                <h3 class="text-xl font-semibold mt-8 mb-2">Add New Patient</h3>
+                <form action="/add-patient" method="POST">
+                    <label for="name" class="block mb-2">Name</label>
+                    <input type="text" id="name" name="name" class="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+
+                    <label for="age" class="block mt-4 mb-2">Age</label>
+                    <input type="number" id="age" name="age" class="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+
+                    <label for="gender" class="block mt-4 mb-2">Gender</label>
+                    <select id="gender" name="gender" class="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md mt-4 hover:bg-blue-600">Add Patient</button>
+                </form>
+
             </section>
 
             <!-- Appointment Scheduling Section -->
