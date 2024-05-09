@@ -1,0 +1,30 @@
+<!-- templates/login.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Rehab Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="flex justify-center items-center h-screen">
+        <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold mb-4">Staff Login</h2>
+            <form action="/login" method="post">
+                <div class="mb-4">
+                    <label for="password" class="block text-gray-700">Password:</label>
+                    <input type="password" id="password" name="password" class="form-input mt-1 block w-full" required>
+                </div>
+                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Login</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
