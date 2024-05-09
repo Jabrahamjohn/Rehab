@@ -51,6 +51,7 @@ def login():
     if request.method == 'POST':
         password = request.form.get("password")
         if password == STAFFPASSWORD:
+            #session["logged_in"] = True
             return redirect(url_for('change_password'))
         else:
             error_message="Invalid password. Please try again!"
@@ -59,8 +60,8 @@ def login():
     return render_template('login.html')
 @app.route('/change_password', methods=['GET', 'POST'])
 def change_password():
-    if not session.get("logged_in"):
-        return redirect(url_for("login"))
+   # if not session.get("logged_in"):
+    #    return redirect(url_for("login"))
     if request.method == "POST":
         # Logic to change password
         new_password = request.form.get("new_password")
