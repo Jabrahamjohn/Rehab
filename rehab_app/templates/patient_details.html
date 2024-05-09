@@ -1,0 +1,28 @@
+<!-- templates/patient_details.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ patient.name }} Details - Rehab Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl font-bold mb-4">{{ patient.name }} Details</h1>
+        <div class="bg-white rounded-lg shadow-md p-4">
+            <h2 class="text-xl font-bold mb-2">Name: {{ patient.name }}</h2>
+            <p class="mb-2"><strong>Age:</strong> {{ patient.age }}</p>
+            <p class="mb-2"><strong>Gender:</strong> {{ patient.gender }}</p>
+            <p class="mb-2"><strong>Diagnosis:</strong> {{ patient.diagnosis }}</p>
+            <!-- Add more patient details as needed -->
+        </div>
+    </div>
+
+</body>
+
+</html>

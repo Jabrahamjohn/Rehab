@@ -15,7 +15,7 @@
     <div class="container mx-auto py-8">
         <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
         <div class="grid grid-cols-2 gap-4">
-            <div class="bg-white rounded-lg shadow-md p-4">
+            <section class="bg-white rounded-lg shadow-md p-4">
                 <h2 class="text-xl font-bold mb-2">Patient Information</h2>
                 <!-- Placeholder for patient information -->
                 <table class="min-w-full divide-y divide-gray-200">
@@ -24,41 +24,30 @@
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gender</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
+                        {% for patient in patients %}
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
-                            <td class="px-6 py-4 whitespace-nowrap">35</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Male</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ patient.name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ patient.age }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ patient.gender }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <a href="/patient/{{ loop.index }}" class="text-blue-500 hover:underline">View Details</a>
+                            </td>
                         </tr>
-                        <!-- Add more patient rows as needed -->
+                        {% endfor %}
                     </tbody>
                 </table>
-            </div>
-            <div class="bg-white rounded-lg shadow-md p-4">
-                <h2 class="text-xl font-bold mb-2">Add Patient</h2>
-                <!-- Form for adding a new patient -->
-                <form action="/add-patient" method="post">
-                    <div class="mb-4">
-                        <label for="name" class="block text-gray-700">Name:</label>
-                        <input type="text" id="name" name="name" class="form-input mt-1 block w-full" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="age" class="block text-gray-700">Age:</label>
-                        <input type="number" id="age" name="age" class="form-input mt-1 block w-full" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="gender" class="block text-gray-700">Gender:</label>
-                        <select id="gender" name="gender" class="form-select mt-1 block w-full" required>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Add Patient</button>
-                </form>
-            </div>
+
+            </section>
+            <section class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-xl font-bold mb-2">Appointment Scheduling</h2>
+                <!-- Placeholder for appointment scheduling -->
+                <p>Schedule appointments here...</p>
+            </section>
+            <!-- Add more components as needed -->
         </div>
     </div>
 
