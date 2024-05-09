@@ -1,7 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 
 
 app = Flask(__name__)
+
+STAFFPASSWORD = 'Password1234'
 
 @app.route('/')
 def index():
@@ -44,10 +46,17 @@ def admissions():
     """Renders the admissions.html template"""
     return render_template('admissions.html')
 
-@app.route('/login')
+@app.route('/staff' , methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        password = request.form.get("password")
+        if password == STAFFPASSWORD:
+            return redirect(url_for('change_password'))
+        else:
+            error_message="Invalid password. Please try again!"
+            return render_template("staff.html", error_message=error_message)
     """Renders the login.html template"""
-    return render_template('login.html')
+    return render_template('staff.html')
 
 
 if __name__ == '__main__':
