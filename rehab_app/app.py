@@ -93,6 +93,24 @@ patients = [
     {"id": 3, "name": "Alice Johnson", "age": 45, "gender": "Female"}
 ]
 
+# Route for adding a new patient
+@app.route('/add_patient', methods=['POST'])
+def add_patient():
+    # Get form data
+    name = request.form.get('name')
+    age = int(request.form.get('age'))
+    gender = request.form.get('gender')
+    
+    # Generate patient ID (for demonstration purposes)
+    new_patient_id = len(patients) + 1
+    
+    # Add new patient to the list
+    new_patient = {"id": new_patient_id, "name": name, "age": age, "gender": gender}
+    patients.append(new_patient)
+    
+    # Redirect back to the dashboard
+    return redirect(url_for('dashboard'))
+
 # Route for viewing patients
 @app.route('/patients')
 def view_patients():
