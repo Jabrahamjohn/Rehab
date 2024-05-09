@@ -59,20 +59,26 @@ def login():
     return render_template('login.html')
 @app.route('/change_password', methods=['GET', 'POST'])
 def change_password():
-    if request.method == 'POST':
-        password = request.form.get("password")
+    if not session.get("logged_in"):
+        return redirect(url_for("login"))
+    if request.method == "POST":
+        # Logic to change password
+        new_password = request.form.get("new_password")
         confirm_password = request.form.get("confirm_password")
-        if password == confirm_password:
-            STAFFPASSWORD = password
-            return redirect(url_for('dashboard'))
+        if new_password == confirm_password:
+            # Update password logic (you may want to store it securely)
+            STAFF_PASSWORD = new_password
+            session.pop("logged_in", None)
+            return redirect(url_for("dashboard"))
         else:
-            error_message="Passwords do not match. Please try again!"
+            error_message = "Passwords do not match. Please try again."
             return render_template("change_password.html", error_message=error_message)
-    """Renders the change_password.html template"""
-    return render_template('change_password.html')
+    return render_template("change_password.html")
 
 @app.route('/dashboard')
 def dashboard():
+    if not session.get("logged_in"):
+        return redirect(url_for("login"))
     """Renders the dashboard.html template"""
     return render_template('dashboard.html')
 
