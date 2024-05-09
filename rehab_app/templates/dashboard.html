@@ -63,6 +63,17 @@
                     <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md mt-4 hover:bg-blue-600">Add Patient</button>
                 </form>
 
+                <!--edit patients-->
+                {% for patient in patients %}
+                <div class="flex items-center justify-between border-b py-2">
+                    <div>{{ patient.name }}</div>
+                    <div>{{ patient.age }}</div>
+                    <div>{{ patient.gender }}</div>
+                    <!-- Edit button -->
+                    <a href="{{ url_for('edit_patient', patient_id=patient.id) }}" class="text-blue-500 hover:underline">Edit</a>
+                </div>
+                {% endfor %}
+
             </section>
 
             <!-- Appointment Scheduling Section -->
