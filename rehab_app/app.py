@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 
 app = Flask(__name__)
 
+USERNAME = "admin"
 STAFFPASSWORD = 'Password1234'
 
 @app.route('/')
@@ -49,12 +50,13 @@ def admissions():
 @app.route('/login' , methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        username = request.form.get("username")
         password = request.form.get("password")
-        if password == STAFFPASSWORD:
+        if username == USERNAME and password == STAFFPASSWORD:
             #session["logged_in"] = True
             return redirect(url_for('change_password'))
         else:
-            error_message="Invalid password. Please try again!"
+            error_message="Invalid password or user name. Please try again!"
             return render_template("login.html", error_message=error_message)
     """Renders the login.html template"""
     return render_template('login.html')
