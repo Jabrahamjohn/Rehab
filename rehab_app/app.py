@@ -46,7 +46,7 @@ def admissions():
     """Renders the admissions.html template"""
     return render_template('admissions.html')
 
-@app.route('/staff' , methods=['GET', 'POST'])
+@app.route('/login' , methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         password = request.form.get("password")
@@ -54,10 +54,10 @@ def login():
             return redirect(url_for('change_password'))
         else:
             error_message="Invalid password. Please try again!"
-            return render_template("staff.html", error_message=error_message)
+            return render_template("login.html", error_message=error_message)
     """Renders the login.html template"""
-    return render_template('staff.html')
-@pp.route('/change_password', methods=['GET', 'POST'])
+    return render_template('login.html')
+@app.route('/change_password', methods=['GET', 'POST'])
 def change_password():
     if request.method == 'POST':
         password = request.form.get("password")
