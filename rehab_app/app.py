@@ -83,30 +83,6 @@ def dashboard():
      #   return redirect(url_for("login"))
     """Renders the dashboard.html template"""
     return render_template('dashboard.html')
-"""
-@app.route("/add-patient", methods=["POST"])
-def add_patient():
-    if not session.get("logged_in"):
-        return redirect(url_for("login"))
-    name = request.form.get("name")
-    age = request.form.get("age")
-    gender = request.form.get("gender")
-    # Add patient to the list (for demonstration purposes)
-    patients.append({"name": name, "age": age, "gender": gender})
-    return redirect(url_for("dashboard"))
-"""
-# app.py
-
-@app.route("/patient/<int:patient_id>")
-def patient_details(patient_id):
-    if not session.get("logged_in"):
-        return redirect(url_for("login"))
-
-    if patient_id >= 1 and patient_id <= len(patients):
-        patient = patients[patient_id - 1]  # Subtract 1 to adjust for zero-based index
-        return render_template("patient_details.html", patient=patient)
-    else:
-        return "Patient not found"
 
 if __name__ == '__main__':
     app.run(debug=True)
