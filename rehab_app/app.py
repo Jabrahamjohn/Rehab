@@ -84,5 +84,10 @@ def dashboard():
     """Renders the dashboard.html template"""
     return render_template('dashboard.html')
 
+@app.route('/logout')
+def logout():
+    #session.pop("logged_in", None)
+    return redirect(url_for("index"))
+
 if __name__ == '__main__':
     app.run(debug=True)
