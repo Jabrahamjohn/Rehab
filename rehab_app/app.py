@@ -154,7 +154,7 @@ def edit_appointment(appointment_id):
 def delete_appointment(appointment_id):
     # Delete the appointment from the list (for demonstration purposes)
     del appointments[appointment_id - 1]
-    return redirect(url_for('dashboard
+    return redirect(url_for('dashboard'))
 
 
 @app.route('/logout')
