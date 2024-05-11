@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Reporting Section -->
+    <section class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-semibold mb-4">Reporting</h2>
+        <p class="text-lg mb-2">Reports and analytics tools for tracking patient progress and outcomes.</p>
+        <!-- Placeholder for reporting functionality -->
+        <!-- Include Plotly.js library -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+        <!-- JavaScript code for Plotly.js visualization -->
+        <script>
+            // Sample data (replace with your actual data)
+            var data = [
+                { treatment: "Treatment A", count: 10 },
+                { treatment: "Treatment B", count: 20 },
+                { treatment: "Treatment C", count: 15 },
+            ];
+
+            // Extract data for Plotly.js trace
+            var treatments = data.map(item => item.treatment);
+            var counts = data.map(item => item.count);
+
+            // Create Plotly.js trace
+            var trace = {
+                x: treatments,
+                y: counts,
+                type: "bar",
+                marker: { color: "blue" },
+            };
+
+            // Create Plotly.js layout
+            var layout = {
+                title: "Treatment Outcomes",
+                xaxis: { title: "Treatment" },
+                yaxis: { title: "Count" },
+            };
+
+            // Plot the data
+            Plotly.newPlot("plot-container", [trace], layout);
+        </script>
+
+    </section>
+</body>
+</html>

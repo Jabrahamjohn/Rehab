@@ -84,7 +84,7 @@ def dashboard():
     #if not session.get("logged_in"):
      #   return redirect(url_for("login"))
     """Renders the dashboard.html template"""
-    return render_template('dashboard.html')
+    return render_template('./dashboard/dashboard.html')
 
 # Sample data for demonstration purposes
 patients = [
