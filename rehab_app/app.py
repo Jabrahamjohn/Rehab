@@ -156,17 +156,7 @@ def delete_appointment(appointment_id):
     del appointments[appointment_id - 1]
     return redirect(url_for('dashboard'))
 
-# Sample tasks data (replace with actual tasks data)
-tasks = [
-    {"id": 1, "title": "Task 1", "description": "Description for Task 1"},
-    {"id": 2, "title": "Task 2", "description": "Description for Task 2"},
-    {"id": 3, "title": "Task 3", "description": "Description for Task 3"}
-]
 
-# Route to fetch tasks
-@app.route('/tasks', methods=['GET'])
-def get_tasks():
-    return jsonify(tasks)
 
 @app.route('/logout')
 def logout():
