@@ -67,15 +67,18 @@ def change_password():
     #    return redirect(url_for("login"))
     if request.method == "POST":
         # Logic to change password
+        initial_password = request.form.get("initial_password")
         new_password = request.form.get("new_password")
         confirm_password = request.form.get("confirm_password")
-        if new_password == confirm_password:
-            # Update password logic (you may want to store it securely)
-            STAFF_PASSWORD = new_password
-            #session.pop("logged_in", None)
-            return redirect(url_for("dashboard"))
+        if initial_password == STAFFPASSWORD:
+            if new_password == confirm_password:
+                STAFFPASSWORD = new_password
+                return redirect(url_for("dashboard"))
+            else:
+                error_message = "New password and confirm password do not match. Please try again!"
+                return render_template("change_password.html", error_message=error_message)
         else:
-            error_message = "Passwords do not match. Please try again."
+            error_message = "Invalid initial password. Please try again!"
             return render_template("change_password.html", error_message=error_message)
     return render_template("change_password.html")
 
