@@ -133,30 +133,6 @@ def add_appointment():
     appointments.append({"id": len(appointments) + 1, "patient_id": patient_id, "patient_name": patients[patient_id - 1]['name'], "date": date, "time": time})
     return redirect(url_for('dashboard'))
 
-# Route for editing an appointment
-@app.route('/edit-appointment/<int:appointment_id>', methods=['GET', 'POST'])
-def edit_appointment(appointment_id):
-    if request.method == 'POST':
-        # Update the appointment's information (for demonstration purposes)
-        appointment = appointments[appointment_id - 1]
-        appointment['patient_id'] = int(request.form.get('patient'))
-        appointment['patient_name'] = patients[appointment['patient_id'] - 1]['name']
-        appointment['date'] = request.form.get('date')
-        appointment['time'] = request.form.get('time')
-        return redirect(url_for('dashboard'))
-    else:
-        # Render the edit appointment form
-        appointment = appointments[appointment_id - 1]  # Subtract 1 because list indices start from 0
-        return render_template('edit_appointment.html', appointment=appointment)
-
-# Route for deleting an appointment
-@app.route('/delete-appointment/<int:appointment_id>', methods=['POST'])
-def delete_appointment(appointment_id):
-    # Delete the appointment from the list (for demonstration purposes)
-    del appointments[appointment_id - 1]
-    return redirect(url_for('dashboard'))
-
-
 
 @app.route('/logout')
 def logout():
