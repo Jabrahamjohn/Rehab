@@ -1,100 +1,56 @@
-<!-- dashboard.html -->
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Rehab Center</title>
-    <!-- Link to Tailwind CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <style>
-        /* Style for sidebar */
-        .sidebar {
-            width: 240px;
-            background-color: #4a5568;
-            color: #fff;
-            position: fixed;
-            height: 100%;
-            top: 0;
-            left: 0;
-            overflow-x: hidden;
-            padding-top: 20px;
-        }
-
-        .sidebar a {
-            padding: 10px 20px;
-            text-decoration: none;
-            display: block;
-            color: #fff;
-        }
-
-        .sidebar a:hover {
-            background-color: #718096;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
-
-<body class="bg-gray-100">
-    
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <a href="#patient-management">Patient Management</a>
-        <a href="#appointment-scheduling">Appointment Scheduling</a>
-        <a href="#reporting">Reporting</a>
-        <a href="#task-management">Task Management</a>
-        <a href="#document-management">Document Management</a>
-        <a href="#messaging-system">Messaging System</a>
-        <a href="#notifications">Notifications</a>
+<body>
+  <div class="flex w-full h-screen bg-gray-100">
+    <div class="flex flex-col w-64 bg-white shadow-md p-4">
+      <h1 class="text-xl font-bold text-center py-4">Dashboard</h1>
+      <ul class="space-y-2">
+        <li class="py-2 px-4 rounded-lg hover:bg-gray-200 cursor-pointer">
+          <div class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m-2-2l-2-2" />
+            </svg>
+            <span>Team</span>
+          </div>
+        </li>
+        <li class="py-2 px-4 rounded-lg hover:bg-gray-200 cursor-pointer">
+          <div class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2zM9 10v5a1 1 0 001 1h2a1 1 0 001-1V10a1 1 0 00-1-1h-2a1 1 0 00-1 1z" />
+            </svg>
+            <span>Projects</span>
+            <span class="text-gray-400 text-sm">(12)</span>
+          </div>
+        </li>
+        <li class="py-2 px-4 rounded-lg hover:bg-gray-200 cursor-pointer">
+          <div class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4v3m-4 8v5m0 0s6 0 6 6v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2s6-6 6-6z" />
+            </svg>
+            <span>Calendar</span>
+            <span class="text-gray-400 text-sm">(20+)</span>
+          </div>
+        </li>
+        <li class="py-2 px-4 rounded-lg hover:bg-gray-200 cursor-pointer">
+          <div class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 2>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m-2-2l-2-2" />
+            </svg>
+            <span>Settings</span>
+            </div>
+        </li>
+        </ul>
     </div>
-
-    <!-- Main content -->
-    <main class="ml-240px py-8 px-4">
-
-        <!-- Grid Layout -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-            <!-- Patient Management Section -->
-            <section id="patient-management" class="bg-white rounded-lg shadow-md p-6">
-                <!-- Content for patient management section -->
-            </section>
-
-            <!-- Appointment Scheduling Section -->
-            <section id="appointment-scheduling" class="bg-white rounded-lg shadow-md p-6">
-                <!-- Content for appointment scheduling section -->
-            </section>
-
-            <!-- Reporting Section -->
-            <section id="reporting" class="bg-white rounded-lg shadow-md p-6">
-                <!-- Content for reporting section -->
-            </section>
-
-            <!-- Task Management Section -->
-            <section id="task-management" class="bg-white rounded-lg shadow-md p-6">
-                <!-- Content for task management section -->
-            </section>
-
-            <!-- Document Management Section -->
-            <section id="document-management" class="bg-white rounded-lg shadow-md p-6">
-                <!-- Content for document management section -->
-            </section>
-
-            <!-- Messaging System Section -->
-            <section id="messaging-system" class="bg-white rounded-lg shadow-md p-6">
-                <!-- Content for messaging system section -->
-            </section>
-
-            <!-- Notifications Section -->
-            <section id="notifications" class="bg-white rounded-lg shadow-md p-6">
-                <!-- Content for notifications section -->
-            </section>
-
-        </div> <!-- End of Grid Layout -->
-
-    </main>
-
+    <div class="flex-1 p-4">
+      <h1 class="text-2xl font-bold">Welcome to the Dashboard</h1>
+      <p class="text-gray-500">This is a simple dashboard template using Tailwind CSS</p>
+    </div>
+</div>
 </body>
-
 </html>
