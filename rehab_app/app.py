@@ -106,6 +106,16 @@ def messaging():
     """Renders the messaging.html template"""
     return render_template('./dashboard/messaging.html')
 
+@app.route('/notification')
+def notifications():
+    """Renders the notifications.html template"""
+    return render_template('./dashboard/notification.html')
+
+@app.route('/reports')
+def reports():
+    """Renders the reports.html template"""
+    return render_template('./dashboard/reports.html')
+
 
 @app.route('/logout')
 def logout():
