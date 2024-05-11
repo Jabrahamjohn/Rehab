@@ -91,6 +91,11 @@ def patients():
     """Renders the patients.html template"""
     return render_template('./dashboard/patients.html')
 
+@app.route('/appointments')
+def appointments():
+    """Renders the appointments.html template"""
+    return render_template('./dashboard/appointments.html')
+
 @app.route('/logout')
 def logout():
     #session.pop("logged_in", None)
