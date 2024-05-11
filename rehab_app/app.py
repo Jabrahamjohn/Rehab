@@ -87,6 +87,7 @@ def dashboard():
     return render_template('./dashboard/dashboard.html')
 
 
+
 @app.route('/logout')
 def logout():
     #session.pop("logged_in", None)
