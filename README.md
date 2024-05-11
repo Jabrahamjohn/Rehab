@@ -1,4 +1,5 @@
 # Rehab
+
 ## Overview
 A user-friendly and informative web application for a rehab center to provide resources, support, and information to individuals seeking help for addiction or rehabilitation.
 
