@@ -116,6 +116,10 @@ def reports():
     """Renders the reports.html template"""
     return render_template('./dashboard/reports.html')
 
+@app.route('/tasks')
+def tasks():
+    """Renders the tasks.html template"""
+    return render_template('./dashboard/tasks.html')
 
 @app.route('/logout')
 def logout():
