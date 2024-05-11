@@ -86,53 +86,6 @@ def dashboard():
     """Renders the dashboard.html template"""
     return render_template('./dashboard/dashboard.html')
 
-# Sample data for demonstration purposes
-patients = [
-    {"id": 1, "name": "John Doe", "age": 30, "gender": "Male"},
-    {"id": 2, "name": "Jane Smith", "age": 25, "gender": "Female"}
-]
-
-# Route for adding a new patient
-@app.route('/add-patient', methods=['POST'])
-def add_patient():
-    name = request.form.get('name')
-    age = request.form.get('age')
-    gender = request.form.get('gender')
-    # Add the new patient to the list (for demonstration purposes)
-    patients.append({"id": len(patients) + 1, "name": name, "age": age, "gender": gender})
-    return redirect(url_for('dashboard'))
-
-# Route for editing a patient
-@app.route('/edit-patient/<int:patient_id>', methods=['GET', 'POST'])
-def edit_patient(patient_id):
-    if request.method == 'POST':
-        # Update the patient's information (for demonstration purposes)
-        patients[patient_id - 1]['name'] = request.form.get('name')
-        patients[patient_id - 1]['age'] = request.form.get('age')
-        patients[patient_id - 1]['gender'] = request.form.get('gender')
-        return redirect(url_for('dashboard'))
-    else:
-        # Render the edit patient form
-        patient = patients[patient_id - 1]  # Subtract 1 because list indices start from 0
-        return render_template('edit_patient.html', patient=patient)
-
-# Route for deleting a patient
-@app.route('/delete-patient/<int:patient_id>', methods=['POST'])
-def delete_patient(patient_id):
-    # Delete the patient from the list (for demonstration purposes)
-    del patients[patient_id - 1]
-    return redirect(url_for('dashboard'))
-
-# Route for adding a new appointment
-@app.route('/add-appointment', methods=['POST'])
-def add_appointment():
-    patient_id = int(request.form.get('patient'))
-    date = request.form.get('date')
-    time = request.form.get('time')
-    # Add the new appointment to the list (for demonstration purposes)
-    appointments.append({"id": len(appointments) + 1, "patient_id": patient_id, "patient_name": patients[patient_id - 1]['name'], "date": date, "time": time})
-    return redirect(url_for('dashboard'))
-
 
 @app.route('/logout')
 def logout():
