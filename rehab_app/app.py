@@ -101,6 +101,11 @@ def document():
     """Renders the document.html template"""
     return render_template('./dashboard/document.html')
 
+@app.route('/messaging')
+def messaging():
+    """Renders the messaging.html template"""
+    return render_template('./dashboard/messaging.html')
+
 
 @app.route('/logout')
 def logout():
