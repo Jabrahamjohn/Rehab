@@ -96,6 +96,12 @@ def appointments():
     """Renders the appointments.html template"""
     return render_template('./dashboard/appointments.html')
 
+@app.route('/document')
+def document():
+    """Renders the document.html template"""
+    return render_template('./dashboard/document.html')
+
+
 @app.route('/logout')
 def logout():
     #session.pop("logged_in", None)
