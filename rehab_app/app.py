@@ -86,7 +86,10 @@ def dashboard():
     """Renders the dashboard.html template"""
     return render_template('./dashboard/dashboard.html')
 
-
+@app.route('/patients')
+def patients():
+    """Renders the patients.html template"""
+    return render_template('./dashboard/patients.html')
 
 @app.route('/logout')
 def logout():
