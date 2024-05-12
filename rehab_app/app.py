@@ -73,14 +73,17 @@ def change_password():
         if initial_password == STAFFPASSWORD:
             if new_password == confirm_password:
                 STAFFPASSWORD = new_password
-                return redirect(url_for("dashboard"))
+                return redirect(url_for("/dashboard"))
             else:
                 error_message = "New password and confirm password do not match. Please try again!"
                 return render_template("change_password.html", error_message=error_message)
         else:
             error_message = "Invalid initial password. Please try again!"
             return render_template("change_password.html", error_message=error_message)
-    return render_template("change_password.html")
+    """Renders the change_password.html template"""
+    return render_template('change_password.html')
+
+
 
 @app.route('/dashboard')
 def dashboard():
