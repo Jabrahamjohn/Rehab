@@ -67,106 +67,65 @@ def change_password():
     #    return redirect(url_for("login"))
     if request.method == "POST":
         # Logic to change password
+        initial_password = request.form.get("initial_password")
         new_password = request.form.get("new_password")
         confirm_password = request.form.get("confirm_password")
-        if new_password == confirm_password:
-            # Update password logic (you may want to store it securely)
-            STAFF_PASSWORD = new_password
-            #session.pop("logged_in", None)
-            return redirect(url_for("dashboard"))
+        if initial_password == STAFFPASSWORD:
+            if new_password == confirm_password:
+                STAFFPASSWORD = new_password
+                return redirect(url_for("/dashboard"))
+            else:
+                error_message = "New password and confirm password do not match. Please try again!"
+                return render_template("change_password.html", error_message=error_message)
         else:
-            error_message = "Passwords do not match. Please try again."
+            error_message = "Invalid initial password. Please try again!"
             return render_template("change_password.html", error_message=error_message)
-    return render_template("change_password.html")
+    """Renders the change_password.html template"""
+    return render_template('change_password.html')
+
+
 
 @app.route('/dashboard')
 def dashboard():
     #if not session.get("logged_in"):
      #   return redirect(url_for("login"))
     """Renders the dashboard.html template"""
-    return render_template('dashboard.html')
+    return render_template('./dashboard/dashboard.html')
 
-# Sample data for demonstration purposes
-patients = [
-    {"id": 1, "name": "John Doe", "age": 30, "gender": "Male"},
-    {"id": 2, "name": "Jane Smith", "age": 25, "gender": "Female"}
-]
+@app.route('/patients')
+def patients():
+    """Renders the patients.html template"""
+    return render_template('./dashboard/patients.html')
 
-# Route for adding a new patient
-@app.route('/add-patient', methods=['POST'])
-def add_patient():
-    name = request.form.get('name')
-    age = request.form.get('age')
-    gender = request.form.get('gender')
-    # Add the new patient to the list (for demonstration purposes)
-    patients.append({"id": len(patients) + 1, "name": name, "age": age, "gender": gender})
-    return redirect(url_for('dashboard'))
+@app.route('/appointments')
+def appointments():
+    """Renders the appointments.html template"""
+    return render_template('./dashboard/appointments.html')
 
-# Route for editing a patient
-@app.route('/edit-patient/<int:patient_id>', methods=['GET', 'POST'])
-def edit_patient(patient_id):
-    if request.method == 'POST':
-        # Update the patient's information (for demonstration purposes)
-        patients[patient_id - 1]['name'] = request.form.get('name')
-        patients[patient_id - 1]['age'] = request.form.get('age')
-        patients[patient_id - 1]['gender'] = request.form.get('gender')
-        return redirect(url_for('dashboard'))
-    else:
-        # Render the edit patient form
-        patient = patients[patient_id - 1]  # Subtract 1 because list indices start from 0
-        return render_template('edit_patient.html', patient=patient)
+@app.route('/document')
+def document():
+    """Renders the document.html template"""
+    return render_template('./dashboard/document.html')
 
-# Route for deleting a patient
-@app.route('/delete-patient/<int:patient_id>', methods=['POST'])
-def delete_patient(patient_id):
-    # Delete the patient from the list (for demonstration purposes)
-    del patients[patient_id - 1]
-    return redirect(url_for('dashboard'))
+@app.route('/messaging')
+def messaging():
+    """Renders the messaging.html template"""
+    return render_template('./dashboard/messaging.html')
 
-# Route for adding a new appointment
-@app.route('/add-appointment', methods=['POST'])
-def add_appointment():
-    patient_id = int(request.form.get('patient'))
-    date = request.form.get('date')
-    time = request.form.get('time')
-    # Add the new appointment to the list (for demonstration purposes)
-    appointments.append({"id": len(appointments) + 1, "patient_id": patient_id, "patient_name": patients[patient_id - 1]['name'], "date": date, "time": time})
-    return redirect(url_for('dashboard'))
+@app.route('/notification')
+def notifications():
+    """Renders the notifications.html template"""
+    return render_template('./dashboard/notification.html')
 
-# Route for editing an appointment
-@app.route('/edit-appointment/<int:appointment_id>', methods=['GET', 'POST'])
-def edit_appointment(appointment_id):
-    if request.method == 'POST':
-        # Update the appointment's information (for demonstration purposes)
-        appointment = appointments[appointment_id - 1]
-        appointment['patient_id'] = int(request.form.get('patient'))
-        appointment['patient_name'] = patients[appointment['patient_id'] - 1]['name']
-        appointment['date'] = request.form.get('date')
-        appointment['time'] = request.form.get('time')
-        return redirect(url_for('dashboard'))
-    else:
-        # Render the edit appointment form
-        appointment = appointments[appointment_id - 1]  # Subtract 1 because list indices start from 0
-        return render_template('edit_appointment.html', appointment=appointment)
+@app.route('/reports')
+def reports():
+    """Renders the reports.html template"""
+    return render_template('./dashboard/reports.html')
 
-# Route for deleting an appointment
-@app.route('/delete-appointment/<int:appointment_id>', methods=['POST'])
-def delete_appointment(appointment_id):
-    # Delete the appointment from the list (for demonstration purposes)
-    del appointments[appointment_id - 1]
-    return redirect(url_for('dashboard'))
-
-# Sample tasks data (replace with actual tasks data)
-tasks = [
-    {"id": 1, "title": "Task 1", "description": "Description for Task 1"},
-    {"id": 2, "title": "Task 2", "description": "Description for Task 2"},
-    {"id": 3, "title": "Task 3", "description": "Description for Task 3"}
-]
-
-# Route to fetch tasks
-@app.route('/tasks', methods=['GET'])
-def get_tasks():
-    return jsonify(tasks)
+@app.route('/tasks')
+def tasks():
+    """Renders the tasks.html template"""
+    return render_template('./dashboard/tasks.html')
 
 @app.route('/logout')
 def logout():
