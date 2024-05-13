@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import uuid
 from sqlalchemy import Column, String, Integer, ForeignKey, Date, Time
-from db_storage import db
+from app import db
 from sqlalchemy.orm import relationship
 
 
