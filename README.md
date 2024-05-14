@@ -54,6 +54,8 @@ pip install -r requirements.txt
 ```
 python app.py (runs the application)
 ```
+
 ## Authors
+
 * Abraham John - [https://github.com/Jabrahamjohn](https://github.com/Jabrahamjohn)
 * Margaret Maina - [https://github.com/maggywairigu](https://github.com/maggywairigu)
