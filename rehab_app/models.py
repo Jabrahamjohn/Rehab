@@ -3,8 +3,9 @@
 #models.py
 import uuid
 from sqlalchemy import Column, String, Integer, ForeignKey, Date, Time
-from app import db
+from extensions import db
 from sqlalchemy.orm import relationship
+from flask_sqlalchemy import SQLAlchemy
 
 
 class Appointment(db.Model):

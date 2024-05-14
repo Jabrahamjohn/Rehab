@@ -3,15 +3,19 @@
 #app.py
 from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from models import Appointment, Medication, Patient, Therapist, Treatment_Plan, Proggress
+from extensions import db
+from flask_migrate import Migrate
 
 
 app = Flask(__name__)
-
+app.secret_key = 'AJ'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:admin@localhost/rehab'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
+db.init_app(app)
+migrate = Migrate(app, db)
+
+from models import Appointment, Medication, Patient, Therapist, Treatment_Plan, Progress
 
 @app.route('/')
 def index():
@@ -109,7 +113,7 @@ def patients():
 def add_patient():
     name = request.form['name']
     age = request.form['age']
-    new_patient = Patient(name=name, age=age)
+    new_patient = patients(name=name, year=age)
     db.session.add(new_patient)
     db.session.commit()
     flash('Patient added successfully', 'success')
@@ -151,4 +155,5 @@ def logout():
     return redirect(url_for("index"))
 
 if __name__ == '__main__':
+    app.secret_key = 'AJ'
     app.run(debug=True)
