@@ -43,12 +43,12 @@ class Patient(db.Model):
     phone_number = Column(String(60), nullable=False)
     email = Column(String(128))
     medical_history = Column(String)
-    treatment_plan = Column(String(36), ForeignKey('treatment_plan.id'))
-    medication_plan = Column(String(36), ForeignKey('medication.id'))
+    #treatment_plan = Column(String(36), ForeignKey('treatment_plan.id'))
+    #medication_plan = Column(String(36), ForeignKey('medication.id'))
     progress_notes = Column(String(128))
 
-    treatment_plan = relationship('Treatment_Plan', backref='treatment_plan_patients')
-    medication = relationship('Medication', backref='Medication.patient_id')
+    #treatment_plan = relationship('Treatment_Plan', backref='treatment_plan_patients')
+    medication = relationship('Medication', backref='patient', foreign_keys='Medictaion.patient_id')
 
 class Therapist(db.Model):
     __tablename__ = "therapists"
