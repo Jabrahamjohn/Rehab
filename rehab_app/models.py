@@ -28,9 +28,9 @@ class Medication(db.Model):
     frequency = Column(String, nullable=False)
     start_date = Column(Date, nullable=False)
     end_date = Column(Date, nullable=False)
-    therapist_id = Column(String(36), ForeignKey('therapists.id'), nullable=False)  # Specify therapist_id as foreign key
+    therapist = Column(String(36), ForeignKey('therapists.id'), primary_key=True, nullable=False)
 
-    patients = relationship('Patient', backref='patient_medications', foreign_keys=[patient_id])  # Change backref to 'patient_medications'
+    patients = relationship('Patient', backref='medication')
     therapists = relationship('Therapist', backref='medication')
 
 class Patient(db.Model):
@@ -43,12 +43,12 @@ class Patient(db.Model):
     phone_number = Column(String(60), nullable=False)
     email = Column(String(128))
     medical_history = Column(String)
-    # Remove the existing medication_plan column
-    # medication_plan = Column(String(36), ForeignKey('medication.id'))
+    treatment_plan = Column(String(36), ForeignKey('treatment_plan.id'))
+    medication_plan = Column(String(36), ForeignKey('medication.id'))
     progress_notes = Column(String(128))
 
-    # Define the relationship with Medication with explicit foreign_keys argument
-    medication = relationship('Medication', backref='patient', foreign_keys='Medication.patient_id')
+    treatment_plan = relationship('Treatment_Plan', backref='patients')
+    medication = relationship('Medication', backref='patients')
 
 class Therapist(db.Model):
     __tablename__ = "therapists"
