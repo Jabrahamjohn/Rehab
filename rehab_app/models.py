@@ -28,9 +28,9 @@ class Medication(db.Model):
     frequency = Column(String, nullable=False)
     start_date = Column(Date, nullable=False)
     end_date = Column(Date, nullable=False)
-    therapist = Column(String(36), ForeignKey('therapists.id'), primary_key=True, nullable=False)
+    therapist_id = Column(String(36), ForeignKey('therapists.id'), nullable=False)  # Specify therapist_id as foreign key
 
-    patients = relationship('Patient', backref='medication')
+    patients = relationship('Patient', backref='medication', foreign_keys=[patient_id])  # Specify patient_id as foreign key
     therapists = relationship('Therapist', backref='medication')
 
 class Patient(db.Model):
