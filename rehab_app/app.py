@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
+
+#app.py
 from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from models import Appointment, Medication, Patient, Therapist, Treatment_Plan, Proggress
 
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://<username>:<password>@localhost/<databasename>'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:admin@localhost/rehab'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -99,7 +102,8 @@ def dashboard():
 @app.route('/patients')
 def patients():
     """Renders the patients.html template"""
-    return render_template('./dashboard/patients.html')
+    patients = Patient.query.all()
+    return render_template('./dashboard/patients.html', patients=patients)
 
 @app.route('/appointments')
 def appointments():
