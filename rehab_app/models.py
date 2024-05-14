@@ -30,7 +30,7 @@ class Medication(db.Model):
     end_date = Column(Date, nullable=False)
     therapist_id = Column(String(36), ForeignKey('therapists.id'), nullable=False)  # Specify therapist_id as foreign key
 
-    patients = relationship('Patient', backref='medication', foreign_keys=[patient_id])  # Specify patient_id as foreign key
+    patients = relationship('Patient', backref='patient_medications', foreign_keys=[patient_id])  # Change backref to 'patient_medications'
     therapists = relationship('Therapist', backref='medication')
 
 class Patient(db.Model):
