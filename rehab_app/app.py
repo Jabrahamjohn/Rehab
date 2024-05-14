@@ -105,6 +105,16 @@ def patients():
     patients = Patient.query.all()
     return render_template('./dashboard/patients.html', patients=patients)
 
+@app.route('/add_patient', methods=['POST'])
+def add_patient():
+    name = request.form['name']
+    age = request.form['age']
+    new_patient = Patient(name=name, age=age)
+    db.session.add(new_patient)
+    db.session.commit()
+    flash('Patient added successfully', 'success')
+    return redirect(url_for(patients))
+
 @app.route('/appointments')
 def appointments():
     """Renders the appointments.html template"""
