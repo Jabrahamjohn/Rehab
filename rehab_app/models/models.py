@@ -1,0 +1,84 @@
+#!/usr/bin/python3
+import uuid
+from sqlalchemy import Column, String, Integer, ForeignKey, Date, Time
+from app import db
+from sqlalchemy.orm import relationship
+
+
+class Appointment(db.Model):
+    __tablename__ = "appointments"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), nullable=False)
+    date = Column(Date, nullable=False)
+    time = Column(Time, nullable=False)
+    duration = Column(Integer, nullable=False)
+    patient_id = Column(String(36), ForeignKey('patients.id'),nullable=False)
+    therapist_id = Column(String(36), ForeignKey('therapists.id'), nullable=False)
+
+class Medication(db.Model):
+    __tablename__ = "medication"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
+    patient_id = Column(String(36), ForeignKey('patients.id'), primary_key=True, nullable=False)
+    name = Column(String, nullable=False)
+    dosage = Column(String, nullable=False)
+    frequency = Column(String, nullable=False)
+    start_date = Column(Date, nullable=False)
+    end_date = Column(Date, nullable=False)
+    therapist = Column(String(36), ForeignKey('therapists.id'), primary_key=True, nullable=False)
+
+    patients = relationship('Patient', backref='medication')
+    therapists = relationship('Therapist', backref='medication')
+
+class Patient(db.Model):
+    __tablename__ = "patients"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
+    name = Column(String(128), nullable=False)
+    year = Column(Integer, nullable=False)
+    gender = Column(String(6), nullable=False)
+    phone_number = Column(String(60), nullable=False)
+    email = Column(String(128))
+    medical_history = Column(String)
+    treatment_plan = Column(String(36), ForeignKey('treatment_plan.id'))
+    medication_plan = Column(String(36), ForeignKey('medication.id'))
+    progress_notes = Column(String(128))
+
+    treatment_plan = relationship('Treatment_Plan', backref='patients')
+    medication = relationship('Medication', backref='patients')
+
+class Therapist(db.Model):
+    __tablename__ = "therapists"
+
+    id = Column(String(36), primary_key=True, nullable=False)
+    name = Column(String(128), nullable=False)
+    phone_number = Column(String(60), nullable=False)
+    email = Column(String(128))
+    availability = Column(String(20), nullable=False)
+
+class Treatment_Plan(db.Model):
+    __tablename__ = "treatment_plans"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
+    patient_id = Column(String(36), ForeignKey('patients.id'), nullable=False)
+    start_date = Column(Date, nullable=False)
+    end_date = Column(Date, nullable=False)
+    goals = Column(String,nullable=False)
+    medication = Column(String(128), ForeignKey('medication.id'))
+    progress = Column(String(128), ForeignKey('progress.id'))
+
+    patients = relationship('Patient', backref='treatment_plans')
+    medication = relationship('Medication', backref='treatment_plans')
+    progress = relationship('Progress', backref='treatment_plans')
+
+class Progress(db.Model):
+    __tablename__ = "progress"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
+    patient_id = Column(String(36), ForeignKey('patients.id'), primary_key=True, nullable=False)
+    author = Column(String(36), ForeignKey('therapists.id'), primary_key=True, nullable=False)
+    date = Column(Date, nullable=False)
+    content = Column(String, nullable=False)
+
+    patients = relationship('Patient', backref='progress')
+    therapists = relationship('Therapist', backref='medication')

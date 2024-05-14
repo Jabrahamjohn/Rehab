@@ -1,10 +1,14 @@
+#!/usr/bin/env python3
 from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
+from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
 
-USERNAME = "admin"
-STAFFPASSWORD = 'Password1234'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://<username>:<password>@localhost/<databasename>'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
 
 @app.route('/')
 def index():
