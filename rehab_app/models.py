@@ -48,7 +48,7 @@ class Patient(db.Model):
     progress_notes = Column(String(128))
 
     treatment_plan = relationship('Treatment_Plan', backref='treatment_plan_patients')
-    medication = relationship('Medication', backref='patients')
+    medication = relationship('Medication', backref='Medication.patient_id')
 
 class Therapist(db.Model):
     __tablename__ = "therapists"
