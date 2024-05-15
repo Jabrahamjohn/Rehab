@@ -50,44 +50,7 @@ def admissions():
     """Renders the admissions.html template"""
     return render_template('admissions.html')
 
-@app.route('/login' , methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form.get("username")
-        password = request.form.get("password")
-        if username == USERNAME and password == STAFFPASSWORD:
-            #session["logged_in"] = True
-            return redirect(url_for('change_password'))
-        else:
-            error_message="Invalid password or user name. Please try again!"
-            return render_template("login.html", error_message=error_message)
-    """Renders the login.html template"""
-    return render_template('login.html')
-
-@app.route('/change_password', methods=['GET', 'POST'])
-def change_password():
-    STAFFPASSWORD = 'Password1234'
-   # if not session.get("logged_in"):
-    #    return redirect(url_for("login"))
-    if request.method == "POST":
-        # Logic to change password
-        initial_password = request.form.get("initial_password")
-        new_password = request.form.get("new_password")
-        confirm_password = request.form.get("confirm_password")
-        if initial_password == STAFFPASSWORD:
-            if new_password == confirm_password:
-                STAFFPASSWORD = new_password
-                return redirect(url_for("/dashboard"))
-            else:
-                error_message = "New password and confirm password do not match. Please try again!"
-                return render_template("change_password.html", error_message=error_message)
-        else:
-            error_message = "Invalid initial password. Please try again!"
-            return render_template("change_password.html", error_message=error_message)
-    """Renders the change_password.html template"""
-    return render_template('change_password.html')
-
-
+@app.route('/login')
 
 @app.route('/dashboard')
 def dashboard():
@@ -101,43 +64,6 @@ def patients():
     """Renders the patients.html template"""
     patients = Patient.query.all()
     return render_template('./dashboard/patients.html', patients=patients)
-
-@app.route('/add_patient', methods=['POST'])
-def add_patient():
-    try:
-        name = request.form['name']
-        year = request.form['year']  # Change from 'age' to 'year' to match the model
-        gender = request.form['gender']
-        phone_number = request.form['phone_number']
-        email = request.form['email']
-        medical_history = request.form['medical_history']
-        treatment_plan_id = request.form['treatment_plan']  # Assuming treatment_plan_id is provided
-        medication_plan_id = request.form['medication_plan']  # Assuming medication_plan_id is provided
-        progress_notes = request.form['progress_notes']
-    # Create a new Patient instance
-        new_patient = Patient(
-            name=name,
-            year=year,
-            gender=gender,
-            phone_number=phone_number,
-            email=email,
-            medical_history=medical_history,
-            treatment_plan=treatment_plan_id,
-            medication_plan=medication_plan_id,
-            progress_notes=progress_notes
-        )
-
-        # Add the new patient to the database
-        db.session.add(new_patient)
-        db.session.commit()
-
-        flash('Patient added successfully', 'success')
-    except Exception as e:
-        db.session.rollback()
-        flash('An error occured.')
-    finally:
-        db.session.close()
-    return redirect(url_for('patients'))
 
 @app.route('/appointments')
 def appointments():
@@ -162,7 +88,7 @@ def notifications():
 @app.route('/reports')
 def reports():
     """Renders the reports.html template"""
-    return render_template('./dashboard/reports.html')
+    return render_template('./dashboard/medication.html')
 
 @app.route('/tasks')
 def tasks():

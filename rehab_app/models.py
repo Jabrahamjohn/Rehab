@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship
 
 app = Flask(__name__)
 app.secret_key = 'AJ'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:admin@localhost/rehab_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/rehab_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
