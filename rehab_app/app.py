@@ -15,7 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 migrate = Migrate(app, db)
 
-from models import Appointment, Medication, Patient, Therapist, Treatment_Plan, Progress
+from models import Appointment, Patient, Therapist, Treatment_Plan, Progress
 
 @app.route('/')
 def index():
@@ -111,13 +111,40 @@ def patients():
 
 @app.route('/add_patient', methods=['POST'])
 def add_patient():
-    name = request.form['name']
-    age = request.form['age']
-    new_patient = patients(name=name, year=age)
-    db.session.add(new_patient)
-    db.session.commit()
-    flash('Patient added successfully', 'success')
-    return redirect(url_for(patients))
+    try:
+        name = request.form['name']
+        year = request.form['year']  # Change from 'age' to 'year' to match the model
+        gender = request.form['gender']
+        phone_number = request.form['phone_number']
+        email = request.form['email']
+        medical_history = request.form['medical_history']
+        treatment_plan_id = request.form['treatment_plan']  # Assuming treatment_plan_id is provided
+        medication_plan_id = request.form['medication_plan']  # Assuming medication_plan_id is provided
+        progress_notes = request.form['progress_notes']
+    # Create a new Patient instance
+        new_patient = Patient(
+            name=name,
+            year=year,
+            gender=gender,
+            phone_number=phone_number,
+            email=email,
+            medical_history=medical_history,
+            treatment_plan=treatment_plan_id,
+            medication_plan=medication_plan_id,
+            progress_notes=progress_notes
+        )
+
+        # Add the new patient to the database
+        db.session.add(new_patient)
+        db.session.commit()
+
+        flash('Patient added successfully', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash('An error occured.')
+    finally:
+        db.session.close()
+    return redirect(url_for('patients'))
 
 @app.route('/appointments')
 def appointments():
