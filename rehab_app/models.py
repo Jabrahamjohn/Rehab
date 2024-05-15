@@ -1,8 +1,11 @@
 #!/usr/bin/python3
+
+#models.py
 import uuid
 from sqlalchemy import Column, String, Integer, ForeignKey, Date, Time
-from app import db
+from extensions import db
 from sqlalchemy.orm import relationship
+
 
 
 class Appointment(db.Model):
@@ -14,12 +17,12 @@ class Appointment(db.Model):
     duration = Column(Integer, nullable=False)
     patient_id = Column(String(36), ForeignKey('patients.id'),nullable=False)
     therapist_id = Column(String(36), ForeignKey('therapists.id'), nullable=False)
-
+"""
 class Medication(db.Model):
     __tablename__ = "medication"
 
-    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
-    patient_id = Column(String(36), ForeignKey('patients.id'), primary_key=True, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    patient_id = db.Column(db.Integer, db.ForeignKey('patients.id'))
     name = Column(String, nullable=False)
     dosage = Column(String, nullable=False)
     frequency = Column(String, nullable=False)
@@ -27,9 +30,9 @@ class Medication(db.Model):
     end_date = Column(Date, nullable=False)
     therapist = Column(String(36), ForeignKey('therapists.id'), primary_key=True, nullable=False)
 
-    patients = relationship('Patient', backref='medication')
+    patient = db.relationship('Patient', back_populates='medications')
     therapists = relationship('Therapist', backref='medication')
-
+"""
 class Patient(db.Model):
     __tablename__ = "patients"
 
@@ -45,16 +48,19 @@ class Patient(db.Model):
     progress_notes = Column(String(128))
 
     treatment_plan = relationship('Treatment_Plan', backref='patients')
-    medication = relationship('Medication', backref='patients')
+    medication = relationship('Medication', backref='patient')
+    progress = relationship('Progress', backref='patient')
 
 class Therapist(db.Model):
     __tablename__ = "therapists"
 
-    id = Column(String(36), primary_key=True, nullable=False)
+   # id = Column(String(36), primary_key=True, nullable=False)
     name = Column(String(128), nullable=False)
     phone_number = Column(String(60), nullable=False)
     email = Column(String(128))
     availability = Column(String(20), nullable=False)
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), nullable=False)
+
 
 class Treatment_Plan(db.Model):
     __tablename__ = "treatment_plans"
@@ -70,6 +76,10 @@ class Treatment_Plan(db.Model):
     patients = relationship('Patient', backref='treatment_plans')
     medication = relationship('Medication', backref='treatment_plans')
     progress = relationship('Progress', backref='treatment_plans')
+     # Define relationships
+    patient_id = Column(String(36), ForeignKey('patients.id'), nullable=False)
+    medication_id = Column(String(36), ForeignKey('medication.id'))
+    progress_id = Column(String(36), ForeignKey('progress.id'))
 
 class Progress(db.Model):
     __tablename__ = "progress"
