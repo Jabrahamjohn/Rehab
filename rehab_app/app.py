@@ -1,21 +1,13 @@
 #!/usr/bin/env python3
 
-#app.py
-from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from extensions import db
-from flask_migrate import Migrate
+from flask import render_template, request, redirect, url_for, flash, session, jsonify
+from models import app, Treatment_Plan, Progress, Medication, Patient, Therapist, Appointment
+from models import db
 
+with app.app_context():
+    #Create all the db models into the database
+    db.create_all()
 
-app = Flask(__name__)
-app.secret_key = 'AJ'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:admin@localhost/rehab'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db.init_app(app)
-migrate = Migrate(app, db)
-
-from models import Appointment, Patient, Therapist, Treatment_Plan, Progress
 
 @app.route('/')
 def index():
@@ -74,6 +66,7 @@ def login():
 
 @app.route('/change_password', methods=['GET', 'POST'])
 def change_password():
+    STAFFPASSWORD = 'Password1234'
    # if not session.get("logged_in"):
     #    return redirect(url_for("login"))
     if request.method == "POST":
