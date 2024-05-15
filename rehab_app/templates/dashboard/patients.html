@@ -132,95 +132,36 @@
       </div>
     </header>
     <main>
-      <!--Patient Management section-->
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
-            <div class="flex justify-between">
-            <h2 class="text-2xl font-semibold text-gray-900">Patient Management</h2>
-            <a href="./patients/add" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Patient</a>
-            </div>
-            <div class="mt-4">
-            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Name
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Email
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Phone
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Actions
-                    </th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="flex items-center">
-                        <div class="flex-shrink-0 h-10 w-10">
-                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                        </div>
-                        <div class="ml-4">
-                            <div class="text-sm font-medium text-gray-900">
-                            Jane Cooper
-                            </div>
-                            <div class="text-sm text-gray-500">
-                            </div>
-                        </div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">
-                            janecooper@gmail.com
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">
-                            123-456-7890
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="flex items-center">
-                        <div class="flex-shrink-0 h-10 w-10">
-                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                        </div>
-                        <div class="ml-4">
-                            <div class="text-sm font-medium text-gray-900">
-                            Jane Cooper
-                            </div>
-                            <div class="text-sm text-gray-500">
-                            </div>
-                        </div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">
-                            123-456-7890
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                    </td>
-                    </tr>
-                    
-                </tbody>
-                </table>
-            </div>
-            </div>
-        </div>
+      <!-- Add Patient Form -->
+      <form action="/add_patient" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br>
+
+        <!-- Add other input fields for gender, phone number, email, etc. -->
+
+        <button type="submit">Add Patient</button>
+      </form>
+      <!-- Display Patient Data -->
+
+      <tbody class="bg-white divide-y divide-gray-200">
+        {% for patient in patients %}
+        <tr>
+            <td class="px-6 py-4 whitespace-nowrap">{{ patient.name }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ patient.email }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ patient.phone_number }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+
+      <!-- Add/Edit Patient Button -->
+      <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+
 
     </main>
   </div>

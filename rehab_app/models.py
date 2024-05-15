@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import uuid
@@ -78,7 +79,6 @@ class Therapist(db.Model):
     phone_number = Column(String(60), nullable=False)
     email = Column(String(128))
     availability = Column(String(20), nullable=False)
-
     progress = relationship('Progress', backref='therapist')
 
 class Appointment(db.Model):
@@ -93,3 +93,5 @@ class Appointment(db.Model):
 
     patient = relationship('Patient', backref='appointments')
     therapist = relationship('Therapist', backref='appointments')
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), nullable=False)
+
