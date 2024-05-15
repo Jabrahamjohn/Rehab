@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import uuid
@@ -31,7 +30,7 @@ class Progress(db.Model):
 
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
     patient_id = Column(String(36), ForeignKey('patients.id'), nullable=False)
-    author = Column(String(36), ForeignKey('therapists.id'), nullable=False)
+    author = Column(String(36), ForeignKey('therapists.reg_no'), nullable=False)
     date = Column(Date, nullable=False)
     content = Column(String(255), nullable=False)
 
@@ -48,7 +47,7 @@ class Medication(db.Model):
     frequency = Column(String(60), nullable=False)
     start_date = Column(Date, nullable=False)
     end_date = Column(Date, nullable=False)
-    therapist = Column(String(36), ForeignKey('therapists.id'), nullable=False)
+    therapist = Column(String(36), ForeignKey('therapists.reg_no'), nullable=False)
 
     patient = relationship('Patient', back_populates='medications')
     therapists = relationship('Therapist', backref='medications')
@@ -70,16 +69,30 @@ class Patient(db.Model):
     treatment_plan = relationship('Treatment_Plan', backref='patients')
     medications = relationship('Medication', back_populates='patient')
     progress = relationship('Progress', backref='patient')
+    
+class User(db.Model):
+    __tablename__ = "users"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
+    name = Column(String(255), nullable=False)
+    phone_number = Column(String(60), nullable=False)
+    email = Column(String(128))
+    role = Column(String(20), nullable=False)
+    password = Column(String(255), nullable=False)
+
+    therapist = relationship('Therapist', back_populates='user')
+
 
 class Therapist(db.Model):
     __tablename__ = "therapists"
 
-    id = Column(String(36), primary_key=True, nullable=False)
-    name = Column(String(128), nullable=False)
-    phone_number = Column(String(60), nullable=False)
-    email = Column(String(128))
+    reg_no = Column(String(36), primary_key=True, unique=True, nullable=False)
     availability = Column(String(20), nullable=False)
+
+    user = relationship('User', back_populates='therapist')
     progress = relationship('Progress', backref='therapist')
+
+
 
 class Appointment(db.Model):
     __tablename__ = "appointments"
@@ -89,9 +102,7 @@ class Appointment(db.Model):
     time = Column(Time, nullable=False)
     duration = Column(Integer, nullable=False)
     patient_id = Column(String(36), ForeignKey('patients.id'), nullable=False)
-    therapist_id = Column(String(36), ForeignKey('therapists.id'), nullable=False)
+    therapist_id = Column(String(36), ForeignKey('therapists.reg_no'), nullable=False)
 
     patient = relationship('Patient', backref='appointments')
     therapist = relationship('Therapist', backref='appointments')
-    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), nullable=False)
-
