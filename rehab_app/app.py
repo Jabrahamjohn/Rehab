@@ -1,7 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
+#!/usr/bin/env python3
 
+from flask import render_template, request, redirect, url_for, flash, session, jsonify
+from models import app, Treatment_Plan, Progress, Medication, Patient, Therapist, Appointment
+from models import db
 
-app = Flask(__name__)
+with app.app_context():
+    #Create all the db models into the database
+    db.create_all()
+
 
 USERNAME = "admin"
 STAFFPASSWORD = 'Password1234'
@@ -63,6 +69,7 @@ def login():
 
 @app.route('/change_password', methods=['GET', 'POST'])
 def change_password():
+    STAFFPASSWORD = 'Password1234'
    # if not session.get("logged_in"):
     #    return redirect(url_for("login"))
     if request.method == "POST":
