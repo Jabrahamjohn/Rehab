@@ -62,17 +62,19 @@ def login():
         user = cursor.fetchone()
 
         if user:
-            # Authentication successful. Redirect to dashboard.
+            # Authentication successful.
             session['username'] = username
             if user['first_login']:
                 return redirect(url_for('change_password'))
             else:
-                return redirect(url_for('dashboard'))
+                return f'Welcome, {username}!'
         else:
-            # Authentication failed. Redirect back to login page.
+            # Authentication failed
             flash('Invalid username or password. Please try again.', 'error')
-            return redirect(url_for('login'))
-        
+            return redirect(url_for('login'))  # Redirect back to login page with error message
+
+    # If the request method is not 'POST', render the login form template
+    return render_template('login.html')
 
 @app.route('/change_password', methods=['GET', 'POST'])
 def change_password():
