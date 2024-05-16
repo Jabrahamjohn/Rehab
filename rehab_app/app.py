@@ -51,7 +51,7 @@ def admissions():
     """Renders the admissions.html template"""
     return render_template('admissions.html')
 
-@app.route('/login' , methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form.get("username")
@@ -62,15 +62,17 @@ def login():
         user = cursor.fetchone()
 
         if user:
-            #Authentication succesful.
+            # Authentication successful. Redirect to dashboard.
             session['username'] = username
             if user['first_login']:
                 return redirect(url_for('change_password'))
             else:
-                return f'Welcome, {username}!'
+                return redirect(url_for('dashboard'))
         else:
-            #Authentication failed
-            return 'Invalid username or password. Please try again.'       return redirect(url_for('change_password'))
+            # Authentication failed. Redirect back to login page.
+            flash('Invalid username or password. Please try again.', 'error')
+            return redirect(url_for('login'))
+        
 
 @app.route('/change_password', methods=['GET', 'POST'])
 def change_password():
@@ -94,11 +96,15 @@ def change_password():
 
 @app.route('/dashboard')
 def dashboard():
-    #if not session.get("logged_in"):
-     #   return redirect(url_for("login"))
-    """Renders the dashboard.html template"""
-    return render_template('./dashboard/dashboard.html')
-
+    # Check if the 'username' key exists in the session
+    if 'username' in session:
+        # User is logged in, render the dashboard
+        return render_template('./dashboard/dashboard.html')
+    else:
+        # User is not logged in, redirect to the login page
+        flash('You need to login first.', 'error')
+        return redirect(url_for('login'))
+    
 @app.route('/patients')
 def patients():
     """Renders the patients.html template"""
@@ -174,7 +180,7 @@ def tasks():
 
 @app.route('/logout')
 def logout():
-    #session.pop("logged_in", None)
+    session.pop("username", None)  # Clear the session variable
     return redirect(url_for("index"))
 
 if __name__ == '__main__':
