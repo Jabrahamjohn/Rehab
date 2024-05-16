@@ -2,7 +2,8 @@
 
 from flask import render_template, request, redirect, url_for, flash, session, jsonify
 from models import app, Treatment_Plan, Progress, Medication, Patient, Therapist, Appointment
-from models import db
+from models import db, mysql
+
 
 with app.app_context():
     #Create all the db models into the database
@@ -50,52 +51,62 @@ def admissions():
     """Renders the admissions.html template"""
     return render_template('admissions.html')
 
-@app.route('/login' , methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form.get("username")
         password = request.form.get("password")
-        if username == USERNAME and password == STAFFPASSWORD:
-            #session["logged_in"] = True
-            return redirect(url_for('change_password'))
+
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM users WHERE username = %s AND password = %s', (username, password))
+        user = cursor.fetchone()
+
+        if user:
+            # Authentication successful.
+            session['username'] = username
+            if user['first_login']:
+                return redirect(url_for('change_password'))
+            else:
+                return f'Welcome, {username}!'
         else:
-            error_message="Invalid password or user name. Please try again!"
-            return render_template("login.html", error_message=error_message)
-    """Renders the login.html template"""
+            # Authentication failed
+            flash('Invalid username or password. Please try again.', 'error')
+            return redirect(url_for('login'))  # Redirect back to login page with error message
+
+    # If the request method is not 'POST', render the login form template
     return render_template('login.html')
 
 @app.route('/change_password', methods=['GET', 'POST'])
 def change_password():
-    STAFFPASSWORD = 'Password1234'
-   # if not session.get("logged_in"):
-    #    return redirect(url_for("login"))
-    if request.method == "POST":
-        # Logic to change password
-        initial_password = request.form.get("initial_password")
-        new_password = request.form.get("new_password")
-        confirm_password = request.form.get("confirm_password")
-        if initial_password == STAFFPASSWORD:
-            if new_password == confirm_password:
-                STAFFPASSWORD = new_password
-                return redirect(url_for("/dashboard"))
-            else:
-                error_message = "New password and confirm password do not match. Please try again!"
-                return render_template("change_password.html", error_message=error_message)
-        else:
-            error_message = "Invalid initial password. Please try again!"
-            return render_template("change_password.html", error_message=error_message)
-    """Renders the change_password.html template"""
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    
+    if request.method == 'POST':
+        new_password = request.form['new_password']
+        confirm_password = request.form['confirm_password']
+
+        if new_password != confirm_password:
+            return 'Password do not match. Please try again.'
+        
+        cursor = mysql.connection.cursor()
+        cursor.execute('UPDATE users SET password = %s, first_login = 0 WHERE username = %s', (new_password, session['username']))
+        mysql.connection.commit()
+        cursor.close()
+
+        return 'Password changed successfully!'
     return render_template('change_password.html')
-
-
 
 @app.route('/dashboard')
 def dashboard():
-    #if not session.get("logged_in"):
-     #   return redirect(url_for("login"))
-    """Renders the dashboard.html template"""
-    return render_template('./dashboard/dashboard.html')
-
+    # Check if the 'username' key exists in the session
+    if 'username' in session:
+        # User is logged in, render the dashboard
+        return render_template('./dashboard/dashboard.html')
+    else:
+        # User is not logged in, redirect to the login page
+        flash('You need to login first.', 'error')
+        return redirect(url_for('login'))
+    
 @app.route('/patients')
 def patients():
     """Renders the patients.html template"""
@@ -157,21 +168,21 @@ def messaging():
 @app.route('/notification')
 def notifications():
     """Renders the notifications.html template"""
-    return render_template('./dashboard/notification.html')
+    return render_template('./dashboard/medication.html')
 
 @app.route('/reports')
 def reports():
     """Renders the reports.html template"""
-    return render_template('./dashboard/reports.html')
+    return render_template('./dashboard/users.html')
 
 @app.route('/tasks')
 def tasks():
     """Renders the tasks.html template"""
-    return render_template('./dashboard/tasks.html')
+    return render_template('./dashboard/progress.html')
 
 @app.route('/logout')
 def logout():
-    #session.pop("logged_in", None)
+    session.pop("username", None)  # Clear the session variable
     return redirect(url_for("index"))
 
 if __name__ == '__main__':

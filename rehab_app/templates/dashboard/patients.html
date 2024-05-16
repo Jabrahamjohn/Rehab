@@ -26,7 +26,7 @@
                 <a href="./document" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Document</a>
                 <a href="./messaging" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Messaging</a>
                 <a href="./notification" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Notifications</a>
-                <a href="./reports" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Reports</a>
+                <a href="./reports" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Medication</a>
               </div>
             </div>
           </div>
@@ -98,7 +98,7 @@
           <a href="./document" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Document</a>
           <a href="./messaging" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Messaging</a>
           <a href="./notification" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Notifications</a>
-          <a href="./reports" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Reports</a>
+          <a href="./reports" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Medication</a>
         </div>
         <div class="border-t border-gray-700 pb-3 pt-4">
           <div class="flex items-center px-5">
@@ -149,20 +149,22 @@
       <tbody class="bg-white divide-y divide-gray-200">
         {% for patient in patients %}
         <tr>
-            <td class="px-6 py-4 whitespace-nowrap">{{ patient.name }}</td>
-            <td class="px-6 py-4 whitespace-nowrap">{{ patient.email }}</td>
-            <td class="px-6 py-4 whitespace-nowrap">{{ patient.phone_number }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+          <td class="px-6 py-4 whitespace-nowrap">{{ patient.id }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ patient.name }}</td>                      
+          <td class="px-6 py-4 whitespace-nowrap">{{ patient.year }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ patient.gender }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ patient.email }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ patient.phone_number }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ patient.medical_history }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ patient.treatment_plan_id}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ patient.medication_plan_id }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ patient.progress_notes }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+            <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
             </td>
         </tr>
         {% endfor %}
       </tbody>
-
-      <!-- Add/Edit Patient Button -->
-      <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-
-
     </main>
   </div>
   
