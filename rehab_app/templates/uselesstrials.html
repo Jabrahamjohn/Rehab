@@ -1,240 +1,59 @@
-<!-- dashboard.html -->
+from flask import Flask, render_template, request, redirect, url_for, session
+from flask_mysqldb import MySQL
 
-<!DOCTYPE html>
-<html lang="en">
+app = Flask(__name__)
+app.secret_key = 'your_secret_key'  # Change this to a random string
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'your_mysql_username'
+app.config['MYSQL_PASSWORD'] = 'your_mysql_password'
+app.config['MYSQL_DB'] = 'your_mysql_database'
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Rehab Center</title>
-    <!-- Link to Tailwind CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.2.19/dist/tailwind.min.css" rel="stylesheet">
+mysql = MySQL(app)
 
-    <style>
-        .sidebar{
-            width: 240px;
-            background-color: #4a5568;
-            color: #fff;
-            position: fixed;
-            height: 100%;
-            top: 0;
-            left: 0;
-            overflow-x: hidden;
-            padding-top: 20px;
-        }
+@app.route('/')
+def index():
+    return render_template('login.html')
 
-        .sidebar a{
-            padding: 10px 20px;
-            text-decoration: none;
-            display: block;
-            color: #fff;
-        }
-        .sidebar a:hover{
-            background-color: #718096;
-        }
-    </style>
-</head>
-
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.form['username']
+    password = request.form['password']
     
-<body class="bg-gray-100">
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM users WHERE username = %s AND password = %s', (username, password))
+    user = cursor.fetchone()
     
-    <header class="bg-blue-500 text-white py-4">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <!-- Logo and Title -->
-            <h1 class="text-3xl font-bold">Dashboard</h1>
-                
-            <!-- Staff Profile -->
-            <div class="flex items-center space-x-4">
-                <!-- Profile Picture (Replace URL with actual profile picture URL) -->
-                <img src="https://via.placeholder.com/40" alt="Profile Picture" class="w-10 h-10 rounded-full">
-                    
-                <!-- Username -->
-                <span class="text-lg font-semibold">John Doe</span>
-                    
-                <!-- Logout Button -->
-                <a href="/logout" class="bg-white text-blue-500 py-2 px-4 rounded-lg hover:bg-blue-500 hover:text-white transition duration-300">Logout</a>
-            </div>
-        </div>
-    </header>
+    if user:
+        # Authentication successful
+        session['username'] = username
+        if user['first_login']:
+            return redirect(url_for('change_password'))
+        else:
+            return f'Welcome, {username}!'
+    else:
+        # Authentication failed
+        return 'Invalid username or password. Please try again.'
 
-    <!--Sidebar-->
-    <div class="sidebar">
-        <a href="#patient management">Patient Management</a>
-        <a href="#appointment-scheduling">Appointment sche</a>
-        <a href="#task-management">Task Management</a>
-        <a href="#document-management">Document Management</a>
-        <a href="#messaging-system">Messaging</a>
-        <a href="#notifications">Notifications</a>
-        <a href="#reporting">Reporting</a>
-    </div>
+@app.route('/change_password', methods=['GET', 'POST'])
+def change_password():
+    if 'username' not in session:
+        return redirect(url_for('index'))
+    
+    if request.method == 'POST':
+        new_password = request.form['new_password']
+        confirm_password = request.form['confirm_password']
+        
+        if new_password != confirm_password:
+            return 'Passwords do not match. Please try again.'
+        
+        cursor = mysql.connection.cursor()
+        cursor.execute('UPDATE users SET password = %s, first_login = 0 WHERE username = %s', (new_password, session['username']))
+        mysql.connection.commit()
+        cursor.close()
+        
+        return 'Password changed successfully!'
+    
+    return render_template('change_password.html')
 
-    <main class="container mx-auto px-4 py-8">
-
-        <!-- Grid Layout -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-            <!-- Patient Management Section -->
-            <section class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-semibold mb-4">Patient Management</h2>
-                <p class="text-lg mb-2">View, add, edit, and delete patient information.</p>
-
-                <!-- Add New Patient Form -->
-                <h3 class="text-xl font-semibold mt-8 mb-4">Add New Patient</h3>
-                <form action="/add-patient" method="POST">
-                    <label for="name" class="block mb-2">Name</label>
-                    <input type="text" id="name" name="name" class="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-
-                    <label for="age" class="block mt-4 mb-2">Age</label>
-                    <input type="number" id="age" name="age" class="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-
-                    <label for="gender" class="block mt-4 mb-2">Gender</label>
-                    <select id="gender" name="gender" class="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
-
-                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md mt-4 hover:bg-blue-600">Add Patient</button>
-                </form>
-
-                <!-- Existing Patients -->
-                <h3 class="text-xl font-semibold mt-8 mb-4">Existing Patients</h3>
-                <div>
-                    {% for patient in patients %}
-                    <div class="flex items-center justify-between border-b py-2">
-                        <div>{{ patient.name }}</div>
-                        <div>{{ patient.age }}</div>
-                        <div>{{ patient.gender }}</div>
-                        <!-- Edit button -->
-                        <a href="{{ url_for('edit_patient', patient_id=patient.id) }}" class="text-blue-500 hover:underline mr-2">Edit</a>
-                        <!-- Delete button -->
-                        <form action="{{ url_for('delete_patient', patient_id=patient.id) }}" method="post">
-                            <button type="submit" class="text-red-500 hover:underline">Delete</button>
-                        </form>
-                    </div>
-                    {% endfor %}
-                </div>
-            </section>
-
-
-            <!-- Appointment Scheduling Section -->
-            <section class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-semibold mb-4">Appointment Scheduling</h2>
-                <p class="text-lg mb-2">Schedule and manage appointments for patients.</p>
-
-                <!-- Add New Appointment Form -->
-                <h3 class="text-xl font-semibold mt-8 mb-4">Add New Appointment</h3>
-                <form action="/add-appointment" method="POST">
-                    <label for="patient">Patient</label>
-                    <select id="patient" name="patient" class="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        <!-- Populate with patient options -->
-                        {% for patient in patients %}
-                        <option value="{{ patient.id }}">{{ patient.name }}</option>
-                        {% endfor %}
-                    </select>
-
-                    <label for="date" class="block mt-4">Date</label>
-                    <input type="date" id="date" name="date" class="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-
-                    <label for="time" class="block mt-4">Time</label>
-                    <input type="time" id="time" name="time" class="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-
-                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md mt-4 hover:bg-blue-600">Add Appointment</button>
-                </form>
-
-                <!-- Existing Appointments -->
-                <h3 class="text-xl font-semibold mt-8 mb-4">Existing Appointments</h3>
-                <div>
-                    {% for appointment in appointments %}
-                    <div class="flex items-center justify-between border-b py-2">
-                        <div>{{ appointment.patient_name }}</div>
-                        <div>{{ appointment.date }}</div>
-                        <div>{{ appointment.time }}</div>
-                        <!-- Edit button -->
-                        <a href="{{ url_for('edit_appointment', appointment_id=appointment.id) }}" class="text-blue-500 hover:underline mr-2">Edit</a>
-                        <!-- Delete button -->
-                        <form action="{{ url_for('delete_appointment', appointment_id=appointment.id) }}" method="post">
-                            <button type="submit" class="text-red-500 hover:underline">Delete</button>
-                        </form>
-                    </div>
-                    {% endfor %}
-                </div>
-            </section>
-
-            <!-- Reporting Section -->
-            <section class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-semibold mb-4">Reporting</h2>
-                <p class="text-lg mb-2">Reports and analytics tools for tracking patient progress and outcomes.</p>
-                <!-- Placeholder for reporting functionality -->
-                <!-- Include Plotly.js library -->
-                <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
-                <!-- JavaScript code for Plotly.js visualization -->
-                <script>
-                    // Sample data (replace with your actual data)
-                    var data = [
-                        { treatment: "Treatment A", count: 10 },
-                        { treatment: "Treatment B", count: 20 },
-                        { treatment: "Treatment C", count: 15 },
-                    ];
-
-                    // Extract data for Plotly.js trace
-                    var treatments = data.map(item => item.treatment);
-                    var counts = data.map(item => item.count);
-
-                    // Create Plotly.js trace
-                    var trace = {
-                        x: treatments,
-                        y: counts,
-                        type: "bar",
-                        marker: { color: "blue" },
-                    };
-
-                    // Create Plotly.js layout
-                    var layout = {
-                        title: "Treatment Outcomes",
-                        xaxis: { title: "Treatment" },
-                        yaxis: { title: "Count" },
-                    };
-
-                    // Plot the data
-                    Plotly.newPlot("plot-container", [trace], layout);
-                </script>
-
-            </section>
-
-            <!-- Task Management Section -->
-            <section class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-semibold mb-4">Task Management</h2>
-                <p class="text-lg mb-2">Create and manage tasks or to-do lists.</p>
-                <!-- Placeholder for task management functionality -->
-            </section>
-
-            <!-- Document Management Section -->
-            <section class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-semibold mb-4">Document Management</h2>
-                <p class="text-lg mb-2">Upload, store, and access documents.</p>
-                <!-- Placeholder for document management functionality -->
-            </section>
-
-            <!-- Messaging System Section -->
-            <section class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-semibold mb-4">Messaging System</h2>
-                <p class="text-lg mb-2">Communication between staff members and patients.</p>
-                <!-- Placeholder for messaging system functionality -->
-            </section>
-
-            <!-- Notifications Section -->
-            <section class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-semibold mb-4">Notifications</h2>
-                <p class="text-lg mb-2">Set up notifications for appointments and task reminders.</p>
-                <!-- Placeholder for notifications functionality -->
-            </section>
-
-        </div> <!-- End of Grid Layout -->
-
-    </main>
-
-</body>
-
-</html>
+if __name__ == '__main__':
+    app.run(debug=True)

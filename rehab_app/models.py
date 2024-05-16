@@ -3,12 +3,14 @@ from flask_sqlalchemy import SQLAlchemy
 import uuid
 from sqlalchemy import Column, String, Integer, ForeignKey, Date, Time
 from sqlalchemy.orm import relationship
+from flask_mysqldb import MySQL
 
 app = Flask(__name__)
-app.secret_key = 'AJ'
+app.secret_key = 'super_secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/rehab_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+mysql = MySQL(app)
 
 class Treatment_Plan(db.Model):
     __tablename__ = "treatment_plans"
