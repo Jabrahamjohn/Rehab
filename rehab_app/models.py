@@ -77,6 +77,7 @@ class User(db.Model):
 
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
     name = Column(String(255), nullable=False)
+    username = Column(String(60), nullable=False)
     phone_number = Column(String(60), nullable=False)
     email = Column(String(128))
     role = Column(String(20), nullable=False)
