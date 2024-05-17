@@ -2,12 +2,24 @@
 
 from flask import render_template, request, redirect, url_for, flash, session, jsonify
 from models import app, Treatment_Plan, Progress, Medication, Patient, Therapist, Appointment
-from models import db, mysql
+from models import db, mysql, login_manager, User
+from werkzeug.security import generate_password_hash
+from flask_login import login_required
+from werkzeug.security import check_password_hash
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
 with app.app_context():
     #Create all the db models into the database
-    db.create_all()
+    if not User.query.filter_by(username='admin').first():
+        hashed_password = generate_password_hash('admin', method='sha256')
+        new_user = User(name='Admin User', username='admin', phone_number='1234567890', email='admin@example.com', role='admin', password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
 
 
 @app.route('/')
@@ -54,46 +66,36 @@ def admissions():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form.get("username")
-        password = request.form.get("password")
-
-        cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM users WHERE username = %s AND password = %s', (username, password))
-        user = cursor.fetchone()
-
-        if user:
-            # Authentication successful.
-            session['username'] = username
-            if user['first_login']:
+        username = request.form['username']
+        password = request.form['password']
+        user = User.query.filter_by(username=username).first()
+        
+        if user and check_password_hash(user.password, password):
+            login_user(user)
+            if user.password == generate_password_hash('admin', method='sha256'):  # Check if default password
                 return redirect(url_for('change_password'))
-            else:
-                return f'Welcome, {username}!'
+            return redirect(url_for('dashboard'))
         else:
-            # Authentication failed
-            flash('Invalid username or password. Please try again.', 'error')
-            return redirect(url_for('login'))  # Redirect back to login page with error message
-
-    # If the request method is not 'POST', render the login form template
+            flash('Login Unsuccessful. Please check username and password', 'danger')
+    
     return render_template('login.html')
 
 @app.route('/change_password', methods=['GET', 'POST'])
+@login_required
 def change_password():
-    if 'username' not in session:
-        return redirect(url_for('login'))
-    
     if request.method == 'POST':
         new_password = request.form['new_password']
         confirm_password = request.form['confirm_password']
-
-        if new_password != confirm_password:
-            return 'Password do not match. Please try again.'
         
-        cursor = mysql.connection.cursor()
-        cursor.execute('UPDATE users SET password = %s, first_login = 0 WHERE username = %s', (new_password, session['username']))
-        mysql.connection.commit()
-        cursor.close()
-
-        return 'Password changed successfully!'
+        if new_password == confirm_password:
+            hashed_password = generate_password_hash(new_password, method='sha256')
+            current_user.password = hashed_password
+            db.session.commit()
+            flash('Your password has been updated!', 'success')
+            return redirect(url_for('dashboard'))
+        else:
+            flash('Passwords do not match!', 'danger')
+    
     return render_template('change_password.html')
 
 @app.route('/dashboard')

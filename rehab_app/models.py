@@ -4,6 +4,8 @@ import uuid
 from sqlalchemy import Column, String, Integer, ForeignKey, Date, Time
 from sqlalchemy.orm import relationship
 from flask_mysqldb import MySQL
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key'
@@ -11,6 +13,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/rehab_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 mysql = MySQL(app)
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
 
 class Treatment_Plan(db.Model):
     __tablename__ = "treatment_plans"
@@ -23,7 +27,8 @@ class Treatment_Plan(db.Model):
     medication_id = Column(String(36), ForeignKey('medication.id'))
     progress_id = Column(String(36), ForeignKey('progress.id'))
 
-    patients = relationship('Patient', backref='treatment_plans')
+    # Specify the join condition explicitly
+    patient = relationship('Patient', backref='treatment_plans', foreign_keys=[patient_id])
     medication = relationship('Medication', backref='treatment_plans')
     progress = relationship('Progress', backref='treatment_plans')
 
@@ -70,7 +75,7 @@ class Patient(db.Model):
 
     treatment_plan = relationship('Treatment_Plan', backref='patients')
     medications = relationship('Medication', back_populates='patient')
-    progress = relationship('Progress', backref='patient')
+    patient_progress = relationship('Progress', backref='patients')
     
 class User(db.Model):
     __tablename__ = "users"
@@ -93,7 +98,7 @@ class Therapist(db.Model):
     availability = Column(String(20), nullable=False)
 
     user = relationship('User', back_populates='therapist')
-    progress = relationship('Progress', backref='therapist')
+    Patient_progress = relationship('Progress', backref='therapist')
 
 
 
