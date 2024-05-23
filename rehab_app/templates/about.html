@@ -1,98 +1,57 @@
-<!-- templates/about.html -->
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Rehab Center</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+    <title>Rehab</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
 </head>
-
-<body class="bg-gray-100">
-
-    <!-- Header Section -->
-    <header class="bg-blue-500 text-white py-4">
-        <div class="container mx-auto flex justify-between items-center px-4">
-            <a href="/" class="text-lg font-bold">Rehab Center</a>
-            <nav>
-                <ul class="flex space-x-4">
-                    <li><a href="/" class="hover:text-gray-200">Home</a></li>
-                    <li><a href="/services" class="hover:text-gray-200">Services</a></li>
-                    <li><a href="/resources" class="hover:text-gray-200">Resources</a></li>
-                    <li><a href="/contact" class="hover:text-gray-200">Contact Us</a></li>
-                    <li><a href="/login" class="hover:text-gray-200">Staff</a"></a></li>
-
-                </ul>
-            </nav>
-        </div>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Rehab</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/resources">Resources</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/login">Staff</a></li>
+            </ul>
+        </nav>
     </header>
+    <main>
+        <section class="about-section">
+            <div class="about-content">
+                <h2>The Full Story</h2>
+                <h3>About</h3>
+                <p>At Rehab Center, we are dedicated to providing compassionate care and evidence-based treatment for individuals struggling with addiction. Our team of experts is committed to guiding you through every step of your recovery journey.</p>
+            </div>
+        </section>
+        <section class="mission-section">
+            <div class="image-section">
+                <img src="https://images.unsplash.com/photo-1458501534264-7d326fa0ca04?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2VsbG5lc3N8ZW58MHx8MHx8fDA%3D" alt="Rehab Center">
+            </div>
+            <div class="mission-content">
+                <h2>Our Mission</h2>
+                <h3>Professional and Compassionate Care</h3>
+                <p>At Rehab, we understand the challenges of addiction and the impact it has on individuals, families, and communities. Our team of dedicated and highly trained professionals is committed to providing comprehensive and personalized care to help you overcome your addiction and achieve lasting recovery.</p>
+                <p>We believe that addiction is a treatable illness, and that everyone deserves the opportunity to live a healthy and fulfilling life. That's why we offer a range of services to help you on your journey to recovery, including medical and behavioral care, personalized treatment plans, activity management, patient education programs, and more.</p>
+                <a href="#" class="btn">Learn More</a>
+            </div>
 
-    <!-- Introduction Section -->
-    <section class="py-16">
-        <div class="container mx-auto text-center">
-            <h1 class="text-4xl font-bold mb-4">About Us</h1>
-            <p class="text-lg mb-8">Welcome to Rehab Center. We are committed to providing compassionate care and evidence-based treatment for individuals struggling with addiction.</p>
-        </div>
-    </section>
+        </section>
 
-    <!-- History Section -->
-    <section class="bg-gray-200 py-16">
-        <div class="container mx-auto">
-            <h2 class="text-2xl font-bold mb-4">Our History</h2>
-            <p class="text-lg mb-8">Founded in [year], Rehab Center has been dedicated to helping individuals overcome addiction for over [number] years.</p>
-        </div>
-    </section>
-
-    <!-- Philosophy Section -->
-    <section class="py-16">
-        <div class="container mx-auto">
-            <h2 class="text-2xl font-bold mb-4">Our Philosophy</h2>
-            <p class="text-lg mb-8">At Rehab Center, we believe in treating the whole person, not just the addiction. Our holistic approach addresses the physical, emotional, and spiritual aspects of recovery.</p>
-        </div>
-    </section>
-
-    <!-- Treatment Methods Section -->
-    <section class="bg-gray-200 py-16">
-        <div class="container mx-auto">
-            <h2 class="text-2xl font-bold mb-4">Treatment Methods</h2>
-            <p class="text-lg mb-8">We offer a range of evidence-based treatment modalities, including cognitive-behavioral therapy (CBT), dialectical behavior therapy (DBT), mindfulness-based therapy, and more.</p>
-        </div>
-    </section>
-
-    <!-- Staff Credentials Section -->
-    <section class="py-16">
-        <div class="container mx-auto">
-            <h2 class="text-2xl font-bold mb-4">Our Staff</h2>
-            <p class="text-lg mb-8">Our team of professionals includes licensed therapists, counselors, and medical professionals with years of experience in addiction treatment. Each member of our staff is dedicated to providing personalized care and support to help our clients achieve lasting recovery.</p>
-        </div>
-    </section>
-
-    <!-- Footer Section -->
-    <footer class="bg-blue-500 text-white py-4 flex flex-wrap justify-center gap-8">
-        <div class="container mx-auto  p-8 rounded-lg shadow-md text-center w-80">
-            <li>Follow Us on:
-                <ul><a href="#" class="text-white hover:underline">LinkedIn</a></ul>
-                <ul><a href="#" class="text-white hover:underline">Instagram</a></ul>
-                <ul><a href="#" class="text-white hover:underline">Facebook</a></ul>
-                <ul><a href="#" class="text-white hover:underline">Twitter</a></ul>
-            </li>
-        </div>
-        <div class="container mx-auto  p-8 rounded-lg shadow-md text-center w-80">
-            <li>&copy; 2024 Rehab</li>
-            <li>All Rights Reserved</li>
-            <li><a href="/privacystatement" target="_blank" class="text-white hover:underline">Terms of Use & Privacy Policy </a></li>
-        </div>
-        <div class="container mx-auto  p-8 rounded-lg shadow-md text-center w-80">
-            <li><a href="#top" class="text-white hover:underline">Back to Top</a></li>
-            <li><a href="/contact" class="text-white hover:underline">Contact Us</a></li>
-            <li><a href="/virtualtour" class="text-white hover:underline">virtual tour</a></li>
-            <li><a href="/sitemap" class="text-white hover:underline">sitemap</a></li>
-            <li><a href="/resources" class="text-white hover:underline" target="_blank">FAQ</a></li>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 Rehab. All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
         </div>
     </footer>
-
 </body>
-
 </html>

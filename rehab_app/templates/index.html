@@ -1,142 +1,46 @@
-<!-- templates/index.html -->
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rehab Center</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+    <title>Rehab</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
 </head>
-
-<body class="bg-gray-100">
-
-    <!-- Header Section -->
-    <header class="bg-blue-500 text-white py-4">
-        <div class="container mx-auto flex justify-between items-center px-4">
-            <a href="/" class="text-lg font-bold">Rehab Center</a>
-            <nav>
-                <ul class="flex space-x-4">
-                    <li><a href="/" class="hover:text-gray-200">Home</a></li>
-                    <li><a href="#about" class="hover:text-gray-200">About Us</a></li>
-                    <li><a href="#services" class="hover:text-gray-200">Services</a></li>
-                    <li><a href="#resources" class="hover:text-gray-200">Resources</a></li>
-                    <li><a href="/contact" class="hover:text-gray-200">Contact Us</a></li>
-                    <li><a href="/login" class="hover:text-gray-200">Staff</a"></a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="bg-blue-900 text-white py-16">
-        <div class="container mx-auto text-center">
-            <h1 class="text-4xl font-bold mb-4">Welcome to Rehab Center</h1>
-            <p class="text-lg mb-8">Your Partner in Recovery</p>
-            <a href="#contact" class="bg-white text-blue-900 py-2 px-6 rounded-full inline-block hover:bg-blue-800 hover:text-white transition duration-300">Get Help Now</a>
-        </div>
-    </section>
-
-    <!-- About Us Section -->
-    <section id="about" class="py-16">
-        <div class="container mx-auto">
-            <div class="text-center mb-8">
-                <h2 class="text-2xl font-bold mb-4">About Us</h2>
-                <p class="text-lg">At Rehab Center, we are dedicated to providing compassionate care and evidence-based treatment for individuals struggling with addiction. Our team of experts is committed to guiding you through every step of your recovery journey.</p>
-            </div>
-            <a href="/about" class="text-blue-500 font-bold hover:underline">Learn More About Us</a>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="bg-gray-200 py-16">
-        <div class="container mx-auto">
-            <div class="text-center mb-8">
-                <h2 class="text-2xl font-bold mb-4">Our Services</h2>
-                <p class="text-lg">We offer a range of services to support individuals on their journey to recovery:</p>
-            </div>
-            <div class="flex flex-wrap justify-center gap-8">
-                <div class="bg-white p-8 rounded-lg shadow-md text-center w-64">
-                    <h3 class="text-xl font-bold mb-4">Inpatient Treatment</h3>
-                    <p>Comprehensive residential treatment programs.</p>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-md text-center w-64">
-                    <h3 class="text-xl font-bold mb-4">Outpatient Programs</h3>
-                    <p>Flexible outpatient programs tailored to your schedule.</p>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-md text-center w-64">
-                    <h3 class="text-xl font-bold mb-4">Detox Services</h3>
-                    <p>Safe and supervised detoxification programs.</p>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-md text-center w-64">
-                    <h3 class="text-xl font-bold mb-4">Therapy Sessions</h3>
-                    <p>Individual, group, and family therapy sessions.</p>
-                </div>
-            </div>
-            <a href="/services" class="text-blue-500 font-bold hover:underline mt-4 inline-block">Explore Our Services</a>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="py-16">
-        <div class="container mx-auto">
-            <div class="text-center mb-8">
-                <h2 class="text-2xl font-bold mb-4">What Our Clients Say</h2>
-            </div>
-            <div class="flex flex-wrap justify-center gap-8">
-                <div class="bg-white p-8 rounded-lg shadow-md text-center w-80">
-                    <p class="mb-4">"I'm forever grateful to Rehab Center for helping me overcome my addiction. The support and guidance I received here changed my life."</p>
-                    <p class="text-sm font-bold">- John Doe</p>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-md text-center w-80">
-                    <p class="mb-4">"The staff at Rehab Center truly cares about their clients' well-being. I felt supported every step of the way during my recovery journey."</p>
-                    <p class="text-sm font-bold">- Jane Smith</p>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-md text-center w-80">
-                    <p class="mb-4">"Choosing Rehab Center was the best decision I ever made. Their holistic approach to treatment helped me address the root causes of my addiction."</p>
-                    <p class="text-sm font-bold">- Alex Johnson</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Resources Section -->
-    <section id="resources" class="bg-gray-200 py-16">
-        <div class="container mx-auto">
-            <div class="text-center mb-8">
-                <h2 class="text-2xl font-bold mb-4">Resources</h2>
-                <p class="text-lg">Access additional resources for support:</p>
-            </div>
-            <ul class="flex justify-center gap-4">
-                <li><a href="#" class="text-blue-500 font-bold hover:underline">24/7 Helpline: 1-800-RECOVERY</a></li>
-                <li><a href="/resources" class="text-blue-500 font-bold hover:underline">Support Groups Near You</a></li>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Rehab</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/resources">Resources</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/login">Staff</a></li>
             </ul>
-            <a href="/resources" class="text-blue-500 font-bold hover:underline mt-4 inline-block">Access Additional Resources</a>
+        </nav>
+    </header>
+    <main>
+        <div class="hero-section">
+            <div class="hero-text">
+                <h1>Rehab</h1>
+                <p>Your partner in recovery</p>
+                <a href="#" class="btn">Get help now</a>
+            </div>
         </div>
-    </section>
-
-    <!-- Footer Section -->
-    <footer class="bg-blue-500 text-white py-4 flex flex-wrap justify-center gap-8">
-        <div class="container mx-auto  p-8 rounded-lg shadow-md text-center w-80">
-            <li>Follow Us on:
-                <ul><a href="#" class="text-white hover:underline">LinkedIn</a></ul>
-                <ul><a href="#" class="text-white hover:underline">Instagram</a></ul>
-                <ul><a href="#" class="text-white hover:underline">Facebook</a></ul>
-                <ul><a href="#" class="text-white hover:underline">Twitter</a></ul>
-            </li>
-        </div>
-        <div class="container mx-auto  p-8 rounded-lg shadow-md text-center w-80">
-            <li>&copy; 2024 Rehab</li>
-            <li>All Rights Reserved</li>
-            <li><a href="/privacystatement" target="_blank" class="text-white hover:underline">Terms of Use & Privacy Policy </a></li>
-        </div>
-        <div class="container mx-auto  p-8 rounded-lg shadow-md text-center w-80">
-            <li><a href="#top" class="text-white hover:underline">Back to Top</a></li>
-            <li><a href="/contact" class="text-white hover:underline">Contact Us</a></li>
-            <li><a href="/virtualtour" class="text-white hover:underline">virtual tour</a></li>
-            <li><a href="/sitemap" class="text-white hover:underline">sitemap</a></li>
-            <li><a href="/resources" class="text-white hover:underline" target="_blank">FAQ</a></li>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <p>&copy; 2024 Rehab. All rights reserved.</p>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
         </div>
     </footer>
-
+</body>
+</html>
