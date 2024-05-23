@@ -1,178 +1,72 @@
-<!-- templates/services.html -->
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - Rehab Center</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        /* Additional CSS styling */
-        .service-card {
-            background-color: #fff;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-4px);
-        }
-    </style>
+    <title>Rehab Services</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='services.css') }}">
 </head>
-
-<body class="bg-gray-100">
-
-    <!-- Header Section -->
-    <header class="bg-blue-500 text-white py-4">
-        <div class="container mx-auto flex justify-between items-center px-4">
-            <a href="/" class="text-lg font-bold">Rehab Center</a>
-            <nav>
-                <ul class="flex space-x-4">
-                    <li><a href="/" class="hover:text-gray-200">Home</a></li>
-                    <li><a href="/about" class="hover:text-gray-200">About Us</a></li>
-                    <li><a href="#services" class="hover:text-gray-200">Services</a></li>
-                    <li><a href="/resources" class="hover:text-gray-200">Resources</a></li>
-                    <li><a href="/contact" class="hover:text-gray-200">Contact Us</a></li>
-                </ul>
-            </nav>
-        </div>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Rehab</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/resources">Resources</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/login">Staff</a></li>
+            </ul>
+        </nav>
     </header>
-
-    <!-- Introduction Section -->
-    <section class="py-12">
-        <div class="container mx-auto text-center">
-            <h1 class="text-4xl font-bold mb-4">Our Services</h1>
-            <p class="text-lg mb-8">Explore Our Treatment Programs and Therapy Services.</p>
-        </div>
-    </section>
-
-    <!-- Treatment Programs Section -->
-    <section class="bg-gray-200 py-16">
-        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Inpatient Treatment -->
-            <div class="service-card p-6 flex flex-col justify-between items-center">
-                <img src="/static/images/inpatient.jpg" alt="Inpatient Treatment" class="mb-4 rounded-lg">
-                <h2 class="text-xl font-bold mb-2">Inpatient Treatment</h2>
-                <p class="text-lg">Comprehensive residential treatment programs.</p>
+    <main>
+        <section class="services-section">
+            <div class="services-content">
+                <h2>Our Services</h2>
+                <p>This is your Services Page. It's a great opportunity to provide information about the services you provide. We offer a range of services to support individuals on their journey to recovery.</p>
             </div>
-            <!-- Outpatient Programs -->
-            <div class="service-card p-6 flex flex-col justify-between items-center">
-                <img src="/static/images/outpatient.jpg" alt="Outpatient Programs" class="mb-4 rounded-lg">
-                <h2 class="text-xl font-bold mb-2">Outpatient Programs</h2>
-                <p class="text-lg">Flexible outpatient programs tailored to your schedule.</p>
-            </div>
-            <!-- Detox Services -->
-            <div class="service-card p-6 flex flex-col justify-between items-center">
-                <img src="/static/images/detox.jpg" alt="Detox Services" class="mb-4 rounded-lg">
-                <h2 class="text-xl font-bold mb-2">Detox Services</h2>
-                <p class="text-lg">Safe and supervised detoxification programs.</p>
-            </div>
-            <!-- Therapy Sessions -->
-            <div class="service-card p-6 flex flex-col justify-between items-center">
-                <img src="/static/images/therapy.jpg" alt="Therapy Sessions" class="mb-4 rounded-lg">
-                <h2 class="text-xl font-bold mb-2">Therapy Sessions</h2>
-                <p class="text-lg">Individual, group, and family therapy sessions.</p>
-            </div>
-        </div>
-        <div class="container mx-auto mt-8 text-center">
-            <p class="text-lg">We also provide specialized programs for specific addictions such as alcoholism, drug addiction, and dual diagnosis. Our programs are designed to address the unique needs of various demographics, including adolescents, adults, and seniors.</p>
-        </div>
-    </section>
-
-    <!-- Treatment Approach Section -->
-    <section class="py-16 bg-gray-200">
-        <div class="container mx-auto">
-            <div>
-                <h2 class="text-4xl font-bold text-center mb-8">Treatment Approach</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Explanation of the center's approach -->
-                    <div>
-                        <h3 class="text-2xl font-bold mb-4">Our Approach</h3>
-                        <p class="text-lg text-gray-700">At Rehab Center, we believe in a holistic approach to addiction treatment that addresses the physical, emotional, and spiritual aspects of recovery. <br>Our evidence-based practices are tailored to meet the individual needs of each client, ensuring comprehensive care and support throughout their journey to sobriety.</p>
+            <div class="services-cards">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1458501534264-7d326fa0ca04?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2VsbG5lc3N8ZW58MHx8MHx8fDA%3D" alt="Inpatient Treatment">
+                    <div class="card-content">
+                        <h3>Inpatient Treatment</h3>
+                        <p>Comprehensive residential treatment programs.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1458501534264-7d326fa0ca04?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2VsbG5lc3N8ZW58MHx8MHx8fDA%3D" alt="Outpatient Programs">
+                    <div class="card-content">
+                        <h3>Outpatient Programs</h3>
+                        <p>Flexible outpatient programs tailored to your schedule.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1458501534264-7d326fa0ca04?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2VsbG5lc3N8ZW58MHx8MHx8fDA%3D" alt="Detox Services">
+                    <div class="card-content">
+                        <h3>Detox Services</h3>
+                        <p>Safe and supervised detoxification programs.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1458501534264-7d326fa0ca04?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2VsbG5lc3N8ZW58MHx8MHx8fDA%3D" alt="Therapy Sessions">
+                    <div class="card-content">
+                        <h3>Therapy Sessions</h3>
+                        <p>Individual, group, and family therapy sessions.</p>
                     </div>
                 </div>
             </div>
-            <!-- Information on therapy modalities and counseling techniques -->
-            <div class="mt-8">
-                <h2 class="text-4xl font-bold text-center mb-8">Therapy Modalities and Counseling Techniques</h2>
-                <div>
-                    <h3 class="text-2xl font-bold mb-4">Therapy Modalities</h3>
-                    <ul class="list-disc list-inside">
-                        <li>Cognitive Behavioral Therapy (CBT)</li>
-                        <li>Dialectical Behavior Therapy (DBT)</li>
-                        <li>Motivational Interviewing (MI)</li>
-                        <!-- Add more therapy modalities as needed -->
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-2xl font-bold mt-8 mb-4">Counseling Techniques</h3>
-                    <ul class="list-disc list-inside">
-                        <li>Individual Counseling</li>
-                        <li>Group Therapy</li>
-                        <li>Family Counseling</li>
-                        <!-- Add more counseling techniques as needed -->
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!---Contact Section-->
-    <section id="contact" class="bg-blue-900 text-white py-14">
-        <div class="container mx-auto text-center">
-            <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
-            <p class="text-lg mb-8">Ready to start your recovery journey? Contact us today to learn more about our treatment programs and therapy services.</p>
-            <div class="flex flex-col md:flex-row justify-center items-center">
-                <a href="/contact" class="bg-white text-blue-900 py-2 px-6 rounded-full inline-block hover:bg-blue-800 hover:text-white transition duration-300 mb-4 md:mb-0">Contact Us</a>
-                <p class="text-lg ml-0 md:ml-4">Call us at <strong>(555) 123-4567</strong></p>
-            </div>
-        </div>
-    </section>
-
-    <!---Footer Section-->
-    <footer class="bg-blue-500 text-white py-4 flex flex-wrap justify-center gap-8">
-        <div class="container mx-auto  p-8 rounded-lg shadow-md text-center w-80">
-            <li>Follow Us on:
-                <ul><a href="#" class="text-white hover:underline">LinkedIn</a></ul>
-                <ul><a href="#" class="text-white hover:underline">Instagram</a></ul>
-                <ul><a href="#" class="text-white hover:underline">Facebook</a></ul>
-                <ul><a href="#" class="text-white hover:underline">Twitter</a></ul>
-            </li>
-        </div>
-        <div class="container mx-auto  p-8 rounded-lg shadow-md text-center w-80">
-            <li>&copy; 2024 Rehab</li>
-            <li>All Rights Reserved</li>
-            <li><a href="/privacystatement" target="_blank" class="text-white hover:underline">Terms of Use & Privacy Policy </a></li>
-        </div>
-        <div class="container mx-auto  p-8 rounded-lg shadow-md text-center w-80">
-            <li><a href="#top" class="text-white hover:underline">Back to Top</a></li>
-            <li><a href="/contact" class="text-white hover:underline">Contact Us</a></li>
-            <li><a href="/virtualtour" class="text-white hover:underline">virtual tour</a></li>
-            <li><a href="/sitemap" class="text-white hover:underline">sitemap</a></li>
-            <li><a href="/resources" class="text-white hover:underline" target="_blank">FAQ</a></li>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 Rehab. All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
         </div>
     </footer>
-
-    <!-- JavaScript to toggle service Cards -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Select all service titles
-            const serviceTitles = document.querySelectorAll('.text-2xl');
-            
-            // Loop through each service title
-            serviceTitles.forEach(serviceTitle => {
-                // Add click event listener to each service title
-                serviceTitle.addEventListener('click', () => {
-                    // Toggle visibility of next sibling element (service details)
-                    serviceTitle.nextElementSibling.classList.toggle('hidden');
-                });
-            });
-        });
-    </script>
-
 </body>
-
 </html>
