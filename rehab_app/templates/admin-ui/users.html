@@ -26,7 +26,7 @@
                 <a href="./document" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Document</a>
                 <a href="./messaging" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Messaging</a>
                 <a href="./notification" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Notifications</a>
-                <a href="./reports" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Medication</a>
+                <a href="./reports" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Reports</a>
               </div>
             </div>
           </div>
@@ -98,7 +98,7 @@
           <a href="./document" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Document</a>
           <a href="./messaging" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Messaging</a>
           <a href="./notification" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Notifications</a>
-          <a href="./reports" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Medication</a>
+          <a href="./reports" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Reports</a>
         </div>
         <div class="border-t border-gray-700 pb-3 pt-4">
           <div class="flex items-center px-5">
@@ -128,43 +128,76 @@
   
     <header class="bg-white shadow">
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900">Patient Management</h1>
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900">User Management</h1>
       </div>
     </header>
     <main>
-      <!-- Add Patient Form -->
-      <form action="/add_patient" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br>
-
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age" required><br>
-
-        <!-- Add other input fields for gender, phone number, email, etc. -->
-
-        <button type="submit">Add Patient</button>
-      </form>
-      <!-- Display Patient Data -->
-
-      <tbody class="bg-white divide-y divide-gray-200">
-        {% for patient in patients %}
-        <tr>
-          <td class="px-6 py-4 whitespace-nowrap">{{ patient.id }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ patient.name }}</td>                      
-          <td class="px-6 py-4 whitespace-nowrap">{{ patient.year }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ patient.gender }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ patient.email }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ patient.phone_number }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ patient.medical_history }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ patient.treatment_plan_id}}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ patient.medication_plan_id }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ patient.progress_notes }}</td>
-          <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-            <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-            </td>
-        </tr>
-        {% endfor %}
-      </tbody>
+      <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <div class="flex flex-col">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        User ID
+                      </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        User Name
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Email
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Role
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Password
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Action
+                    </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-sm text-gray-900">1</div>
+                    </td>
+                  
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                    <div class="flex-shrink-0 h-10 w-10">
+                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                    </div>
+                    <div class="ml-4">
+                        <div class="text-sm font-medium text-gray-900">
+                        Jane Cooper
+                        </div>
+                        <div class="text-sm text-gray-500"></div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                    johncooper@gmail.com
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                      admin
+                      </span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                    Password
+                    </span>
+                </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                  </td>
+                  </tr>
+              </tbody>
     </main>
   </div>
   
