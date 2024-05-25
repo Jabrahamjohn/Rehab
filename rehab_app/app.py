@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import uuid
 
 from flask import render_template, request, redirect, url_for, flash, session, jsonify
 from models import app, Treatment_Plan, Progress, Medication, Patient, Therapist, Appointment
@@ -53,41 +54,34 @@ def admissions():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        username = request.form.get("username")
-        password = request.form.get("password")
-
-        cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM users WHERE username = %s AND password = %s', (username, password))
-        user = cursor.fetchone()
-
-        if user:
-            # Authentication successful.
-            session['username'] = username
-            if user['first_login']:
-                return redirect(url_for('change_password'))
-            else:
-                return f'Welcome, {username}!'
-        else:
-            # Authentication failed
-            flash('Invalid username or password. Please try again.', 'error')
-            return redirect(url_for('login'))  # Redirect back to login page with error message
-
     # If the request method is not 'POST', render the login form template
+    if request.method == "POST":
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        if email == 'rehab@gmail.com':
+            id = str(uuid.uuid4())
+            session['id'] = id
+            session['password'] = password
+            return redirect(url_for('admin-ui', id=id))
+        else:
+            error = 'Invalid username/password'
+            return render_template('login.html', error=error)
+
     return render_template('login.html')
 
 @app.route('/change_password', methods=['GET', 'POST'])
 def change_password():
     if 'username' not in session:
         return redirect(url_for('login'))
-    
+
     if request.method == 'POST':
         new_password = request.form['new_password']
         confirm_password = request.form['confirm_password']
 
         if new_password != confirm_password:
             return 'Password do not match. Please try again.'
-        
+
         cursor = mysql.connection.cursor()
         cursor.execute('UPDATE users SET password = %s, first_login = 0 WHERE username = %s', (new_password, session['username']))
         mysql.connection.commit()
@@ -96,22 +90,17 @@ def change_password():
         return 'Password changed successfully!'
     return render_template('change_password.html')
 
-@app.route('/dashboard')
-def dashboard():
-    # Check if the 'username' key exists in the session
-    if 'username' in session:
-        # User is logged in, render the dashboard
-        return render_template('./dashboard/dashboard.html')
-    else:
-        # User is not logged in, redirect to the login page
-        flash('You need to login first.', 'error')
-        return redirect(url_for('login'))
+@app.route('/dashboard/<id>')
+def dashboard(id):
+    user_id = id
+    role = session.get('role')
+    return render_template('dashboard/dashboard.html', id=user_id, role=role)
     
-@app.route('/patients')
-def patients():
-    """Renders the patients.html template"""
-    patients = Patient.query.all()
-    return render_template('./dashboard/patients.html', patients=patients)
+@app.route('/patients/<id>')
+def patients(id):
+    user_id = id
+    role = session.get('role')
+    return render_template('dashboard/dashboard.html', id=user_id, role=role)
 
 @app.route('/add_patient', methods=['POST'])
 def add_patient():
