@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patients</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='patients.css') }}">
+</head>
+<body>
+    {% if session['password'] == 'admin'%}
+    <header>
+        <nav>
+            <div class="logo">Rehab</div>
+            <ul class="nav-links">
+                <li><a href="/dashboard/{{user_id}}">Dashboard</a></li>
+                <li><a href="/patients/{{user_id}}">Patients</a></li>
+                <li><a href="/staff/{{user_id}}">Staff</a></li>
+                <li><a href="/resources/{{user_id}}">Resources</a></li>
+                <li><a href="/reports/{{user_id}}">Reports & Analytics</a></li>
+                <li><a href="/notifications/{{user_id}}">Notification & Alerts</a></li>
+                <li><a href="/admin/{{user_id}}">Administrative tools</a></li>
+                <li><a href="/profile/{{user_id}}">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+    <section id="patient-registration">
+      <h2>Patient Registration & Discharge</h2>
+      <p>Manage patient intake and discharge processes.</p>
+      <div>
+          <p>Register New Patient</p>
+          <div class="registration-card">
+            <form>
+                <p>patient id</p>
+                 <div class="form-group">
+                    <label for="name">Name*</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="years">Years*</label>
+                    <input type="number" id="years" name="years" required>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender*</label>
+                    <select id="gender" name="gender" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number*</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="guardian">Guardian's Phone Number*</label>
+                    <input type="tel" id="guardian" name="guardian">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="history">Medical history</label>
+                    <textarea id="history" name="history"></textarea>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+          </div>
+      </div>
+      <div>
+          <p>Discharge patient</p>
+      </div>
+    </section>
+    <section id="patient-records">
+      <h2>Patient Records & History</h2>
+      <p>Access and update patient medical records.</p>
+      <ul>
+        <li><a href="#">View Patient Records</a></li>
+        <li><a href="#">Add/Edit Medical History</a></li>
+      </ul>
+    </section>
+    <section id="appointment-scheduling">
+      <h2>Appointment Scheduling & Tracking</h2>
+      <p>Schedule and track patient appointments.</p>
+      <ul>
+        <li><a href="#">Schedule Appointment</a></li>
+        <li><a href="#">View Appointment Calendar</a></li>
+      </ul>
+    </section>
+    <section id="bed-allocation">
+      <h2>Bed Allocation & Status</h2>
+      <p>Manage bed availability and assignment.</p>
+      <ul>
+        <li><a href="#">View Bed Availability</a></li>
+        <li><a href="#">Assign Bed to Patient</a></li>
+      </ul>
+    </section>
+  </main>
+
+    {% elif session['password'] == 'therapist'%}
+    <header>
+        <nav>
+            <div class="logo">Rehab</div>
+            <ul class="nav-links">
+                <li><a href="/">Dashboard</a></li>
+                <li><a href="/about">Patients</a></li>
+                <li><a href="/services">Therapists</a></li>
+                <li><a href="/resources">Appointments</a></li>
+                <li><a href="/contact">Reports</a></li>
+                <li><a href="/login">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        this is the therapist dashboard
+    </main>
+
+    {% else %}
+    <header>
+        <nav>
+            <div class="logo">Rehab</div>
+            <ul class="nav-links">
+                <li><a href="/">Dashboard</a></li>
+                <li><a href="/about">Patients</a></li>
+                <li><a href="/services">Therapists</a></li>
+                <li><a href="/resources">Appointments</a></li>
+                <li><a href="/contact">Reports</a></li>
+                <li><a href="/login">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        this is the staff dashboard
+    </main>
+
+    {% endif %}
+
+</body>
+</html>

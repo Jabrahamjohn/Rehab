@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+<body>
+    {% if session['password'] == 'admin'%}
+    <header>
+        <nav>
+            <div class="logo">Rehab</div>
+            <ul class="nav-links">
+                <li><a href="/dashboard/{{user_id}}">Dashboard</a></li>
+                <li><a href="/patients/{{user_id}}">Patients</a></li>
+                <li><a href="/staff/{{user_id}}">Staff</a></li>
+                <li><a href="/resources/{{user_id}}">Resources</a></li>
+                <li><a href="/reports/{{user_id}}">Reports & Analytics</a></li>
+                <li><a href="/notifications/{{user_id}}">Notification & Alerts</a></li>
+                <li><a href="/admin/{{user_id}}">Administrative tools</a></li>
+                <li><a href="/profile/{{user_id}}">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="first-deck">
+            <div class="card">
+                <p>No. of Patients</p>
+                <h1>150</h1>
+            </div>
+            <div class="card">
+                <p>No. of Therapists</p>
+                <h1>15</h1>
+            </div>
+            <div class="card">
+                <p>Therapists Available</p>
+                <h1>10</h1>
+            </div>
+            <div class="card">
+                <p>No. of Slots Available</p>
+                <h1>50</h1>
+            </div>
+        </div>
+        <div class="second-deck">
+            <div class="appointments" >
+                <p>Upcoming Appointments & Events</p>
+                <hr>
+                <div>
+                    <ul>
+                        <li>
+                            <div class="schedule-content">
+                                <p>26-05-2024: 9:00 - 11:30</p>
+                                <strong>Board meeting</strong> - Boardroom<br/></p>
+                                <hr>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="schedule-content">
+                                <p>26-05-2024: 9:00 - 11:30</p>
+                                <strong>Board meeting</strong> - Boardroom<br/></p>
+                                <hr>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="schedule-content">
+                                <p>26-05-2024: 9:00 - 11:30</p>
+                                <strong>Board meeting</strong> - Boardroom<br/></p>
+                                <hr>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="schedule-content">
+                                <p>26-05-2024: 9:00 - 11:30</p>
+                                <strong>Board meeting</strong> - Boardroom<br/></p>
+                                <hr>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="schedule-content">
+                                <p>26-05-2024: 9:00 - 11:30<br/>
+                                <strong>Board meeting</strong> - Boardroom<br/></p>
+                                <hr>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="occupancy">
+                <div class="card rate">
+                    <p>Occupancy rate</p>
+                    <hr>
+                    <h1>^ 75%</h1>
+                </div>
+                <div class="finance">
+                    <p>Financial summary</p>
+                    <hr>
+                    <ul>
+                        <li><strong>Revenue:</strong> Ksh 250,000 (This Month)</li>
+                        <li><strong>Expenses:</strong>
+                          <ul>
+                            <li><strong>Payroll:</strong> Ksh 120,000</li>
+                            <li><strong>Rent & Utilities:</strong> Ksh 30,000</li>
+                            <li><strong>Supplies:</strong> Ksh 15,000</li>
+                            <li><strong>Marketing:</strong> Ksh 10,000</li>
+                            <li><strong>Other Expenses:</strong> Ksh 25,000</li>
+                          </ul>
+                        </li>
+                        <li><strong>Outstanding Bills:</strong> Ksh 50,000 (Estimated amount owed by patients)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    {% elif session['password'] == 'therapist'%}
+    <header>
+        <nav>
+            <div class="logo">Rehab</div>
+            <ul class="nav-links">
+                <li><a href="/">Dashboard</a></li>
+                <li><a href="/about">Patients</a></li>
+                <li><a href="/services">Therapists</a></li>
+                <li><a href="/resources">Appointments</a></li>
+                <li><a href="/contact">Reports</a></li>
+                <li><a href="/login">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        this is the therapist dashboard
+    </main>
+
+    {% else %}
+    <header>
+        <nav>
+            <div class="logo">Rehab</div>
+            <ul class="nav-links">
+                <li><a href="/">Dashboard</a></li>
+                <li><a href="/about">Patients</a></li>
+                <li><a href="/services">Therapists</a></li>
+                <li><a href="/resources">Appointments</a></li>
+                <li><a href="/contact">Reports</a></li>
+                <li><a href="/login">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        this is the staff dashboard
+    </main>
+
+    {% endif %}
+
+</body>
+</html>
