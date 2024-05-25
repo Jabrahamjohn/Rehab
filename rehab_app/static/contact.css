@@ -1,0 +1,154 @@
+/* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #f7f7f7;
+    padding: 10px 20px;
+    margin-bottom: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #006400;
+}
+
+.nav-links {
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.8rem;
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #006400;
+}
+
+.contact-main {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.title {
+    padding: 30px;
+    color: green;
+}
+
+.title h1{
+    color: green;
+    font-family: "Robot", sans-serif;
+    font-size: 1.5rem;
+}
+
+
+.title p {
+    font-family: "Montserrat", sans-serif;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+
+.contact-info {
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    display-content: spread-evenly;
+    border-top: 1px solid green;
+    border-bottom: 1px solid green;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.8rem;
+    color: #333;
+}
+
+.contact-info h2 {
+    margin-bottom: 10px;
+}
+
+.contact-info .info {
+    text-align: left;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.contact-info .info p {
+    margin: 10px 0;
+}
+
+.contact-form {
+    text-align: left;
+    margin-left: auto;
+    border-left: 1px solid green;
+    padding-left: 20px;
+    width: 50%;
+}
+
+.contact-form .form-group {
+    margin-bottom: 15px;
+}
+
+.contact-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.contact-form .form-group input,
+.contact-form .form-group textarea {
+    width: 80%;
+    padding: 10px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.contact-form button {
+    padding: 10px 30px;
+    background-color: #006400;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #004d00;
+}
+
+.map {
+    margin-top: 20px;
+    text-align: center;
+    height: 200px;
+}
+
+.map iframe {
+    width: 100%;
+    height: 200px;
+}
