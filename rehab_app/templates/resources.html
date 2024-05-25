@@ -1,106 +1,59 @@
-<!-- templates/resources.html -->
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resources - Rehab Center</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+    <title>Resources</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='resources.css') }}">
 </head>
-
-<body class="bg-gray-100">
-
-    <!-- Header Section -->
-    <header class="bg-blue-500 text-white py-4">
-        <div class="container mx-auto flex justify-between items-center px-4">
-            <a href="/" class="text-lg font-bold">Rehab Center</a>
-            <nav>
-                <ul class="flex space-x-4">
-                    <li><a href="/" class="hover:text-gray-200">Home</a></li>
-                    <li><a href="/about" class="hover:text-gray-200">About Us</a></li>
-                    <li><a href="/services" class="hover:text-gray-200">Services</a></li>
-                    <li><a href="#resources" class="hover:text-gray-200">Resources</a></li>
-                    <li><a href="/contact" class="hover:text-gray-200">Contact Us</a></li>
-                    <li><a href="/login" class="hover:text-gray-200">Staff</a"></a></li>
-
-                </ul>
-            </nav>
-        </div>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Rehab</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/resources">Resources</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/login">Staff</a></li>
+            </ul>
+        </nav>
     </header>
+    <main class="resources-main">
+        <div class="img-section">
+            <img src="https://static.wixstatic.com/media/b88fd419f8554115b6666bf06653919b.jpg/v1/fill/w_1349,h_300,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/b88fd419f8554115b6666bf06653919b.jpg"/>
+        </div>
 
-    <!-- Educational Articles and Guides Section -->
-    <section class="py-16">
-        <div class="container mx-auto">
-            <h1 class="text-4xl font-bold text-center mb-8">Educational Articles and Guides</h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Sample Article Card -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-xl font-bold mb-4">Understanding Addiction</h2>
-                    <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis elit justo.</p>
-                    <a href="#" class="text-blue-500 font-bold hover:underline mt-4">Read More</a>
-                </div>
-                <!-- Add more article cards as needed -->
+        <div class="title">
+            <h2>Resources</h2>
+            <p>Welcome to our resources page! Here you will find a wealth of information and tools to help you understand and learn more about addiction. From expert advice to helpful guides, we've got you covered. Take look around and see what resources we have.</p>
+        </div>
+
+        <div class="resources-list">
+
+            <div class="resource-item">
+                <img src="https://static.wixstatic.com/media/11062b_b9bc6d65be074409bc46034cfeff3ec2~mv2.jpg/v1/fill/w_230,h_170,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Books.jpg"/>
+                <h3>Books</h3>
+                <p>Explore our extensive collection of books covering various topics from business to wellness. Start discovering amazing insights and inspiration today!</p>
+                <a href="#">Explore</a>
+            </div>
+            <div class="resource-item">
+                <img src="https://static.wixstatic.com/media/11062b_e08d4f3a09894187b48d9203232e7cc3~mv2.jpg/v1/crop/x_103,y_0,w_1915,h_1414/fill/w_230,h_170,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Light%20and%20Shadow%20Portrait.jpg"/>
+                <h3>Websites</h3>
+                <p>Description of resource 2. This is a brief description to give an idea of what this resource offers.</p>
+                <a href="#">Explore</a>
+            </div>
+            <div class="resource-item">
+                <img src="https://static.wixstatic.com/media/11062b_e7dd0bafe385414686024e4cbe20687e~mv2.jpg/v1/fill/w_230,h_170,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Support%20Group%20Session.jpg"/>
+                <h3>Self help groups</h3>
+                <p>Join our self groups and connect with like-minded individuals who share your interests and. Our community is a supportive and welcoming space where you can learn, grow, and make meaningful connections. Don't miss out on the opportunity to be a part of special.</p>
+                <a href="#">Join</a>
             </div>
         </div>
-    </section>
-
-    <!-- FAQs Section -->
-    <section class="py-16 bg-gray-200">
-        <div class="container mx-auto">
-            <h1 class="text-4xl font-bold text-center mb-8">Frequently Asked Questions (FAQs)</h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Sample FAQ Card -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-xl font-bold mb-4">Is addiction treatable?</h2>
-                    <p class="text-gray-700">Yes, addiction is treatable. With the right support and treatment, individuals can recover from addiction and lead fulfilling lives.</p>
-                </div>
-                <!-- Add more FAQ cards as needed -->
-            </div>
-        </div>
-    </section>
-
-    <!-- External Resources Section -->
-    <section class="py-16">
-        <div class="container mx-auto">
-            <h1 class="text-4xl font-bold text-center mb-8">External Resources</h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Sample Resource Card -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-xl font-bold mb-4">Support Groups</h2>
-                    <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis elit justo.</p>
-                    <a href="#" class="text-blue-500 font-bold hover:underline mt-4">Learn More</a>
-                </div>
-                <!-- Add more resource cards as needed -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer Section -->
-    <footer class="bg-blue-500 text-white py-4 flex flex-wrap justify-center gap-8">
-        <div class="container mx-auto  p-8 rounded-lg shadow-md text-center w-80">
-            <li>Follow Us on:
-                <ul><a href="#" class="text-white hover:underline">LinkedIn</a></ul>
-                <ul><a href="#" class="text-white hover:underline">Instagram</a></ul>
-                <ul><a href="#" class="text-white hover:underline">Facebook</a></ul>
-                <ul><a href="#" class="text-white hover:underline">Twitter</a></ul>
-            </li>
-        </div>
-        <div class="container mx-auto  p-8 rounded-lg shadow-md text-center w-80">
-            <li>&copy; 2024 Rehab</li>
-            <li>All Rights Reserved</li>
-            <li><a href="/privacystatement" target="_blank" class="text-white hover:underline">Terms of Use & Privacy Policy </a></li>
-        </div>
-        <div class="container mx-auto  p-8 rounded-lg shadow-md text-center w-80">
-            <li><a href="#top" class="text-white hover:underline">Back to Top</a></li>
-            <li><a href="/contact" class="text-white hover:underline">Contact Us</a></li>
-            <li><a href="/virtualtour" class="text-white hover:underline">virtual tour</a></li>
-            <li><a href="/sitemap" class="text-white hover:underline">sitemap</a></li>
-            <li><a href="/resources" class="text-white hover:underline" target="_blank">FAQ</a></li>
-        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Rehab. All rights reserved.</p>
     </footer>
-
 </body>
-
 </html>
