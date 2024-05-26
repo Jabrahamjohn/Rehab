@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='staff.css') }}">
+</head>
+<body>
+    {% if session['password'] == 'admin'%}
+    <header>
+        <nav>
+            <div class="logo">Rehab</div>
+            <ul class="nav-links">
+                <li><a href="/dashboard/{{id}}">Dashboard</a></li>
+                <li><a href="/patients/{{id}}">Patients</a></li>
+                <li><a href="/staff/{{id}}">Staff</a></li>
+                <li><a href="/resources/{{id}}">Resources</a></li>
+                <li><a href="/reports/{{id}}">Reports & Analytics</a></li>
+                <li><a href="/notifications/{{id}}">Notification & Alerts</a></li>
+                <li><a href="/admin/{{id}}">Administrative tools</a></li>
+                <li><a href="/profile/{{id}}">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        This is where we will be managing the resources
+    </main>
+
+    {% elif session['password'] == 'therapist'%}
+    <header>
+        <nav>
+            <div class="logo">Rehab</div>
+            <ul class="nav-links">
+                <li><a href="/">Dashboard</a></li>
+                <li><a href="/about">Patients</a></li>
+                <li><a href="/services">Therapists</a></li>
+                <li><a href="/resources">Appointments</a></li>
+                <li><a href="/contact">Reports</a></li>
+                <li><a href="/login">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        this is the therapist dashboard
+    </main>
+
+    {% else %}
+    <header>
+        <nav>
+            <div class="logo">Rehab</div>
+            <ul class="nav-links">
+                <li><a href="/">Dashboard</a></li>
+                <li><a href="/about">Patients</a></li>
+                <li><a href="/services">Therapists</a></li>
+                <li><a href="/resources">Appointments</a></li>
+                <li><a href="/contact">Reports</a></li>
+                <li><a href="/login">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        this is the staff dashboard
+    </main>
+
+    {% endif %}
+
+</body>
+</html>
