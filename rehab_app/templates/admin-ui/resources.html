@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='staff.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='resources.css') }}">
 </head>
 <body>
     {% if session['password'] == 'admin'%}
@@ -24,8 +24,430 @@
         </nav>
     </header>
     <main>
-        This is where we will be managing the resources
+        <section class="resource-management">
+            <h2>Resource Management</h2>
+            <form id="resource-form">
+                <div class="form-group">
+                    <label for="resource-title">Title:</label>
+                    <input type="text" id="resource-title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="resource-description">Description:</label>
+                    <textarea id="resource-description" name="description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="resource-file">File:</label>
+                    <input type="file" id="resource-file" name="file" required>
+                </div>
+                <button type="submit">Add Resource</button>
+            </form>
+        </section>
+        <section class="resource-list">
+            <h2>Existing Resources</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>File</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="resource-table-body">
+                    <!-- Resource rows will be populated here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Inventory Management -->
+        <section class="inventory-management">
+            <h2>Inventory Management</h2>
+            <form id="inventory-form">
+                <div class="form-group">
+                    <label for="inventory-item">Item:</label>
+                    <input type="text" id="inventory-item" name="item" required>
+                </div>
+                <div class="form-group">
+                    <label for="inventory-quantity">Quantity:</label>
+                    <input type="number" id="inventory-quantity" name="quantity" required>
+                </div>
+                <button type="submit">Add Item</button>
+            </form>
+            <h2>Existing Inventory</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="inventory-table-body">
+                    <!-- Inventory items will be populated here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Equipment Maintenance Schedules -->
+        <section class="equipment-maintenance">
+            <h2>Equipment Maintenance Schedules</h2>
+            <form id="maintenance-form">
+                <div class="form-group">
+                    <label for="equipment-name">Equipment Name:</label>
+                    <input type="text" id="equipment-name" name="equipment" required>
+                </div>
+                <div class="form-group">
+                    <label for="maintenance-date">Maintenance Date:</label>
+                    <input type="date" id="maintenance-date" name="date" required>
+                </div>
+                <button type="submit">Add Schedule</button>
+            </form>
+            <h2>Scheduled Maintenance</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Equipment</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="maintenance-table-body">
+                    <!-- Maintenance schedules will be populated here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Room and Facility Management -->
+        <section class="facility-management">
+            <h2>Room and Facility Management</h2>
+            <form id="facility-form">
+                <div class="form-group">
+                    <label for="facility-name">Facility Name:</label>
+                    <input type="text" id="facility-name" name="facility" required>
+                </div>
+                <div class="form-group">
+                    <label for="room-number">Room Number:</label>
+                    <input type="text" id="room-number" name="room" required>
+                </div>
+                <button type="submit">Add Facility</button>
+            </form>
+            <h2>Facilities</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Facility</th>
+                        <th>Room</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="facility-table-body">
+                    <!-- Facilities will be populated here -->
+                </tbody>
+            </table>
+        </section>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const resourceForm = document.getElementById('resource-form');
+            const resourceTableBody = document.getElementById('resource-table-body');
+            const inventoryForm = document.getElementById('inventory-form');
+            const inventoryTableBody = document.getElementById('inventory-table-body');
+            const maintenanceForm = document.getElementById('maintenance-form');
+            const maintenanceTableBody = document.getElementById('maintenance-table-body');
+            const facilityForm = document.getElementById('facility-form');
+            const facilityTableBody = document.getElementById('facility-table-body');
+
+            const initialResources = [
+                {
+                    title: 'Rehabilitation Guidelines',
+                    description: 'Detailed guidelines on patient rehabilitation.',
+                    file: 'rehab_guidelines.pdf'
+                },
+                {
+                    title: 'Staff Training Manual',
+                    description: 'Manual for training new staff members.',
+                    file: 'training_manual.pdf'
+                },
+                {
+                    title: 'Resource Allocation Plan',
+                    description: 'Plan for resource allocation in the rehab hospital.',
+                    file: 'resource_allocation_plan.xlsx'
+                }
+            ];
+
+            const initialInventory = [
+                {
+                    item: 'Painkillers',
+                    quantity: 100
+                },
+                {
+                    item: 'Bandages',
+                    quantity: 200
+                },
+                {
+                    item: 'Wheelchairs',
+                    quantity: 10
+                }
+            ];
+
+            const initialMaintenance = [
+                {
+                    equipment: 'MRI Machine',
+                    date: '2024-06-15'
+                },
+                {
+                    equipment: 'X-ray Machine',
+                    date: '2024-07-10'
+                }
+            ];
+
+            const initialFacilities = [
+                {
+                    facility: 'Physical Therapy Room',
+                    room: '101'
+                },
+                {
+                    facility: 'Occupational Therapy Room',
+                    room: '102'
+                }
+            ];
+
+            // Load initial resources
+            function loadInitialResources() {
+                initialResources.forEach(resource => {
+                    const newRow = document.createElement('tr');
+
+                    newRow.innerHTML = `
+                        <td>${resource.title}</td>
+                        <td>${resource.description}</td>
+                        <td>${resource.file}</td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    `;
+
+                    resourceTableBody.appendChild(newRow);
+                });
+            }
+
+            // Load initial inventory
+            function loadInitialInventory() {
+                initialInventory.forEach(item => {
+                    const newRow = document.createElement('tr');
+
+                    newRow.innerHTML = `
+                        <td>${item.item}</td>
+                        <td>${item.quantity}</td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    `;
+
+                    inventoryTableBody.appendChild(newRow);
+                });
+            }
+
+            // Load initial maintenance schedules
+            function loadInitialMaintenance() {
+                initialMaintenance.forEach(schedule => {
+                    const newRow = document.createElement('tr');
+
+                    newRow.innerHTML = `
+                        <td>${schedule.equipment}</td>
+                        <td>${schedule.date}</td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    `;
+
+                    maintenanceTableBody.appendChild(newRow);
+                });
+            }
+
+            // Load initial facilities
+            function loadInitialFacilities() {
+                initialFacilities.forEach(facility => {
+                    const newRow = document.createElement('tr');
+
+                    newRow.innerHTML = `
+                        <td>${facility.facility}</td>
+                        <td>${facility.room}</td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    `;
+
+                    facilityTableBody.appendChild(newRow);
+                });
+            }
+
+            // Add resource from the form
+            function addResource() {
+                const title = document.getElementById('resource-title').value;
+                const description = document.getElementById('resource-description').value;
+                const file = document.getElementById('resource-file').files[0];
+
+                if (title && description && file) {
+                    const newRow = document.createElement('tr');
+
+                    newRow.innerHTML = `
+                        <td>${title}</td>
+                        <td>${description}</td>
+                        <td>${file.name}</td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    `;
+
+                    resourceTableBody.appendChild(newRow);
+
+                    document.getElementById('resource-title').value = '';
+                    document.getElementById('resource-description').value = '';
+                    document.getElementById('resource-file').value = '';
+                }
+            }
+
+            // Add inventory item from the form
+            function addInventoryItem() {
+                const item = document.getElementById('inventory-item').value;
+                const quantity = document.getElementById('inventory-quantity').value;
+
+                if (item && quantity) {
+                    const newRow = document.createElement('tr');
+
+                    newRow.innerHTML = `
+                        <td>${item}</td>
+                        <td>${quantity}</td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    `;
+
+                    inventoryTableBody.appendChild(newRow);
+
+                    document.getElementById('inventory-item').value = '';
+                    document.getElementById('inventory-quantity').value = '';
+                }
+            }
+
+            // Add maintenance schedule from the form
+            function addMaintenanceSchedule() {
+                const equipment = document.getElementById('equipment-name').value;
+                const date = document.getElementById('maintenance-date').value;
+
+                if (equipment && date) {
+                    const newRow = document.createElement('tr');
+
+                    newRow.innerHTML = `
+                        <td>${equipment}</td>
+                        <td>${date}</td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    `;
+
+                    maintenanceTableBody.appendChild(newRow);
+
+                    document.getElementById('equipment-name').value = '';
+                    document.getElementById('maintenance-date').value = '';
+                }
+            }
+
+            // Add facility from the form
+            function addFacility() {
+                const facility = document.getElementById('facility-name').value;
+                const room = document.getElementById('room-number').value;
+
+                if (facility && room) {
+                    const newRow = document.createElement('tr');
+
+                    newRow.innerHTML = `
+                        <td>${facility}</td>
+                        <td>${room}</td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    `;
+
+                    facilityTableBody.appendChild(newRow);
+
+                    document.getElementById('facility-name').value = '';
+                    document.getElementById('room-number').value = '';
+                }
+            }
+
+            // Event listener for resource form submission
+            resourceForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                addResource();
+            });
+
+            // Event listener for inventory form submission
+            inventoryForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                addInventoryItem();
+            });
+
+            // Event listener for maintenance form submission
+            maintenanceForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                addMaintenanceSchedule();
+            });
+
+            // Event listener for facility form submission
+            facilityForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                addFacility();
+            });
+
+            // Event listener for delete buttons in resource table
+            resourceTableBody.addEventListener('click', (e) => {
+                if (e.target.classList.contains('delete-btn')) {
+                    const row = e.target.closest('tr');
+                    row.remove();
+                }
+            });
+
+            // Event listener for delete buttons in inventory table
+            inventoryTableBody.addEventListener('click', (e) => {
+                if (e.target.classList.contains('delete-btn')) {
+                    const row = e.target.closest('tr');
+                    row.remove();
+                }
+            });
+
+            // Event listener for delete buttons in maintenance table
+            maintenanceTableBody.addEventListener('click', (e) => {
+                if (e.target.classList.contains('delete-btn')) {
+                    const row = e.target.closest('tr');
+                    row.remove();
+                }
+            });
+
+            // Event listener for delete buttons in facility table
+            facilityTableBody.addEventListener('click', (e) => {
+                if (e.target.classList.contains('delete-btn')) {
+                    const row = e.target.closest('tr');
+                    row.remove();
+                }
+            });
+
+            // Load initial data on page load
+            loadInitialResources();
+            loadInitialInventory();
+            loadInitialMaintenance();
+            loadInitialFacilities();
+        });
+    </script>
 
     {% elif session['password'] == 'therapist'%}
     <header>
