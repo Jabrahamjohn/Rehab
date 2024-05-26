@@ -85,6 +85,22 @@ def resourcs(id):
     role = session.get('role')
     return render_template('./admin-ui/resources.html', id=user_id, role=role)
 
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        phone_number = request.form.get('phone_number')
+        role = request.form.get('role')
+        password = request.form.get('password')
+        id = str(uuid.uuid4())
+
+        session['id'] = id
+        session['role'] = role
+
+        return redirect(url_for('dashboard', id=id))
+
+    return render_template('signup.html')
 
 if __name__ == '__main__':
     app.secret_key = 'AJ'
