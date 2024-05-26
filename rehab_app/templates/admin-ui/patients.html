@@ -12,14 +12,14 @@
         <nav>
             <div class="logo">Rehab</div>
             <ul class="nav-links">
-                <li><a href="/dashboard/{{user_id}}">Dashboard</a></li>
-                <li><a href="/patients/{{user_id}}">Patients</a></li>
-                <li><a href="/staff/{{user_id}}">Staff</a></li>
-                <li><a href="/resources/{{user_id}}">Resources</a></li>
-                <li><a href="/reports/{{user_id}}">Reports & Analytics</a></li>
-                <li><a href="/notifications/{{user_id}}">Notification & Alerts</a></li>
-                <li><a href="/admin/{{user_id}}">Administrative tools</a></li>
-                <li><a href="/profile/{{user_id}}">Profile</a></li>
+                <li><a href="/dashboard/{{id}}">Dashboard</a></li>
+                <li><a href="/patients/{{id}}">Patients</a></li>
+                <li><a href="/staff/{{id}}">Staff</a></li>
+                <li><a href="/resources/{{id}}">Resources</a></li>
+                <li><a href="/reports/{{id}}">Reports & Analytics</a></li>
+                <li><a href="/notifications/{{id}}">Notification & Alerts</a></li>
+                <li><a href="/admin/{{id}}">Administrative tools</a></li>
+                <li><a href="/profile/{{id}}">Profile</a></li>
             </ul>
         </nav>
     </header>
@@ -28,74 +28,273 @@
       <h2>Patient Registration & Discharge</h2>
       <p>Manage patient intake and discharge processes.</p>
       <div>
-          <p>Register New Patient</p>
-          <div class="registration-card">
-            <form>
-                <p>patient id</p>
-                 <div class="form-group">
-                    <label for="name">Name*</label>
-                    <input type="text" id="name" name="name" required>
+        <button id="openRegisterModalBtn" class="button">Register New Patient</button>
+        <!-- The Registration Modal -->
+        <div id="registerModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <h4 class="modal-title">Patient Registration Form</h4>
+                <span class="close">&times;</span>
+                <div class="registration-card">
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="name">Name*</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="years">Years*</label>
+                            <input type="number" id="years" name="years" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender*</label>
+                            <select id="gender" name="gender" required>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number*</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="guardian">Guardian's Phone Number*</label>
+                            <input type="tel" id="guardian" name="guardian">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="history">Medical history</label>
+                            <textarea id="history" name="history"></textarea>
+                        </div>
+                        <button type="submit">Register</button>
+                        <button type="reset" class="button">Cancel</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="years">Years*</label>
-                    <input type="number" id="years" name="years" required>
+            </div>
+        </div>
+
+        <button id="openDischargeModalBtn" class="button">Discharge Patient</button>
+        <!-- The Discharge Modal -->
+        <div id="dischargeModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <h4 class="modal-title">Patient Discharge Form</h4>
+                <span class="close">&times;</span>
+                <div class="discharge-card">
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="discharge-id">Patient ID*</label>
+                            <input type="text" id="discharge-id" name="discharge-id" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="discharge-notes">Discharge Notes</label>
+                            <textarea id="discharge-notes" name="discharge-notes"></textarea>
+                        </div>
+                        <button type="submit">Discharge</button>
+                        <button type="reset" class="button">Cancel</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="gender">Gender*</label>
-                    <select id="gender" name="gender" required>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number*</label>
-                    <input type="tel" id="phone" name="phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="guardian">Guardian's Phone Number*</label>
-                    <input type="tel" id="guardian" name="guardian">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email">
-                </div>
-                <div class="form-group">
-                    <label for="history">Medical history</label>
-                    <textarea id="history" name="history"></textarea>
-                </div>
-                <button type="submit">Register</button>
-            </form>
-          </div>
-      </div>
-      <div>
-          <p>Discharge patient</p>
+            </div>
+        </div>
       </div>
     </section>
+
     <section id="patient-records">
       <h2>Patient Records & History</h2>
       <p>Access and update patient medical records.</p>
-      <ul>
-        <li><a href="#">View Patient Records</a></li>
-        <li><a href="#">Add/Edit Medical History</a></li>
-      </ul>
+      <div>
+          <button id="openViewRecordsModalBtn" class="button">View Patient Records</button>
+          <!-- The View Records Modal -->
+          <div id="viewRecordsModal" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                  <h4 class="modal-title">View Patient Records</h4>
+                  <span class="close">&times;</span>
+                  <div class="view-records-card">
+                      <form class="form">
+                          <div class="form-group">
+                              <label for="view-records-id">Patient ID*</label>
+                              <input type="text" id="view-records-id" name="view-records-id" required>
+                          </div>
+                          <button type="submit">View Records</button>
+                          <button type="reset" class="button">Cancel</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+
+          <button id="openEditHistoryModalBtn" class="button">Add/Edit Medical History</button>
+          <!-- The Edit History Modal -->
+          <div id="editHistoryModal" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                  <h4 class="modal-title">Add/Edit Medical History</h4>
+                  <span class="close">&times;</span>
+                  <div class="edit-history-card">
+                      <form class="form">
+                          <div class="form-group">
+                              <label for="edit-history-id">Patient ID*</label>
+                              <input type="text" id="edit-history-id" name="edit-history-id" required>
+                          </div>
+                          <div class="form-group">
+                              <label for="medical-history">Medical History*</label>
+                              <textarea id="medical-history" name="medical-history" required></textarea>
+                          </div>
+                          <button type="submit">Save</button>
+                          <button type="reset" class="button">Cancel</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
     </section>
+
     <section id="appointment-scheduling">
       <h2>Appointment Scheduling & Tracking</h2>
       <p>Schedule and track patient appointments.</p>
-      <ul>
-        <li><a href="#">Schedule Appointment</a></li>
-        <li><a href="#">View Appointment Calendar</a></li>
-      </ul>
+      <div>
+          <button id="openScheduleAppointmentModalBtn" class="button">Schedule Appointment</button>
+          <!-- The Schedule Appointment Modal -->
+          <div id="scheduleAppointmentModal" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                  <h4 class="modal-title">Schedule Appointment</h4>
+                  <span class="close">&times;</span>
+                  <div class="schedule-appointment-card">
+                      <form class="form">
+                          <div class="form-group">
+                              <label for="appointment-patient-id">Patient ID*</label>
+                              <input type="text" id="appointment-patient-id" name="appointment-patient-id" required>
+                          </div>
+                          <div class="form-group">
+                              <label for="appointment-date">Appointment Date*</label>
+                              <input type="date" id="appointment-date" name="appointment-date" required>
+                          </div>
+                          <div class="form-group">
+                              <label for="appointment-time">Appointment Time*</label>
+                              <input type="time" id="appointment-time" name="appointment-time" required>
+                          </div>
+                          <button type="submit">Schedule</button>
+                          <button type="reset" class="button">Cancel</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+
+          <button id="openViewCalendarModalBtn" class="button">View Appointment Calendar</button>
+          <!-- The View Calendar Modal -->
+          <div id="viewCalendarModal" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                  <h4 class="modal-title">View Appointment Calendar</h4>
+                  <span class="close">&times;</span>
+                  <div class="view-calendar-card">
+                      <form class="form">
+                          <div class="form-group">
+                              <label for="calendar-date">Select Date*</label>
+                              <input type="date" id="calendar-date" name="calendar-date" required>
+                          </div>
+                          <button type="submit">View Calendar</button>
+                          <button type="reset" class="button">Cancel</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
     </section>
+
     <section id="bed-allocation">
       <h2>Bed Allocation & Status</h2>
       <p>Manage bed availability and assignment.</p>
-      <ul>
-        <li><a href="#">View Bed Availability</a></li>
-        <li><a href="#">Assign Bed to Patient</a></li>
-      </ul>
+      <div>
+          <button id="openViewBedAvailabilityModalBtn" class="button">View Bed Availability</button>
+          <!-- The View Bed Availability Modal -->
+          <div id="viewBedAvailabilityModal" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                  <h4 class="modal-title">View Bed Availability</h4>
+                  <span class="close">&times;</span>
+                  <div class="view-bed-availability-card">
+                      <form class="form">
+                          <div class="form-group">
+                              <label for="bed-availability-date">Bed Number*</label>
+                              <input type="number" id="bed-availability-date" name="bed-availability-date" required>
+                          </div>
+                          <button type="submit">View Availability</button>
+                          <button type="reset" class="button">Cancel</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+
+          <button id="openAssignBedModalBtn" class="button">Assign Bed to Patient</button>
+          <!-- The Assign Bed Modal -->
+          <div id="assignBedModal" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                  <h4 class="modal-title">Assign Bed to Patient</h4>
+                  <span class="close">&times;</span>
+                  <div class="assign-bed-card">
+                      <form class="form">
+                          <div class="form-group">
+                              <label for="assign-bed-id">Patient ID*</label>
+                              <input type="text" id="assign-bed-id" name="assign-bed-id" required>
+                          </div>
+                          <div class="form-group">
+                              <label for="assign-bed-number">Bed Number*</label>
+                              <input type="text" id="assign-bed-number" name="assign-bed-number" required>
+                          </div>
+                          <button type="submit">Assign Bed</button>
+                          <button type="reset" class="button">Cancel</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
     </section>
   </main>
+
+    <script>
+        // Function to handle modal open and close
+        function setupModal(modalId, openBtnId, closeClass) {
+            var modal = document.getElementById(modalId);
+            var btn = document.getElementById(openBtnId);
+            var span = modal.getElementsByClassName(closeClass)[0];
+
+            btn.onclick = function() {
+                modal.style.display = "block";
+            }
+
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+
+        // Register and Discharge Modals
+        setupModal("registerModal", "openRegisterModalBtn", "close");
+        setupModal("dischargeModal", "openDischargeModalBtn", "close");
+
+        // View Records and Edit History Modals
+        setupModal("viewRecordsModal", "openViewRecordsModalBtn", "close");
+        setupModal("editHistoryModal", "openEditHistoryModalBtn", "close");
+
+        // Schedule Appointment and View Calendar Modals
+        setupModal("scheduleAppointmentModal", "openScheduleAppointmentModalBtn", "close");
+        setupModal("viewCalendarModal", "openViewCalendarModalBtn", "close");
+
+        // View Bed Availability and Assign Bed Modals
+        setupModal("viewBedAvailabilityModal", "openViewBedAvailabilityModalBtn", "close");
+        setupModal("assignBedModal", "openAssignBedModalBtn", "close");
+    </script>
+
 
     {% elif session['password'] == 'therapist'%}
     <header>

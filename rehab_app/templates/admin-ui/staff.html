@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='staff.css') }}">
+</head>
+<body>
+    {% if session['password'] == 'admin'%}
+    <header>
+        <nav>
+            <div class="logo">Rehab</div>
+            <ul class="nav-links">
+                <li><a href="/dashboard/{{id}}">Dashboard</a></li>
+                <li><a href="/patients/{{id}}">Patients</a></li>
+                <li><a href="/staff/{{id}}">Staff</a></li>
+                <li><a href="/resources/{{id}}">Resources</a></li>
+                <li><a href="/reports/{{id}}">Reports & Analytics</a></li>
+                <li><a href="/notifications/{{id}}">Notification & Alerts</a></li>
+                <li><a href="/admin/{{id}}">Administrative tools</a></li>
+                <li><a href="/profile/{{id}}">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+    <section class="staff-search">
+      <h2>Staff Search</h2>
+      <form action="#" class="form">
+        <label for="staff-name">Search by Staff Number:</label>
+        <input type="text" id="staff-name" name="staff-name" placeholder="Enter staff number">
+        <button type="submit">Search</button>
+      </form>
+    </section>
+    <section class="staff-list">
+      <h2>Staff List</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Job Title</th>
+            <th>Department</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John Smith</td>
+            <td>Physical Therapist</td>
+            <td>Outpatient Therapy</td>
+            <td>(555) 555-5555</td>
+            <td>john.smith@rehabhospital.com</td>
+            <td>
+              <a href="#">Edit</a>
+              <a href="#">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Jane Doe</td>
+            <td>Occupational Therapist</td>
+            <td>Inpatient Therapy</td>
+            <td>(555) 555-5556</td>
+            <td>jane.doe@rehabhospital.com</td>
+            <td>
+              <a href="#">Edit</a>
+              <a href="#">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Michael Lee</td>
+            <td>Registered Nurse</td>
+            <td>Cardiology Unit</td>
+            <td>(555) 555-5557</td>
+            <td>michael.lee@rehabhospital.com</td>
+            <td>
+              <a href="#">Edit</a>
+              <a href="#">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Sarah Jones</td>
+            <td>Social Worker</td>
+            <td>Discharge Planning</td>
+            <td>(555) 555-5558</td>
+            <td>sarah.jones@rehabhospital.com</td>
+            <td>
+              <a href="#">Edit</a>
+              <a href="#">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td>David Brown</td>
+            <td>Administrative Assistant</td>
+            <td>Front Desk</td>
+            <td>(555) 555-5559</td>
+            <td>david.brown@rehabhospital.com</td>
+            <td>
+              <a href="#">Edit</a>
+              <a href="#">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Emily Garcia</td>
+            <td>Speech Language Pathologist</td>
+            <td>Neurology Unit</td>
+            <td>(555) 555-5560</td>
+            <td>emily.garcia@rehabhospital.com</td>
+            <td>
+              <a href="#">Edit</a>
+              <a href="#">Delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="add-staff">
+      <h2>Add New Staff</h2>
+      <form action="#" class="add-staff-form">
+          <div class="form-group">
+            <label for="new-staff-name">Staff Name:</label>
+            <input type="text" id="new-staff-name" name="new-staff-name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="job-title">Job Title:</label>
+            <input type="text" id="job-title" name="job-title" required>
+          </div>
+
+          <div class="form-group">
+            <label for="department">Department:</label>
+            <select name="department" id="department">
+              <option value="">Select Department</option>
+              <option value="physical-therapy">Physical Therapy</option>
+              <option value="occupational-therapy">Occupational Therapy</option>
+              <option value="nursing">Nursing</option>
+              <option value="administration">Administration</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="phone-number">Phone Number:</label>
+            <input type="tel" id="phone-number" name="phone-number" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+        <button type="submit">Add Staff</button>
+      </form>
+    </section>
+  </main>
+
+    {% elif session['password'] == 'therapist'%}
+    <header>
+        <nav>
+            <div class="logo">Rehab</div>
+            <ul class="nav-links">
+                <li><a href="/">Dashboard</a></li>
+                <li><a href="/about">Patients</a></li>
+                <li><a href="/services">Therapists</a></li>
+                <li><a href="/resources">Appointments</a></li>
+                <li><a href="/contact">Reports</a></li>
+                <li><a href="/login">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        this is the therapist dashboard
+    </main>
+
+    {% else %}
+    <header>
+        <nav>
+            <div class="logo">Rehab</div>
+            <ul class="nav-links">
+                <li><a href="/">Dashboard</a></li>
+                <li><a href="/about">Patients</a></li>
+                <li><a href="/services">Therapists</a></li>
+                <li><a href="/resources">Appointments</a></li>
+                <li><a href="/contact">Reports</a></li>
+                <li><a href="/login">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        this is the staff dashboard
+    </main>
+
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+/* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.9rem;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #f7f7f7;
+    padding: 10px 20px;
+    margin-bottom: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #006400;
+}
+
+.nav-links {
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.8rem;
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #006400;
+}
+
+.staff-search h2{
+    margin: 20px 30px;
+}
+
+.form {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 90%;
+    margin: auto;
+    display: flex;
+}
+
+.form input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+    width: 20%;
+    padding: 15px;
+}
+
+.form label {
+    margin: 15px 20px;
+}
+
+.form button {
+    background-color: #006400;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 15px;
+    padding: 0 20px;
+    height: 35px;
+}
+
+.form button:hover {
+    background-color: #004d00;
+}
+
+.staff-list h2 {
+    margin: 20px 40px;
+}
+
+.staff-list table {
+  border-collapse: collapse;
+  margin: auto;
+  width: 95%;
+}
+
+.staff-list th,
+.staff-list td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.staff-list thead {
+  background-color: #f1f1f1;
+}
+
+.add-staff h2{
+    margin: 20px 50px;
+}
+
+.add-staff-form {
+    margin: 20px 40px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    width: 50%;
+}
+
+.add-staff-form h2 {
+    margin-bottom: 20px;
+}
+
+.add-staff-form .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.add-staff-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.add-staff-form .form-group input, select{
+    width: 90%;
+    padding: 10px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+
+}
+
+.add-staff-form button {
+    width: 100%;
+    padding: 10px;
+    margin: 20px 0;
+    background-color: #006400;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-staff-form button:hover {
+    background-color: #004d00;
+}
