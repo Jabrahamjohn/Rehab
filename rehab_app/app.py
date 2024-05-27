@@ -85,6 +85,24 @@ def resources(id):
     role = session.get('role')
     return render_template('./admin-ui/resources.html', id=user_id, role=role)
 
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        phone_number = request.form.get('phone_number')
+        role = request.form.get('role')
+        password = request.form.get('password')
+        id = str(uuid.uuid4())
+
+        session['id'] = id
+        session['role'] = role
+
+        return redirect(url_for('dashboard', id=id))
+
+    return render_template('signup.html')
+
 @app.route('/reports/<id>')
 def reports(id):
     """Renders the resources.css template"""
@@ -116,6 +134,7 @@ def profile(id):
     print(user_id)
     role = session.get('role')
     return render_template('./admin-ui/profile.html', id=user_id, role=role)
+
 
 
 if __name__ == '__main__':
