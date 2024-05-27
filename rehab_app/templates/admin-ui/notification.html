@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='report.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='notification.css') }}">
 </head>
 <body>
     {% if session['password'] == 'admin'%}
@@ -24,8 +24,33 @@
         </nav>
     </header>
     <main>
-        This is where we will be managing all the notifications and alerts
+        <section>
+            <h2>Critical Alerts</h2>
+            <div class="alert critical">
+                <p>Low inventory: <strong>Paracetamol</strong> is running low.</p>
+            </div>
+            <div class="alert critical">
+                <p>Equipment failure: <strong>ECG Machine</strong> is not functioning.</p>
+            </div>
+        </section>
+        <section>
+            <h2>Upcoming Appointments</h2>
+            <ul class="appointments">
+                <li>Appointment with <strong>John Doe</strong> on <strong>May 28, 2024</strong> at <strong>10:00 AM</strong></li>
+                <li>Appointment with <strong>Jane Smith</strong> on <strong>May 29, 2024</strong> at <strong>1:00 PM</strong></li>
+            </ul>
+        </section>
+        <section>
+            <h2>Emergency Alerts</h2>
+            <div class="alert emergency">
+                <p>Emergency alert: <strong>Fire in Building B</strong>.</p>
+            </div>
+            <div class="alert emergency">
+                <p>Emergency alert: <strong>Patient John Doe needs immediate attention</strong>.</p>
+            </div>
+        </section>
     </main>
+
 
     {% elif session['password'] == 'therapist'%}
     <header>

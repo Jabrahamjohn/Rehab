@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='report.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
 </head>
 <body>
     {% if session['password'] == 'admin'%}
@@ -24,9 +24,73 @@
         </nav>
     </header>
     <main>
-        This is where we will have the user profile
-    </main>
+          <div class="profile-container">
+            <section class="profile-info">
+              <div class="avatar">
+                <span id="initials"></span>
+              </div>
+              <h2>User Profile</h2>
+              <ul>
+                <li>
+                  <span>Staff Number:</span>
+                  <p id="number"></p>
+                </li>
+                <li>
+                  <span>Name:</span>
+                  <p id="name"></p>
+                </li>
+                <li>
+                  <span>Department:</span>
+                  <p id="department"></p>
+                </li>
+                <li>
+                  <span>Job Title:</span>
+                  <p id="title"></p>
+                </li>
+                <li>
+                  <span>Role:</span>
+                  <p id="role"></p>
+                </li>
+                <li>
+                  <span>Phone:</span>
+                  <p id="tel"></p>
+                </li>
+                <li>
+                  <span>Email:</span>
+                  <p id="email"></p>
+                </li>
+                </ul>
+            </section>
+          </div>
+        </main>
 
+    <script>
+        // Get user data (replace with your logic to fetch user info)
+        const userData = {
+          firstName: "Margaret",
+          lastName: "Maina"
+        };
+
+        // Function to generate initials
+        function getInitials(name) {
+          const parts = name.split(" ");
+          return parts[0][0] + parts[1][0].toUpperCase();
+        }
+
+        // Set initials in the avatar
+        const initialsElement = document.getElementById("initials");
+        initialsElement.textContent = getInitials(userData.firstName + " " + userData.lastName);
+
+        // Set other user data elements (replace with actual data fetching)
+        document.getElementById("name").textContent = userData.firstName + " " + userData.lastName;
+        document.getElementById("email").textContent = "margaret.maina@rehab.com"; // Replace with actual email
+        document.getElementById("number").textContent = "OT/001";
+        document.getElementById("title").textContent = "Physical Therapists";
+        document.getElementById("role").textContent = "Admin";
+        document.getElementById("tel").textContent = "0720454113";
+        document.getElementById("department").textContent = "Outpatient Therapy";
+
+    </script>
     {% elif session['password'] == 'therapist'%}
     <header>
         <nav>
