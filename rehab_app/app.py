@@ -78,12 +78,13 @@ def staff(id):
     return render_template('./admin-ui/staff.html', id=user_id, role=role)
 
 @app.route('/resources/<id>')
-def resourcs(id):
-    """Renders the resources.html template"""
+def resources(id):
+    """Renders the resources.css template"""
     user_id = session.get('id')
     print(user_id)
     role = session.get('role')
     return render_template('./admin-ui/resources.html', id=user_id, role=role)
+
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -101,6 +102,40 @@ def signup():
         return redirect(url_for('dashboard', id=id))
 
     return render_template('signup.html')
+
+@app.route('/reports/<id>')
+def reports(id):
+    """Renders the resources.css template"""
+    user_id = session.get('id')
+    print(user_id)
+    role = session.get('role')
+    return render_template('./admin-ui/reports.html', id=user_id, role=role)
+
+@app.route('/notifications/<id>')
+def notifications(id):
+    """Renders the resources.css template"""
+    user_id = session.get('id')
+    print(user_id)
+    role = session.get('role')
+    return render_template('./admin-ui/notification.html', id=user_id, role=role)
+
+@app.route('/admin/<id>')
+def admin(id):
+    """Renders the resources.css template"""
+    user_id = session.get('id')
+    print(user_id)
+    role = session.get('role')
+    return render_template('./admin-ui/admin.html', id=user_id, role=role)
+
+@app.route('/profile/<id>')
+def profile(id):
+    """Renders the resources.css template"""
+    user_id = session.get('id')
+    print(user_id)
+    role = session.get('role')
+    return render_template('./admin-ui/profile.html', id=user_id, role=role)
+
+
 
 if __name__ == '__main__':
     app.secret_key = 'AJ'

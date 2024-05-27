@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='notification.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
 </head>
 <body>
     {% if session['password'] == 'admin'%}
@@ -24,33 +24,41 @@
         </nav>
     </header>
     <main>
-        <section>
-            <h2>Critical Alerts</h2>
-            <div class="alert critical">
-                <p>Low inventory: <strong>Paracetamol</strong> is running low.</p>
-            </div>
-            <div class="alert critical">
-                <p>Equipment failure: <strong>ECG Machine</strong> is not functioning.</p>
-            </div>
+      <h2>Administrative Tools</h2>
+      <div class="admin-container">
+        <section class="admin-section">
+          <h3>User & Role Management</h3>
+          <ul>
+            <li><button>Manage Users</button></li>
+            <li><button>Manage Roles</button></li>
+          </ul>
         </section>
-        <section>
-            <h2>Upcoming Appointments</h2>
-            <ul class="appointments">
-                <li>Appointment with <strong>John Doe</strong> on <strong>May 28, 2024</strong> at <strong>10:00 AM</strong></li>
-                <li>Appointment with <strong>Jane Smith</strong> on <strong>May 29, 2024</strong> at <strong>1:00 PM</strong></li>
-            </ul>
+        <section class="admin-section">
+          <h3>System Settings & Configurations</h3>
+          <ul>
+            <li><button>General Settings</button></li>
+            <li><button>Security Settings</button></li>
+            <li><button>Integrations</button></li>
+          </ul>
         </section>
-        <section>
-            <h2>Emergency Alerts</h2>
-            <div class="alert emergency">
-                <p>Emergency alert: <strong>Fire in Building B</strong>.</p>
-            </div>
-            <div class="alert emergency">
-                <p>Emergency alert: <strong>Patient John Doe needs immediate attention</strong>.</p>
-            </div>
+        <section class="admin-section">
+          <h3>Backup & Recovery</h3>
+          <ul>
+            <li><button>Initiate Backup</button></li>
+            <li><button>Restore Backup</button></li>
+            <li><button>Schedule Backups</button></li>
+          </ul>
         </section>
+        <section class="admin-section">
+          <h3>Audit Logs</h3>
+          <ul>
+            <li><button>User Activity Logs</button></li>
+            <li><button>System Event Logs</button></li>
+            <li><button>Filter & Download Logs</button></li>
+          </ul>
+        </section>
+        </div>
     </main>
-
 
     {% elif session['password'] == 'therapist'%}
     <header>
