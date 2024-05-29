@@ -117,6 +117,14 @@ def profile(id):
     role = session.get('role')
     return render_template('./admin-ui/profile.html', id=user_id, role=role)
 
+@app.route('/appointments/<id>')
+def appointments(id):
+    """Renders the resources.css template"""
+    user_id = session.get('id')
+    print(user_id)
+    role = session.get('role')
+    return render_template('./admin-ui/appointments.html', id=user_id, role=role)
+
 
 if __name__ == '__main__':
     app.secret_key = 'AJ'

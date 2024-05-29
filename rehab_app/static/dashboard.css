@@ -47,6 +47,8 @@ nav {
     color: #006400;
 }
 
+
+/* Admins dashboard */
 .first-deck {
     display: flex;
     align-items: center;
@@ -153,3 +155,267 @@ nav {
     font-family: "Montserrat", sans-serif;
     color: #012504;
 }
+
+/* Therapists dashboard */
+
+h4 {
+    color: green;
+    border-bottom: 1px solid green;
+    font-family: "Montserrat", sans-serif;
+    padding: 15px;
+}
+
+.therapist-dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+/* Sections */
+.therapist-dashboard section {
+  width: 28%;
+}
+
+.schedule-appointments, .patient-progress, .tasks-todo {
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    height: 70vh;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+/* Schedule Appointments Section */
+.schedule-appointments {
+  margin-bottom: 20px;
+}
+
+.appointment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+
+}
+
+.appointment-table th,
+.appointment-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+}
+
+.appointment-table th {
+  background-color: #61AB67;
+}
+
+.appointment-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.schedule-appointments a {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: green;
+  font-size: 0.8rem;
+}
+
+.schedule-appointments a:hover {
+  text-decoration: underline;
+}
+
+/* Patient Progress Section */
+.patient-progress {
+  margin-bottom: 20px;
+}
+
+.patient-list {
+  list-style: none;
+  padding: 0;
+}
+
+.patient-list li {
+  margin: 10px 0;
+  padding: 15px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+.patient-list a {
+  text-decoration: none;
+  color: #001F03;
+  font-size: 0.85rem;
+}
+
+.link {
+  text-decoration: none;
+  color: #008E0E;
+  font-size: 0.8rem;
+}
+
+.link: hover {
+  text-decoration: underline;
+}
+
+.patient-list a:hover {
+  text-decoration: underline;
+  color: #00690B;
+}
+
+/* Tasks To-Do Section */
+.tasks-todo {
+  margin-bottom: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+}
+
+.tasks-todo h4 {
+  margin-bottom: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task-list li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.task-list input[type="checkbox"] {
+  margin: 10px;
+  font-family: "Montserrat", sans-serif;
+  padding: 20px;
+}
+
+.task-list .add-task {
+  display: flex;
+  align-items: center;
+}
+
+.task-list .add-task input[type="text"] {
+  flex: 1;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.task-list .add-task button {
+  background-color: #03570B;
+  color: #fff;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.task-list .add-task button:hover {
+  background-color: green;
+}
+
+.task {
+    margin-right: auto;
+}
+
+.edit-task-btn {
+    width: 60%;
+    margin-right: auto;
+    padding: 10px;
+}
+
+.edit-btn, .delete-btn {
+  text-decoration: none;
+  color: green;
+  font-size: 0.85rem;
+  cursor: pointer
+}
+
+.edit-btn:hover, .delete-btn:hover {
+  text-decoration: underline;
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  width: 50%;
+  overflow: auto;
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+}
+
+.modal-content {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.modal-content input {
+    width: 90%;
+    padding: 10px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.8rem;
+
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    margin: 20px 0;
+    background-color: #006400;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #004d00;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+

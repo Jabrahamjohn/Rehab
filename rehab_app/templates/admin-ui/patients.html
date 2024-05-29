@@ -255,7 +255,6 @@
       </div>
     </section>
   </main>
-
     <script>
         // Function to handle modal open and close
         function setupModal(modalId, openBtnId, closeClass) {
@@ -301,18 +300,123 @@
         <nav>
             <div class="logo">Rehab</div>
             <ul class="nav-links">
-                <li><a href="/">Dashboard</a></li>
-                <li><a href="/about">Patients</a></li>
-                <li><a href="/services">Therapists</a></li>
-                <li><a href="/resources">Appointments</a></li>
-                <li><a href="/contact">Reports</a></li>
-                <li><a href="/login">Profile</a></li>
+                <li><a href="/dashboard/{{id}}">Dashboard</a></li>
+                <li><a href="/patients/{{id}}">Patients</a></li>
+                <li><a href="/appointments/{{id}}">Appointments</a></li>
+                <li><a href="/resources/{{id}}">Resources & Tools</a></li>
+                <li><a href="/profile/{{id}}">Profile</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        this is the therapist dashboard
+    <main class="therapists-main">
+        <h2>Assigned Patients</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example row, replace with dynamic content -->
+                <tr>
+                    <td>1</td>
+                    <td>John Doe</td>
+                    <td>30</td>
+                    <td>Male</td>
+                    <td><button class="view-patient-btn" data-patient-id="1">View</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div id="patient-details" style="display:none;">
+            <h3>Patient Details</h3>
+            <div id="patient-info" class="patient-info">
+                <h4>Patient Info</h4>
+                <p>Name: John Doe</p>
+                <p>Age: 35</p>
+                <p>Date of Birth: 1989-01-01</p>
+                <button class="create-btn">Admit</button>
+                <button class="edit-btn">Discharge</button>
+            </div>
+            <div id="patient-medical-history" class="patient-info">
+                <h4>Medical History</h4>
+                <p>This section will display the patient's medical history.</p>
+                <button class="create-btn">Create</button>
+                <button class="edit-btn">Edit</button>
+
+            </div>
+            <div id="treatment-plan" class="patient-info">
+                <h4>Treatment Plan</h4>
+                <p>This section will display the treatment plan for the patient.</p>
+                <button class="create-btn">Create</button>
+                <button class="edit-btn">Edit</button>
+
+            </div>
+            <div id="progress-notes" class="patient-info">
+                <h4>Progress Notes</h4>
+                <p>This section will display the patient's progress notes.</p>
+                <button class="create-btn">Create</button>
+                <button class="edit-btn">Edit</button>
+
+            </div>
+            <div id="session-notes" class="patient-info">
+                <h4>Session Notes</h4>
+                <p>This section will display the patient's session notes.</p>
+                <button class="create-btn">Create</button>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+
+            </div>
+        </div>
+
+        <div id="modal-container" style="display:none;">
+            <div class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <h2 id="modal-title"></h2>
+                    <form id="modal-form">
+                        <div class="form-group">
+                            <label for="modal-input">Input:</label>
+                            <input type="text" id="modal-input" name="modal-input" required>
+                        </div>
+                        <button type="submit" id="modal-submit-btn"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const viewButtons = document.querySelectorAll('.view-patient-btn');
+
+            viewButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const patientId = button.getAttribute('data-patient-id');
+
+                    // Show the patient-details div
+                    const patientDetailsDiv = document.getElementById('patient-details');
+                    patientDetailsDiv.style.display = 'block';
+
+                    // Optionally, load patient details dynamically using patientId
+                    // Example: fetch patient details from server and update the div content
+                    // fetch(`/get-patient-details/${patientId}`)
+                    //     .then(response => response.json())
+                    //     .then(data => {
+                    //         // Update the patient-details div with fetched data
+                    //         document.getElementById('patient-info').innerHTML = `
+                    //             <p>Name: ${data.name}</p>
+                    //             <p>Age: ${data.age}</p>
+                    //             <p>Gender: ${data.gender}</p>
+                    //         `;
+                    //     });
+                });
+            });
+        });
+    </script>
 
     {% else %}
     <header>

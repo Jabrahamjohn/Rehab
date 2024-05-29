@@ -112,4 +112,51 @@ table th {
     background-color: #f4f4f4;
 }
 
+/*Therapists page*/
+.container {
+    width: 80%;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 20px;
+}
 
+.resources {
+    background: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.resources h2 {
+    margin-bottom: 20px;
+    color: green;
+    text-align: center;
+}
+
+.resource-section {
+    margin-bottom: 20px;
+}
+
+.resource-section h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.resource-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.resource-section ul li {
+    margin-bottom: 10px;
+}
+
+.resource-section ul li a {
+    text-decoration: none;
+    color: #4CAF50;
+}
+
+.resource-section ul li a:hover {
+    text-decoration: underline;
+}
