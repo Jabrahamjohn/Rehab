@@ -146,7 +146,6 @@
             </table>
         </section>
     </main>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const resourceForm = document.getElementById('resource-form');
@@ -454,17 +453,52 @@
         <nav>
             <div class="logo">Rehab</div>
             <ul class="nav-links">
-                <li><a href="/">Dashboard</a></li>
-                <li><a href="/about">Patients</a></li>
-                <li><a href="/services">Therapists</a></li>
-                <li><a href="/resources">Appointments</a></li>
-                <li><a href="/contact">Reports</a></li>
-                <li><a href="/login">Profile</a></li>
+                <li><a href="/dashboard/{{id}}">Dashboard</a></li>
+                <li><a href="/patients/{{id}}">Patients</a></li>
+                <li><a href="/appointments/{{id}}">Appointments</a></li>
+                <li><a href="/resources/{{id}}">Resources & Tools</a></li>
+                <li><a href="/profile/{{id}}">Profile</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        this is the therapist dashboard
+        <div class="container">
+            <section class="resources">
+                <h2>Therapist Resources and Tools</h2>
+                <div class="resource-section">
+                    <h3>Access to Therapy Materials and Resources</h3>
+                    <ul>
+                        <li><a href="#">Therapy Manuals</a></li>
+                        <li><a href="#">Session Plans</a></li>
+                        <li><a href="#">Patient Handouts</a></li>
+                    </ul>
+                </div>
+                <div class="resource-section">
+                    <h3>Assessment and Evaluation Tools</h3>
+                    <ul>
+                        <li><a href="#">Diagnostic Assessments</a></li>
+                        <li><a href="#">Progress Tracking Forms</a></li>
+                        <li><a href="#">Outcome Measures</a></li>
+                    </ul>
+                </div>
+                <div class="resource-section">
+                    <h3>Training and Development Resources</h3>
+                    <ul>
+                        <li><a href="#">Online Courses</a></li>
+                        <li><a href="#">Workshops and Seminars</a></li>
+                        <li><a href="#">Professional Journals</a></li>
+                    </ul>
+                </div>
+                <div class="resource-section">
+                    <h3>Additional Resources</h3>
+                    <ul>
+                        <li><a href="#">Patient Education Videos</a></li>
+                        <li><a href="#">Therapy Equipment Guides</a></li>
+                        <li><a href="#">Support Groups</a></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
     </main>
 
     {% else %}

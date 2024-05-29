@@ -185,3 +185,111 @@ a {
     background-color: #004d00;
 }
 
+/*Therapists UI*/
+.therapists-main {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3, h4 {
+    color: #333;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table thead {
+    background-color: green;
+    color: #fff;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+table th {
+    font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Button styles */
+button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button.view-patient-btn {
+    background-color: green;
+    color: #fff;
+}
+
+button.create-btn {
+    background-color: green;
+    color: #fff;
+    margin-right: 8px;
+}
+
+button.edit-btn {
+    background-color: #E19301;
+    color: #fff;
+    margin-right: 8px;
+}
+
+button.delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* Patient details section styles */
+#patient-details {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+#patient-details h3 {
+    margin: 20px;
+
+}
+
+#patient-info, #patient-medical-history, #treatment-plan, #progress-notes, #session-notes {
+    margin-top: 20px;
+}
+
+#patient-info h4, #patient-medical-history h4, #treatment-plan h4, #progress-notes h4, #session-notes h4 {
+    margin-bottom: 10px;
+}
+
+#patient-info button, #patient-medical-history button, #treatment-plan button, #progress-notes button, #session-notes button {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.patient-info {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}

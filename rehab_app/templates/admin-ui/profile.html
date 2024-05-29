@@ -96,18 +96,81 @@
         <nav>
             <div class="logo">Rehab</div>
             <ul class="nav-links">
-                <li><a href="/">Dashboard</a></li>
-                <li><a href="/about">Patients</a></li>
-                <li><a href="/services">Therapists</a></li>
-                <li><a href="/resources">Appointments</a></li>
-                <li><a href="/contact">Reports</a></li>
-                <li><a href="/login">Profile</a></li>
+                <li><a href="/dashboard/{{id}}">Dashboard</a></li>
+                <li><a href="/patients/{{id}}">Patients</a></li>
+                <li><a href="/staff/{{id}}">Staff</a></li>
+                <li><a href="/resources/{{id}}">Resources & Tools</a></li>
+                <li><a href="/profile/{{id}}">Profile</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        this is the therapist dashboard
-    </main>
+          <div class="profile-container">
+            <section class="profile-info">
+              <div class="avatar">
+                <span id="user-initials"></span>
+              </div>
+              <h2>User Profile</h2>
+              <ul>
+                <li>
+                  <span>Staff Number:</span>
+                  <p id="staff-number"></p>
+                </li>
+                <li>
+                  <span>Name:</span>
+                  <p id="staff-name"></p>
+                </li>
+                <li>
+                  <span>Department:</span>
+                  <p id="staff-department"></p>
+                </li>
+                <li>
+                  <span>Job Title:</span>
+                  <p id="staff-title"></p>
+                </li>
+                <li>
+                  <span>Role:</span>
+                  <p id="staff-role"></p>
+                </li>
+                <li>
+                  <span>Phone:</span>
+                  <p id="staff-tel"></p>
+                </li>
+                <li>
+                  <span>Email:</span>
+                  <p id="staff-email"></p>
+                </li>
+                </ul>
+            </section>
+          </div>
+        </main>
+    <script>
+        // Get user data (replace with your logic to fetch user info)
+        const userData = {
+          firstName: "Margaret",
+          lastName: "Maina"
+        };
+
+        // Function to generate initials
+        function getInitials(name) {
+          const parts = name.split(" ");
+          return parts[0][0] + parts[1][0].toUpperCase();
+        }
+
+        // Set initials in the avatar
+        const initialsElement = document.getElementById("user-initials");
+        initialsElement.textContent = getInitials(userData.firstName + " " + userData.lastName);
+
+        // Set other user data elements (replace with actual data fetching)
+        document.getElementById("staff-name").textContent = userData.firstName + " " + userData.lastName;
+        document.getElementById("staff-email").textContent = "margaret.maina@rehab.com"; // Replace with actual email
+        document.getElementById("staff-number").textContent = "OT/002";
+        document.getElementById("staff-title").textContent = "Physical Therapists";
+        document.getElementById("staff-role").textContent = "Therapist";
+        document.getElementById("staff-tel").textContent = "0720454113";
+        document.getElementById("staff-department").textContent = "Outpatient Therapy";
+
+    </script>
 
     {% else %}
     <header>

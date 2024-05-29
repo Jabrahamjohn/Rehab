@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    background-color: #f7f7f7;
+}
+
+header {
+    background-color: #f7f7f7;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #006400;
+}
+
+.nav-links {
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.8rem;
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #006400;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+#appointment-scheduling {
+    width: 40%;
+    margin: auto;
+    text-align: center;
+}
+
+.title {
+    text-align: center;
+    border-top: 1px solid green;
+    padding: 20px 0;
+}
+
+.appointments {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+.upcoming-appointments, .recent-appointments {
+    margin: 20px 20px;
+}
+
+.button {
+    width: 100%;
+    padding: 10px;
+    margin: 20px 0;
+    background-color: #006400;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #004d00;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.appointment-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.appointment-table th,
+.appointment-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.appointment-table th {
+    background-color: #f2f2f2;
+}
+
+.patient-list {
+    list-style: none;
+    padding: 0;
+}
+
+.patient-list li {
+    margin-bottom: 10px;
+}
+
+.patient-list a {
+    text-decoration: none;
+    color: #333;
+}
+
+.patient-list a:hover {
+    text-decoration: underline;
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-task-btn a {
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.edit-task-btn a:hover {
+    text-decoration: underline;
+}
