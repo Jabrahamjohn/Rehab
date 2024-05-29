@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import uuid
 from sqlalchemy import Column, String, Integer, ForeignKey, Date, Time
 from sqlalchemy.orm import relationship
-#from flask_mysqldb import MySQL
+from flask_login import UserMixin
 
 app = Flask(__name__)
 
@@ -13,100 +13,61 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 #mysql = MySQL(app)
 
-class Treatment_Plan(db.Model):
-    __tablename__ = "treatment_plans"
 
-    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
-    patient_id = Column(String(36), ForeignKey('patients.id'), nullable=False)
-    start_date = Column(Date, nullable=False)
-    end_date = Column(Date, nullable=False)
-    goals = Column(String(255), nullable=False)
-    medication_id = Column(String(36), ForeignKey('medication.id'))
-    progress_id = Column(String(36), ForeignKey('progress.id'))
 
-    patients = relationship('Patient', backref='treatment_plans')
-    medication = relationship('Medication', backref='treatment_plans')
-    progress = relationship('Progress', backref='treatment_plans')
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(150), nullable=False, unique=True)
+    email = db.Column(db.String(150), nullable=False, unique=True)
+    password = db.Column(db.String(150), nullable=False)
+    role = db.Column(db.String(50), nullable=False)
 
-class Progress(db.Model):
-    __tablename__ = "progress"
+    def set_password(self, password):
+        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
-    patient_id = Column(String(36), ForeignKey('patients.id'), nullable=False)
-    author = Column(String(36), ForeignKey('therapists.reg_no'), nullable=False)
-    date = Column(Date, nullable=False)
-    content = Column(String(255), nullable=False)
-
-    patients = relationship('Patient', backref='progress')
-    therapists = relationship('Therapist', backref='progress')
-
-class Medication(db.Model):
-    __tablename__ = "medication"
-
-    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
-    patient_id = Column(String(36), ForeignKey('patients.id'))
-    name = Column(String(255), nullable=False)
-    dosage = Column(String(255), nullable=False)
-    frequency = Column(String(60), nullable=False)
-    start_date = Column(Date, nullable=False)
-    end_date = Column(Date, nullable=False)
-    therapist = Column(String(36), ForeignKey('therapists.reg_no'), nullable=False)
-
-    patient = relationship('Patient', back_populates='medications')
-    therapists = relationship('Therapist', backref='medications')
+    def check_password(self, password):
+        return bcrypt.check_password_hash(self.password, password)
 
 class Patient(db.Model):
-    __tablename__ = "patients"
-
-    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
-    name = Column(String(128), nullable=False)
-    year = Column(Integer, nullable=False)
-    gender = Column(String(6), nullable=False)
-    phone_number = Column(String(60), nullable=False)
-    email = Column(String(128))
-    medical_history = Column(String(255))
-    treatment_plan_id = Column(String(36), ForeignKey('treatment_plans.id'))
-    medication_plan_id = Column(String(36), ForeignKey('medication.id'))
-    progress_notes = Column(String(128))
-
-    treatment_plan = relationship('Treatment_Plan', backref='patients')
-    medications = relationship('Medication', back_populates='patient')
-    progress = relationship('Progress', backref='patient')
-    
-class User(db.Model):
-    __tablename__ = "users"
-
-    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
-    name = Column(String(255), nullable=False)
-    username = Column(String(60), nullable=False)
-    phone_number = Column(String(60), nullable=False)
-    email = Column(String(128))
-    role = Column(String(20), nullable=False)
-    password = Column(String(255), nullable=False)
-
-    therapist = relationship('Therapist', back_populates='user')
-
-
-class Therapist(db.Model):
-    __tablename__ = "therapists"
-
-    reg_no = Column(String(36), primary_key=True, unique=True, nullable=False)
-    availability = Column(String(20), nullable=False)
-
-    user = relationship('User', back_populates='therapist')
-    progress = relationship('Progress', backref='therapist')
-
-
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150), nullable=False)
+    dob = db.Column(db.Date, nullable=False)
+    address = db.Column(db.String(300), nullable=False)
+    medical_history = db.Column(db.Text, nullable=True)
 
 class Appointment(db.Model):
-    __tablename__ = "appointments"
+    id = db.Column(db.Integer, primary_key=True)
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
+    therapist_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    appointment_date = db.Column(db.DateTime, nullable=False)
+    notes = db.Column(db.Text, nullable=True)
 
-    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), nullable=False)
-    date = Column(Date, nullable=False)
-    time = Column(Time, nullable=False)
-    duration = Column(Integer, nullable=False)
-    patient_id = Column(String(36), ForeignKey('patients.id'), nullable=False)
-    therapist_id = Column(String(36), ForeignKey('therapists.reg_no'), nullable=False)
+class Room(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    room_number = db.Column(db.String(50), nullable=False, unique=True)
+    capacity = db.Column(db.Integer, nullable=False)
+    current_occupancy = db.Column(db.Integer, nullable=False, default=0)
 
-    patient = relationship('Patient', backref='appointments')
-    therapist = relationship('Therapist', backref='appointments')
+class Equipment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150), nullable=False)
+    maintenance_schedule = db.Column(db.DateTime, nullable=False)
+    last_maintenance = db.Column(db.DateTime, nullable=True)
+
+class Staff(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150), nullable=False)
+    position = db.Column(db.String(150), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+class Inventory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    last_updated = db.Column(db.DateTime, nullable=False)
+
+class MaintenanceSchedule(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    equipment_id = db.Column(db.Integer, db.ForeignKey('equipment.id'), nullable=False)
+    schedule_date = db.Column(db.DateTime, nullable=False)
+    status = db.Column(db.String(50), nullable=False)

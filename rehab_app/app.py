@@ -2,7 +2,7 @@
 import uuid
 
 from flask import render_template, request, redirect, url_for, flash, session, jsonify
-from models import app, Treatment_Plan, Progress, Medication, Patient, Therapist, Appointment
+from models import app,Patient, Appointment
 from models import db #mysql
 
 
