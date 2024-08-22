@@ -8,7 +8,7 @@ Individuals struggling with addiction, their families, healthcare professionals,
 
 ### Key Goals
 
-- Provide comprehensive information about the rehab center's services, programs, and treatment approaches.
+- Provide comprehensive information about the rehab center's services, programs, and treatment approache.
 - Offer resources and support to aid individuals in their journey towards recovery.
 - Increase awareness of addiction-related issues and reduce stigma.
 
